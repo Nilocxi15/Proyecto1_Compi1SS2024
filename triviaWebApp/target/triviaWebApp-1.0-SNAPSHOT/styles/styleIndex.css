@@ -1,0 +1,21 @@
+body {
+    background: linear-gradient(to right, #E6E6FA, #FFFFE0);
+    background: #FFFFE0;
+}
+
+.bg {
+    background-image: url('../assets/trivia2.jpeg');
+    background-position: center center;
+}
+
+.row {
+    height: 550px;
+}
+
+.container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background: white;
+}
