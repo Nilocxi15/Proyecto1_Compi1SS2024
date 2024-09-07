@@ -28,17 +28,13 @@
                         <label for="password" class="form-label">Contraseña</label>
                         <input type="password" class="form-control" name="password" id="passwordField" required>
                         <input class="form-check-input" type="checkbox" value="" id="flexCheck" onclick="togglePassword()">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Ver contraseña
-                        </label>
+                        <label class="form-check-label" for="flexCheckDefault">Ver contraseña</label>
                     </div>
                     <div class="field">
                         <label for="password" class="form-label">Confirmar contraseña</label>
                         <input type="password" class="form-control" name="password" id="confirmPassword" required>
                         <input class="form-check-input" type="checkbox" value="" id="flexCheck2" onclick="togglePassword()">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Ver contraseña
-                        </label>
+                        <label class="form-check-label" for="flexCheckDefault">Ver contraseña</label>
                     </div>
                 </form>
                 <div class="buttons">
