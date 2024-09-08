@@ -27,10 +27,10 @@
                             <a class="nav-link active" href="http://localhost:8080/triviaWebApp/site_content/createTrivia.jsp">Crear Trivia</a>
                         </li>
                         <li class="nav-itemt">
-                            <a class="nav-link" href="#">Editar Usuario</a>
+                            <a class="nav-link" href="http://localhost:8080/triviaWebApp/site_content/editUser.jsp">Editar Usuario</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Eliminar Usuario</a>
+                            <a class="nav-link" href="http://localhost:8080/triviaWebApp/site_content/deleteUser.jsp">Eliminar Usuario</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="http://localhost:8080/triviaWebApp/">Salir</a>
@@ -45,9 +45,8 @@
         </nav>
     </div>
     <div class="title">
-        <figure class="text-center">
-            <h1>Lista de Trivias</h1>
-        </figure>
+        <h2>Lista de Trivias</h2>
+        <button class="btn btn-primary">Importar</button>
     </div>
     <div class="table">
         <div class="d-flex p-2">
