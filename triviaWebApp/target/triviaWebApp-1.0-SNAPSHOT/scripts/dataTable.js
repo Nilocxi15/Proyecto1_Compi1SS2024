@@ -1,7 +1,7 @@
 new DataTable('#trivias', {
     lengthMenu: [10, 25, 50],
     columnDefs: [
-        {orderable: false, targets: [4]}
+        {orderable: false, targets: [2]}
     ],
     language: {
         lengthMenu: "Mostrar _MENU_ registros por página",

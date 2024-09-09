@@ -24,10 +24,13 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Crear Trivia</a>
+                            <a class="nav-link active" href="http://localhost:8080/triviaWebApp/site_content/createTrivia.jsp">Crear Trivia</a>
+                        </li>
+                        <li class="nav-itemt">
+                            <a class="nav-link" href="http://localhost:8080/triviaWebApp/site_content/editUser.jsp">Editar Usuario</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Cargar Trivias</a>
+                            <a class="nav-link" href="http://localhost:8080/triviaWebApp/site_content/deleteUser.jsp">Eliminar Usuario</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="http://localhost:8080/triviaWebApp/">Salir</a>
@@ -42,9 +45,8 @@
         </nav>
     </div>
     <div class="title">
-        <figure class="text-center">
-            <h1>Lista de Trivias</h1>
-        </figure>
+        <h2>Lista de Trivias</h2>
+        <button class="btn btn-primary">Importar</button>
     </div>
     <div class="table">
         <div class="d-flex p-2">

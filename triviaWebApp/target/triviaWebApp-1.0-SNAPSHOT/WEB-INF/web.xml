@@ -2,11 +2,19 @@
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <servlet>
         <servlet-name>loginSrv</servlet-name>
-        <servlet-class>structures.loginSrv</servlet-class>
+        <servlet-class>Servlets.loginSrv2</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loginServlet</servlet-name>
+        <servlet-class>Servlets.loginSrv</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>loginSrv</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loginServlet</servlet-name>
+        <url-pattern>/loginSrv</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
