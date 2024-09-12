@@ -8,6 +8,10 @@
         <servlet-name>registerSrv</servlet-name>
         <servlet-class>Servlets.registerSrv</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>logoutSrv</servlet-name>
+        <servlet-class>Servlets.logoutSrv</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginSrv</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>registerSrv</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logoutSrv</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

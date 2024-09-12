@@ -1,4 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+
+<%if (session.getAttribute("user") == null) {
+    response.sendRedirect("http://localhost:8080/triviaWebApp/");
+} else {%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +37,7 @@
                             <a class="nav-link" href="http://localhost:8080/triviaWebApp/site_content/deleteUser.jsp">Eliminar Usuario</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="http://localhost:8080/triviaWebApp/">Salir</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/logout" method="POST">Salir</a>
                         </li>
                     </ul>
                     <span class="navbar-text">
@@ -91,3 +95,4 @@
 <script src="../scripts/dataTable.js"></script>
 </body>
 </html>
+<%}%>

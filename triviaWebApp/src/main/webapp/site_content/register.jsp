@@ -1,10 +1,6 @@
-<%@ page import="util.registerVerifications" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
-<%
-    registerVerifications util = new registerVerifications();
-%>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Registro</title>
@@ -32,7 +28,7 @@
             </div>
             <div class="field">
                 <label for="user-usrname" class="form-label">Nombre de Usuario</label>
-                <input type="text" class="form-control" id="user-usrname" name="user-lastname" required pattern="[A-Za-z0-9_]+" required>
+                <input type="text" class="form-control" id="user-usrname" name="user-usrname" required pattern="[A-Za-z0-9_]+" required>
                 <div class="valid-feedback">
                     Nombre de usuario válido.
                 </div>
@@ -55,7 +51,8 @@
             </div>
             <div class="field">
                 <label for="passwordField" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="passwordField" name="password" required>
+                <input type="password" class="form-control" id="passwordField" name="passwordField"
+                       pattern="[a-zA-Z0-9_]+" required>
                 <div class="valid-feedback">
                     Contraseña válida.
                 </div>

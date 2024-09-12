@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%if (session.getAttribute("user") == null) {
+    response.sendRedirect("http://localhost:8080/triviaWebApp/");
+} else {%>
 <html>
 <head>
     <title>Editar Usuario</title>
@@ -33,7 +36,7 @@
                                 Usuario</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="http://localhost:8080/triviaWebApp/">Salir</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/logout" method="POST">Salir</a>
                         </li>
                     </ul>
                     <span class="navbar-text">
@@ -116,3 +119,4 @@
 <script src="../scripts/password.js"></script>
 </body>
 </html>
+<%}%>

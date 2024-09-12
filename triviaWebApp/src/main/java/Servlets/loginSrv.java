@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 // name = "loginSrv, urlPatterns = {"/login"}
 public class loginSrv extends HttpServlet {
 
+    client o = new client();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -71,26 +73,26 @@ public class loginSrv extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        client o = new client();
-
-        o.sendMessage("HOLA DESDE LA PAGINA WEB");
 
         String verify = request.getParameter("verify");
 
         if ("true".equals(verify)) {
-            try (PrintWriter out = response.getWriter()) {
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet loginSrv</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>Servlet loginSrv at " + request.getContextPath() + "</h1>");
-                out.println("<h2>Entra en el método GET</h2>");
-                out.println("</body>");
-                out.println("</html>");
-            }
-            //response.sendRedirect("http://localhost:8080/JavaWebApp/structures/loginSrv");
+            String userName = request.getParameter("user-name");
+            String password = request.getParameter("passwordField");
+
+            String requestContent = null;
+            requestContent = "<?xson version=\"1.0\" ?>\n";
+            requestContent += "<!realizar_solicitud: \"LOGIN_USUARIO\" >\n";
+            requestContent += "{ \"DATOS_USUARIO\":[{\n";
+            requestContent += "\"USUARIO\": \"" + userName + "\",\n";
+            requestContent += "\"PASSWORD\": \"" + password + "\"\n";
+            requestContent += "}]\n";
+            requestContent += "}\n";
+            requestContent += "<fin_solicitud_realizada!>";
+
+            o.sendMessage(requestContent);
+
+            request.getSession().setAttribute("user", userName);
         } else {
             response.sendRedirect("http://localhost:8080/triviaWebApp/");
         }

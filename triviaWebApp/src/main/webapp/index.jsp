@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,7 +25,7 @@
                 </div>
                 <div class="mb-4">
                     <label class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" name="password" id="passwordField" required>
+                    <input type="password" class="form-control" name="passwordField" id="passwordField" required>
                     <input class="form-check-input" type="checkbox" value="" id="flexCheck" onclick="togglePassword()">
                     <label class="form-check-label">
                         Ver contraseña
