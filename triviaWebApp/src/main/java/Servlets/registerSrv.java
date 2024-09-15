@@ -35,7 +35,7 @@ public class registerSrv extends HttpServlet {
 
         o.sendMessage(requestContent);
 
-        resp.sendRedirect("http://localhost:8080/triviaWebApp/");
+        resp.sendRedirect("http://localhost/triviaWebApp/");
     }
 
 }

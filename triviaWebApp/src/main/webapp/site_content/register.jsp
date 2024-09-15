@@ -64,7 +64,7 @@
             </div>
             <div class="buttons">
                 <button type="submit" class="btn btn-primary">Registrarse</button>
-                <a href="http://localhost:8080/triviaWebApp/">
+                <a href="http://localhost/triviaWebApp/">
                     <button class="btn btn-outline-primary" type="button">Regresar</button>
                 </a>
             </div>

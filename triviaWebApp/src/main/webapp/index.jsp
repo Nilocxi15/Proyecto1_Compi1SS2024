@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -36,7 +35,7 @@
                 </div>
                 <div class="mb-3">
                             <span>¿No tienes cuenta?
-                                <a href="http://localhost:8080/triviaWebApp/site_content/register.jsp">Registrarse</a>
+                                <a href="http://localhost/triviaWebApp/site_content/register.jsp">Registrarse</a>
                             </span>
                 </div>
             </form>

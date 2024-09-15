@@ -13,7 +13,7 @@ public class logoutSrv extends HttpServlet {
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             req.getSession().invalidate();
-            resp.sendRedirect("http://localhost:8080/triviaWebApp/");
+            resp.sendRedirect("http://localhost/triviaWebApp/");
         }
 
 }

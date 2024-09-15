@@ -94,7 +94,7 @@ public class loginSrv extends HttpServlet {
 
             request.getSession().setAttribute("user", userName);
         } else {
-            response.sendRedirect("http://localhost:8080/triviaWebApp/");
+            response.sendRedirect("http://localhost/triviaWebApp/");
         }
     }
 

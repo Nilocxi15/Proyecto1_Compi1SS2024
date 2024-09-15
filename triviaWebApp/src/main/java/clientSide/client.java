@@ -4,26 +4,33 @@ import java.net.*;
 import java.io.*;
 import java.util.Scanner;
 
-public class client{
-    static String HOST = "localhost";
-    static int PUERTO = 5000;
-    Socket sc;
-    DataOutputStream salida;
-    DataInputStream entrada;
+public class client {
+    final String HOST = "localhost";
+    final int PUERTO = 5000;
+
+    DataInputStream in;
+    DataOutputStream out;
     String mensajeRecibido;
 
-    public void sendMessage(String message){
-        try{
-            sc = new Socket(HOST, PUERTO);
-            salida = new DataOutputStream(sc.getOutputStream());
-            entrada = new DataInputStream(sc.getInputStream());
-            salida.writeUTF(message);//enviamos mensaje
-            mensajeRecibido = entrada.readUTF();//Leemos respuesta
-            System.out.println(mensajeRecibido);
-            sc.close();
-        }catch(Exception e){
+    public void sendMessage(String message) {
+        final String HOST = "localhost";
+        final int PUERTO = 5000;
 
+        try {
+            Socket sc = new Socket(HOST, PUERTO);
+
+            in = new DataInputStream(sc.getInputStream());
+            out = new DataOutputStream(sc.getOutputStream());
+
+            out.writeUTF(message); // Enviamos un mensaje al servidor
+            String mensaje = in.readUTF(); // Leemos la respuesta
+            System.out.println(mensaje);
+
+            sc.close();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
         }
+
     }
 
 }

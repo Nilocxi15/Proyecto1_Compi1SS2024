@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%if (session.getAttribute("user") == null) {
-    response.sendRedirect("http://localhost:8080/triviaWebApp/");
+    response.sendRedirect("http://localhost/triviaWebApp/");
 } else {%>
 <html>
 <head>
@@ -15,7 +15,7 @@
     <div class="topbar">
         <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body" data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="http://localhost:8080/triviaWebApp/site_content/home.jsp">Inicio</a>
+                <a class="navbar-brand" href="http://localhost/triviaWebApp/site_content/home.jsp">Inicio</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -24,15 +24,15 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link"
-                               href="http://localhost:8080/triviaWebApp/site_content/createTrivia.jsp">Crear Trivia</a>
+                               href="http://localhost/triviaWebApp/site_content/createTrivia.jsp">Crear Trivia</a>
                         </li>
                         <li class="nav-itemt">
                             <a class="nav-link active" aria-current="page"
-                               href="http://localhost:8080/triviaWebApp/site_content/editUser.jsp">Editar
+                               href="http://localhost/triviaWebApp/site_content/editUser.jsp">Editar
                                 Usuario</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="http://localhost:8080/triviaWebApp/site_content/deleteUser.jsp">Eliminar
+                            <a class="nav-link" href="http://localhost/triviaWebApp/site_content/deleteUser.jsp">Eliminar
                                 Usuario</a>
                         </li>
                         <li class="nav-item">
