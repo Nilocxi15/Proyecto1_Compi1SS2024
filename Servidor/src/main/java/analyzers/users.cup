@@ -1,0 +1,91 @@
+/*--------------- 1ra Area: Codigo de Usuario -----------------------*/
+//-------> importaciones Y paquetes
+package analyzers;
+
+import java_cup.runtime.Symbol;
+import models.user;
+import filesManager.readFiles;
+
+//------> Codigo para el parser,variables, metodos, etc.
+parser code
+{:
+
+    //Metodo al que se llama automaticamente ante algun error sintactico
+    public void syntax_error(Symbol s)
+    {
+        String lexema = s.value.toString();
+        int fila = s.right;
+        int columna = s.left;
+
+        System.out.println("!!!!!!! Error Sintactico Recuperado !!!!!!!");
+        System.out.println("\t\tLexema: "+lexema);
+        System.out.println("\t\tFila: "+fila);
+        System.out.println("\t\tColumna: "+columna);
+
+    }
+
+    //Metodo al que se llama en el momento en que ya no es posible una recuperacion de errores
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception
+    {
+        String lexema = s.value.toString();
+        int fila = s.right;
+        int columna = s.left;
+
+        System.out.println("!!!!!!! Error Sintactico, Panic Mode !!!!!!! ");
+        System.out.println("\t\tLexema: "+lexema);
+        System.out.println("\t\tFila: "+fila);
+        System.out.println("\t\tColumna: "+columna);
+
+    }
+:}
+
+//------> Codigo para las acciones gramaticales
+action code
+{:
+:}
+
+/*--------------- 2da Area: Declaraciones -----------------------*/
+//------> declaracion de terminales
+terminal String OpenParenthesis, CloseParenthesis, LeftBrace, RightBrace, Comma, QuotationMark, Colon, Init,
+                User, Password, Name, Institution, NIValue, UPValue;
+
+//------> declaracion de no terminales
+nonterminal String INICIO, A, B, C, D, E, F, G;
+
+start with INICIO;
+
+/*--------------- 3ra Area: Reglas Semanticas -----------------------*/
+INICIO ::= A;
+
+A ::= Init OpenParenthesis B CloseParenthesis;
+
+B ::= LeftBrace C RightBrace D;
+
+C ::= E:a
+        F:b
+        QuotationMark Name QuotationMark Colon QuotationMark G:c QuotationMark Comma
+        QuotationMark Institution QuotationMark Colon QuotationMark G:d QuotationMark Comma
+        {:String userName = String.valueOf(a);
+        String password = String.valueOf(b);
+        String name = String.valueOf(c);
+        String institution = String.valueOf(d);
+        user data = new user(userName, password, name, institution);
+        readFiles.usersList.add(data);:};
+
+D ::= Comma B
+    | /*epsilon*/;
+
+E ::= QuotationMark User QuotationMark Colon QuotationMark UPValue:a QuotationMark Comma
+        {:RESULT = String.valueOf(a);:}
+        |QuotationMark User QuotationMark Colon QuotationMark NIValue:a QuotationMark Comma
+        {:RESULT = String.valueOf(a);:};
+
+F ::= QuotationMark Password QuotationMark Colon QuotationMark UPValue:a QuotationMark Comma
+        {:RESULT = String.valueOf(a);:}
+        |QuotationMark Password QuotationMark Colon QuotationMark NIValue:a QuotationMark Comma
+        {:RESULT = String.valueOf(a);:};
+
+G ::= NIValue:a
+        {:RESULT = String.valueOf(a);:}
+        |NIValue:a G:b
+        {:RESULT = String.valueOf(a)+" "+String.valueOf(b);:};

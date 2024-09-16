@@ -2,14 +2,20 @@ package com.mycompany.servidor;
 
 import analyzers.L_Analyzer;
 import analyzers.S_Analyzer;
+import filesManager.readFiles;
 
 import java.net.*;
 import java.io.*;
-import java.util.Scanner;
 
 public class Servidor{
 
     public static void main(String[] args){
+
+        readFiles read = new readFiles();
+
+        read.loadUsers();
+        read.printUsersList();
+
         ServerSocket servidor = null;
         Socket sc = null;
         DataInputStream in;
@@ -41,7 +47,16 @@ public class Servidor{
 
                 System.out.println(mensaje);
 
-                out.writeUTF("Mensaje recibido correctamente");
+                String response = null;
+                response = "<?xson version=\"1.0\" ?>\n";
+                response += "<!envio_respuesta: \"LOGIN_USUARIO\" >\n";
+                response += "{ \"RESPUESTA\":[{\n";
+                response += "\"STATUS\": \"Ok\"\n";
+                response += "}]\n";
+                response += "}\n";
+                response += "<fin_envio_respuesta!>";
+
+                out.writeUTF(response);
 
                 sc.close();
                 System.out.println("Cliente desconectado");

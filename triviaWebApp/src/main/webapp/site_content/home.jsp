@@ -1,11 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-
-<%if (session.getAttribute("user") == null) {
-    response.sendRedirect("http://localhost/triviaWebApp/");
-} else {%>
 <!DOCTYPE html>
 <html>
 <head>
+    <%
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+
+        if (session.getAttribute("user") == null) {
+            response.sendRedirect("http://localhost/triviaWebApp/");
+        }
+    %>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -28,21 +31,24 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" href="http://localhost/triviaWebApp/site_content/createTrivia.jsp">Crear Trivia</a>
+                            <a class="nav-link active"
+                               href="http://localhost/triviaWebApp/site_content/createTrivia.jsp">Crear Trivia</a>
                         </li>
                         <li class="nav-itemt">
-                            <a class="nav-link" href="http://localhost/triviaWebApp/site_content/editUser.jsp">Editar Usuario</a>
+                            <a class="nav-link" href="http://localhost/triviaWebApp/site_content/editUser.jsp">Editar
+                                Usuario</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="http://localhost/triviaWebApp/site_content/deleteUser.jsp">Eliminar Usuario</a>
+                            <a class="nav-link" href="http://localhost/triviaWebApp/site_content/deleteUser.jsp">Eliminar
+                                Usuario</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/logout" method="POST">Salir</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/logout">Salir</a>
                         </li>
                     </ul>
                     <span class="navbar-text">
                     <i class="bi bi-person-circle"></i>
-                    Bienvenido 'usuario'
+                    Bienvenido <%= session.getAttribute("user") %>
                 </span>
                 </div>
             </div>
@@ -95,4 +101,3 @@
 <script src="../scripts/dataTable.js"></script>
 </body>
 </html>
-<%}%>

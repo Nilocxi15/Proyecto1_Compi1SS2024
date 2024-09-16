@@ -1,9 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%if (session.getAttribute("user") == null) {
-    response.sendRedirect("http://localhost/triviaWebApp/");
-} else {%>
 <html>
 <head>
+    <%
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+
+        if (session.getAttribute("user") == null) {
+            response.sendRedirect("http://localhost/triviaWebApp/");
+        }
+    %>
     <title>Editar Usuario</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -70,7 +74,7 @@
                     <input type="text" class="form-control" id="newlastname" name="newlastname" placeholder="*">
                 </div>
                 <div class="field">
-                    <label for="password" class="form-label">Contraseña nueva</label>
+                    <label for="passwordField" class="form-label">Contraseña nueva</label>
                     <input type="password" class="form-control" id="passwordField" name="password"
                            placeholder="*">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheck" onclick="togglePassword()">
@@ -83,7 +87,8 @@
                     <label class="form-check-label" for="flexCheck2">Ver contraseña</label>
                 </div>
                 <div class="buttons">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">
                         Cambiar
                     </button>
                     <!-- Vertically centered modal -->
@@ -119,4 +124,3 @@
 <script src="../scripts/password.js"></script>
 </body>
 </html>
-<%}%>

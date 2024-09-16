@@ -90,9 +90,12 @@ public class loginSrv extends HttpServlet {
             requestContent += "}\n";
             requestContent += "<fin_solicitud_realizada!>";
 
-            o.sendMessage(requestContent);
-
-            request.getSession().setAttribute("user", userName);
+            if (o.sendMessage(requestContent)) {
+                response.sendRedirect("http://localhost/triviaWebApp/site_content/home.jsp");
+                request.getSession().setAttribute("user", userName);
+            } else {
+                response.sendRedirect("http://localhost/triviaWebApp/");
+            }
         } else {
             response.sendRedirect("http://localhost/triviaWebApp/");
         }

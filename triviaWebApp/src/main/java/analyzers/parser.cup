@@ -1,0 +1,78 @@
+/*--------------- 1ra Area: Codigo de Usuario -----------------------*/
+//-------> importaciones Y paquetes
+package analyzers;
+import java_cup.runtime.Symbol;
+
+//------> Codigo para el parser,variables, metodos, etc.
+parser code
+{:
+    public boolean resultado = false;
+
+    //Metodo al que se llama automaticamente ante algun error sintactico
+    public void syntax_error(Symbol s)
+    {
+        String lexema = s.value.toString();
+        int fila = s.right;
+        int columna = s.left;
+
+        System.out.println("!!!!!!! Error Sintactico Recuperado !!!!!!!");
+        System.out.println("\t\tLexema: "+lexema);
+        System.out.println("\t\tFila: "+fila);
+        System.out.println("\t\tColumna: "+columna);
+
+    }
+
+    //Metodo al que se llama en el momento en que ya no es posible una recuperacion de errores
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception
+    {
+        String lexema = s.value.toString();
+        int fila = s.right;
+        int columna = s.left;
+
+        System.out.println("!!!!!!! Error Sintactico, Panic Mode !!!!!!! ");
+        System.out.println("\t\tLexema: "+lexema);
+        System.out.println("\t\tFila: "+fila);
+        System.out.println("\t\tColumna: "+columna);
+
+    }
+:}
+
+//------> Codigo para las acciones gramaticales
+action code
+{:
+:}
+
+/*--------------- 2da Area: Declaraciones -----------------------*/
+//------> declaracion de terminales
+terminal String LessThan, GreaterThan, QuestionMark, Equal, XSONsentence, Version, VersionNumber, QuotationMark,
+                ExclamationMark, RealizarSolicitud, Colon, RequestName, LeftBrace, RightBrace, LeftBracket,
+                RightBracket, Comma, Values, FinSolicitud;
+
+//------> declaracion de no terminales
+nonterminal String INICIO, A, B, C, D, E, F, G;
+
+start with INICIO;
+
+/*--------------- 3ra Area: Reglas Semanticas -----------------------*/
+INICIO ::= A;
+
+A ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
+      LessThan ExclamationMark RealizarSolicitud Colon QuotationMark RequestName QuotationMark GreaterThan
+      LeftBrace QuotationMark RequestName QuotationMark Colon LeftBracket B RightBracket RightBrace
+      LessThan FinSolicitud ExclamationMark GreaterThan {:System.out.println("Sentencia correcta y aceptada");
+      resultado = true; :};
+
+B ::= LeftBrace C RightBrace D;
+
+D ::= Comma B
+    | /*epsilon*/;
+
+C ::= QuotationMark RequestName QuotationMark Colon QuotationMark F QuotationMark E;
+
+E ::= Comma C
+    | /*epsilon*/;
+
+F ::= Values G;
+
+G ::= F
+    | /*epsilon*/;
