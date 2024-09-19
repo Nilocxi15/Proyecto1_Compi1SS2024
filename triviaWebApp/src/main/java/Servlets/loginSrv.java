@@ -3,6 +3,7 @@ package Servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import analyzers.S_Analyzer;
 import clientSide.client;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -77,25 +78,21 @@ public class loginSrv extends HttpServlet {
         String verify = request.getParameter("verify");
 
         if ("true".equals(verify)) {
-            String userName = request.getParameter("user-name");
-            String password = request.getParameter("passwordField");
 
-            String requestContent = null;
-            requestContent = "<?xson version=\"1.0\" ?>\n";
-            requestContent += "<!realizar_solicitud: \"LOGIN_USUARIO\" >\n";
-            requestContent += "{ \"DATOS_USUARIO\":[{\n";
-            requestContent += "\"USUARIO\": \"" + userName + "\",\n";
-            requestContent += "\"PASSWORD\": \"" + password + "\"\n";
-            requestContent += "}]\n";
-            requestContent += "}\n";
-            requestContent += "<fin_solicitud_realizada!>";
+            String requestContent = request.getParameter("login-sentence");
 
-            if (o.sendMessage(requestContent)) {
-                response.sendRedirect("http://localhost/triviaWebApp/site_content/home.jsp");
-                request.getSession().setAttribute("user", userName);
+            if (requestContent != null && requestContent.contains("LOGIN_USUARIO")) {
+                if (o.sendMessage(requestContent)) {
+                    response.sendRedirect("http://localhost/triviaWebApp/site_content/home.jsp");
+                    request.getSession().setAttribute("user", S_Analyzer.usuario);
+                } else {
+                    request.getSession().setAttribute("loginStatus", "failure");
+                    response.sendRedirect("http://localhost/triviaWebApp/");
+                }
             } else {
                 response.sendRedirect("http://localhost/triviaWebApp/");
             }
+
         } else {
             response.sendRedirect("http://localhost/triviaWebApp/");
         }

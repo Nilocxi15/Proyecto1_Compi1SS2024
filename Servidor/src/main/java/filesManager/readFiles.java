@@ -13,9 +13,6 @@ public class readFiles {
     public static LinkedList<user> usersList = new LinkedList<user>();
 
     public void loadUsers() {
-        FileReader file;
-        BufferedReader reader;
-        StringBuilder content = new StringBuilder();
 
         try {
             L_Analyzer_Users lexer = new L_Analyzer_Users(new BufferedReader(new FileReader("../USUARIOS.txt")));
@@ -31,17 +28,4 @@ public class readFiles {
         }
     }
 
-    public void printUsersList() {
-        if (usersList.isEmpty()) {
-            System.out.println("La lista de usuarios está vacía.");
-        } else {
-            for (user u : usersList) {
-                System.out.println("Usuario: " + u.getUserName());
-                System.out.println("Contraseña: " + u.getPassword());
-                System.out.println("Nombre: " + u.getName());
-                System.out.println("Institución: " + u.getInstitution());
-                System.out.println("-------------------------");
-            }
-        }
-    }
 }

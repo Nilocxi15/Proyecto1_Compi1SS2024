@@ -18,20 +18,25 @@
 
         </div>
         <div class="col p-5 rounded-end">
-            <h2 class="fw-bold text-center py-5">Bienvenido</h2>
+            <h2 class="fw-bold text-center">Bienvenido</h2>
+            <!-- Mostrar mensaje de éxito o fracaso -->
+            <%
+                String loginStatus = (String) session.getAttribute("loginStatus");
+                if ("failure".equals(loginStatus)) {
+            %>
+            <div class="alert alert-danger" role="alert">
+                Contraseña o usuario incorrectos.
+            </div>
+            <%
+                }
+                session.removeAttribute("loginStatus");
+            %>
             <!-- Login -->
             <form action="${pageContext.request.contextPath}/login" method="POST">
                 <div class="mb-4">
-                    <label class="form-label">Nombre de Usuario</label>
-                    <input type="text" class="form-control" name="user-name" required>
-                </div>
-                <div class="mb-4">
-                    <label class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" name="passwordField" id="passwordField" required>
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheck" onclick="togglePassword()">
-                    <label class="form-check-label">
-                        Ver contraseña
-                    </label>
+                    <label class="form-label">Ingrese la sentencia para iniciar sesión</label>
+                    <textarea class="form-control" id="login-sentence" name="login-sentence" rows="10"
+                              required></textarea>
                 </div>
                 <div class="d-grid">
                     <button type="submit" name="verify" value="true" class="btn btn-primary">Iniciar Sesion</button>

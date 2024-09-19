@@ -16,26 +16,26 @@ public class registerSrv extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String name = req.getParameter("user-name");
-        String userName = req.getParameter("user-usrname");
-        String institution = req.getParameter("institution");
-        String password = req.getParameter("passwordField");
+        String register = req.getParameter("register");
 
-        String requestContent = null;
-        requestContent = "<?xson version=\"1.0\" ?>\n";
-        requestContent += "<!realizar_solicitud: \"USUARIO_NUEVO\" >\n";
-        requestContent += "{ \"DATOS_USUARIO\":[{\n";
-        requestContent += "\"USUARIO\": \"" + userName + "\",\n";
-        requestContent += "\"PASSWORD\": \"" + password + "\",\n";
-        requestContent += "\"NOMBRE\": \"" + name + "\",\n";
-        requestContent += "\"INSTITUCION\": \"" + institution + "\"\n";
-        requestContent += "}]\n";
-        requestContent += "}\n";
-        requestContent += "<fin_solicitud_realizada!>";
+        if ("true".equals(register)) {
+            String requestContent = req.getParameter("user-details");
 
-        o.sendMessage(requestContent);
-
-        resp.sendRedirect("http://localhost/triviaWebApp/");
+            if (requestContent != null && requestContent.contains("USUARIO_NUEVO")) {
+                if (o.sendMessage(requestContent)) {
+                    req.getSession().setAttribute("registerStatus", "success");
+                    resp.sendRedirect("http://localhost/triviaWebApp/site_content/register.jsp");
+                } else {
+                    req.getSession().setAttribute("registerStatus", "failure");
+                    resp.sendRedirect("http://localhost/triviaWebApp/site_content/register.jsp");
+                }
+            } else {
+                req.getSession().setAttribute("registerStatus", "failure");
+                resp.sendRedirect("http://localhost/triviaWebApp/site_content/register.jsp");
+            }
+        } else {
+            resp.sendRedirect("http://localhost/triviaWebApp/");
+        }
     }
 
 }

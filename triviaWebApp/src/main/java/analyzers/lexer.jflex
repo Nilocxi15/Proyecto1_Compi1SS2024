@@ -24,9 +24,14 @@ WhiteSpace = {LineTerminator} | [ \t\f]
 xson = "xson"
 version = "version"
 versionNumber = "1.0"
+ok = "Ok"
+error = "Error"
 realizarSolicitud = "envio_respuesta"
-requestName = [A-Z_]+
-values = [A-Za-z0-9_ÁÉÍÓÚáéíóúñÑ]+
+loginUsuario = "LOGIN_USUARIO"
+respuesta = "RESPUESTA"
+status = "STATUS"
+usuario = "USUARIO"
+name = [A-Z]+
 finSolicitudRealizada = "fin_envio_respuesta"
 
 //------> Estados
@@ -55,8 +60,13 @@ finSolicitudRealizada = "fin_envio_respuesta"
 <YYINITIAL> {versionNumber} {System.out.println("Reconocio "+yytext()+" numero de version"); return new Symbol(Symbols.VersionNumber, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {realizarSolicitud} {System.out.println("Reconocio "+yytext()+" realizar solicitud"); return new Symbol(Symbols.RealizarSolicitud, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {finSolicitudRealizada} {System.out.println("Reconocio "+yytext()+" fin solicitud finalizada"); return new Symbol(Symbols.FinSolicitud, (yycolumn + 1), (yyline + 1), yytext());}
-<YYINITIAL> {requestName} {System.out.println("Reconocio "+yytext()+" nombre de solicitud"); return new Symbol(Symbols.RequestName, (yycolumn + 1), (yyline + 1), yytext());}
-<YYINITIAL> {values} {System.out.println("Reconocio "+yytext()+" valores"); return new Symbol(Symbols.Values, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {ok} {System.out.println("Reconocio "+yytext()+" ok"); return new Symbol(Symbols.Ok, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {error} {System.out.println("Reconocio "+yytext()+" error"); return new Symbol(Symbols.Error, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {loginUsuario} {System.out.println("Reconocio "+yytext()+" login usuario"); return new Symbol(Symbols.LoginUsuario, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {respuesta} {System.out.println("Reconocio "+yytext()+" respuesta"); return new Symbol(Symbols.Respuesta, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {status} {System.out.println("Reconocio "+yytext()+" status"); return new Symbol(Symbols.Status, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {usuario} {System.out.println("Reconocio "+yytext()+" usuario"); return new Symbol(Symbols.Usuario, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {name} {System.out.println("Reconocio "+yytext()+" nombre"); return new Symbol(Symbols.Name, (yycolumn + 1), (yyline + 1), yytext());}
 {WhiteSpace} {/* Ignorar espacios en blanco */}
 
 //------> Errores Lexicos

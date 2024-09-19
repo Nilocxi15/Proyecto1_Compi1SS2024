@@ -8,27 +8,32 @@ package analyzers;
 /** CUP generated class containing symbol constants. */
 public class Symbols {
   /* terminals */
-  public static final int Values = 19;
   public static final int GreaterThan = 3;
   public static final int Colon = 12;
-  public static final int LeftBrace = 14;
+  public static final int LeftBrace = 13;
   public static final int XSONsentence = 6;
-  public static final int LeftBracket = 16;
-  public static final int Comma = 18;
+  public static final int LeftBracket = 15;
+  public static final int Comma = 17;
   public static final int LessThan = 2;
+  public static final int Name = 24;
+  public static final int Usuario = 23;
   public static final int RealizarSolicitud = 11;
+  public static final int LoginUsuario = 20;
   public static final int Version = 7;
   public static final int VersionNumber = 8;
-  public static final int RightBrace = 15;
-  public static final int RequestName = 13;
+  public static final int RightBrace = 14;
+  public static final int Respuesta = 21;
   public static final int EOF = 0;
+  public static final int Status = 22;
+  public static final int Ok = 18;
   public static final int ExclamationMark = 10;
   public static final int QuotationMark = 9;
-  public static final int FinSolicitud = 20;
+  public static final int FinSolicitud = 25;
   public static final int error = 1;
   public static final int Equal = 5;
   public static final int QuestionMark = 4;
-  public static final int RightBracket = 17;
+  public static final int RightBracket = 16;
+  public static final int Error = 19;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -43,13 +48,18 @@ public class Symbols {
   "ExclamationMark",
   "RealizarSolicitud",
   "Colon",
-  "RequestName",
   "LeftBrace",
   "RightBrace",
   "LeftBracket",
   "RightBracket",
   "Comma",
-  "Values",
+  "Ok",
+  "Error",
+  "LoginUsuario",
+  "Respuesta",
+  "Status",
+  "Usuario",
+  "Name",
   "FinSolicitud"
   };
 }

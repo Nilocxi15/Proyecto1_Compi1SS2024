@@ -6,7 +6,8 @@ import java_cup.runtime.Symbol;
 //------> Codigo para el parser,variables, metodos, etc.
 parser code
 {:
-    public boolean resultado = false;
+    public static String resultado = null;
+    public static String usuario = null;
 
     //Metodo al que se llama automaticamente ante algun error sintactico
     public void syntax_error(Symbol s)
@@ -45,34 +46,37 @@ action code
 /*--------------- 2da Area: Declaraciones -----------------------*/
 //------> declaracion de terminales
 terminal String LessThan, GreaterThan, QuestionMark, Equal, XSONsentence, Version, VersionNumber, QuotationMark,
-                ExclamationMark, RealizarSolicitud, Colon, RequestName, LeftBrace, RightBrace, LeftBracket,
-                RightBracket, Comma, Values, FinSolicitud;
+                ExclamationMark, RealizarSolicitud, Colon, LeftBrace, RightBrace, LeftBracket,
+                RightBracket, Comma, Ok, Error, LoginUsuario, Respuesta, Status, Usuario, Name, FinSolicitud;
 
 //------> declaracion de no terminales
-nonterminal String INICIO, A, B, C, D, E, F, G;
+nonterminal String INICIO, CORRECTO, INCORRECTO, NAME;
 
 start with INICIO;
 
 /*--------------- 3ra Area: Reglas Semanticas -----------------------*/
-INICIO ::= A;
+INICIO ::= CORRECTO
+        | INCORRECTO;
 
-A ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
-      LessThan ExclamationMark RealizarSolicitud Colon QuotationMark RequestName QuotationMark GreaterThan
-      LeftBrace QuotationMark RequestName QuotationMark Colon LeftBracket B RightBracket RightBrace
-      LessThan FinSolicitud ExclamationMark GreaterThan {:System.out.println("Sentencia correcta y aceptada");
-      resultado = true; :};
+CORRECTO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
+            LessThan ExclamationMark RealizarSolicitud Colon QuotationMark LoginUsuario QuotationMark GreaterThan
+            LeftBrace QuotationMark Respuesta QuotationMark Colon LeftBracket LeftBrace
+            QuotationMark Status QuotationMark Colon QuotationMark Ok QuotationMark Comma
+            QuotationMark Usuario QuotationMark Colon QuotationMark NAME:name QuotationMark
+            RightBrace RightBracket
+            RightBrace
+            LessThan FinSolicitud ExclamationMark GreaterThan {:System.out.println("Sentencia correcta y aceptada");
+            resultado = "Correcto";
+            usuario = name;:};
 
-B ::= LeftBrace C RightBrace D;
+INCORRECTO ::=  LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
+                LessThan ExclamationMark RealizarSolicitud Colon QuotationMark LoginUsuario QuotationMark GreaterThan
+                LeftBrace QuotationMark Respuesta QuotationMark Colon LeftBracket LeftBrace
+                QuotationMark Status QuotationMark Colon QuotationMark Error QuotationMark
+                RightBrace RightBracket
+                RightBrace
+                LessThan FinSolicitud ExclamationMark GreaterThan {:System.out.println("Sentencia correcta y password incorrecta");
+                resultado = "Incorrecto";:};
 
-D ::= Comma B
-    | /*epsilon*/;
-
-C ::= QuotationMark RequestName QuotationMark Colon QuotationMark F QuotationMark E;
-
-E ::= Comma C
-    | /*epsilon*/;
-
-F ::= Values G;
-
-G ::= F
-    | /*epsilon*/;
+NAME ::= Name:a NAME:b {:RESULT = String.valueOf(a) + " " + String.valueOf(b);:}
+        | Name:a {:RESULT = String.valueOf(a);:};

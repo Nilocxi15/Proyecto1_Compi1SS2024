@@ -11,59 +11,40 @@
 </head>
 <body>
 <div class="container">
-    <div class="form-fields">
+    <div class="form-fields p-5">
         <h1>Registro</h1>
+        <!-- Mostrar mensaje de éxito o fracaso -->
+        <%
+            String registerStatus = (String) session.getAttribute("registerStatus");
+            if ("success".equals(registerStatus)) {
+        %>
+        <div class="alert alert-success" role="alert">
+            Usuario agregado correctamente.
+        </div>
+        <%
+        } else if ("failure".equals(registerStatus)) {
+        %>
+        <div class="alert alert-danger" role="alert">
+            No se pudo agregar el usuario.
+        </div>
+        <%
+            }
+            session.removeAttribute("registerStatus");
+        %>
         <!-- Formulario de login -->
         <form action="${pageContext.request.contextPath}/register" method="post" class="was-validated">
             <div class="field">
-                <label for="user-name" class="form-label">Nombre Completo</label>
-                <input type="text" class="form-control" id="user-name" name="user-name"
-                       pattern="([A-Z][a-z]+[\s]{0,1})+" required>
+                <label for="user-details" class="form-label">Detalles del Usuario</label>
+                <textarea class="form-control" id="user-details" name="user-details" rows="15" required></textarea>
                 <div class="valid-feedback">
-                    Nombre válido.
+                    Texto detectado.
                 </div>
                 <div class="invalid-feedback">
-                    Nombre inválido.
+                    Texto no detectado.
                 </div>
-            </div>
-            <div class="field">
-                <label for="user-usrname" class="form-label">Nombre de Usuario</label>
-                <input type="text" class="form-control" id="user-usrname" name="user-usrname" required pattern="[A-Za-z0-9_]+" required>
-                <div class="valid-feedback">
-                    Nombre de usuario válido.
-                </div>
-                <div class="invalid-feedback">
-                    Nombre de usuario inválido.
-                </div>
-            </div>
-            <div class="form-text" id="basic-addon4">Puede contener mayúsculas, minúsculas, números y guiones bajos.
-            </div>
-            <div class="field">
-                <label for="institution" class="form-label">Institución</label>
-                <input type="text" class="form-control" id="institution" name="institution"
-                       pattern="([A-Za-z][\s]{0,1})+" required>
-                <div class="valid-feedback">
-                    Institución válida.
-                </div>
-                <div class="invalid-feedback">
-                    Institución inválida.
-                </div>
-            </div>
-            <div class="field">
-                <label for="passwordField" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="passwordField" name="passwordField"
-                       pattern="[a-zA-Z0-9_]+" required>
-                <div class="valid-feedback">
-                    Contraseña válida.
-                </div>
-                <div class="invalid-feedback">
-                    Contraseña inválida.
-                </div>
-                <input class="form-check-input" type="checkbox" value="" id="flexCheck" onclick="togglePassword()">
-                <label class="form-check-label" for="flexCheck">Ver contraseña</label>
             </div>
             <div class="buttons">
-                <button type="submit" class="btn btn-primary">Registrarse</button>
+                <button type="submit" class="btn btn-primary" name="register" value="true">Registrarse</button>
                 <a href="http://localhost/triviaWebApp/">
                     <button class="btn btn-outline-primary" type="button">Regresar</button>
                 </a>

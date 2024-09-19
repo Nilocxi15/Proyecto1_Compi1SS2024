@@ -55,36 +55,14 @@
         <div>
             <h1>Editar Usuario</h1>
         </div>
-        <div class="description">
-            <p>Los campos opcionales están marcados con el símbolo *</p>
-        </div>
         <div class="form">
             <!-- Formulario de login -->
             <form action="#">
                 <div class="field">
-                    <label for="DPI" class="form-label">DPI</label>
-                    <input type="number" class="form-control" id="DPI" name="DPI" placeholder="Obligatorio" required>
-                </div>
-                <div class="field">
-                    <label for="newname" class="form-label">Nuevo nombre</label>
-                    <input type="text" class="form-control" id="newname" name="newname" placeholder="*">
-                </div>
-                <div class="field">
-                    <label for="newlastname" class="form-label">Nuevo apellido</label>
-                    <input type="text" class="form-control" id="newlastname" name="newlastname" placeholder="*">
-                </div>
-                <div class="field">
-                    <label for="passwordField" class="form-label">Contraseña nueva</label>
-                    <input type="password" class="form-control" id="passwordField" name="password"
-                           placeholder="*">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheck" onclick="togglePassword()">
-                    <label class="form-check-label" for="flexCheck">Ver contraseña</label>
-                </div>
-                <div class="field">
-                    <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheck2" onclick="togglePassword()">
-                    <label class="form-check-label" for="flexCheck2">Ver contraseña</label>
+                    <label for="deleteSentence" class="form-label">Introduzca la sentencia para eliminar un
+                        usuario</label>
+                    <textarea class="form-control" id="deleteSentence" name="deleteSentence" rows="10"
+                              required></textarea>
                 </div>
                 <div class="buttons">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"

@@ -31,7 +31,6 @@ public class client {
 
             try {
                 sintactic.parse();
-                status = sintactic.resultado;
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
                 status = false;
@@ -42,14 +41,12 @@ public class client {
             throw new RuntimeException(ex);
         }
 
+        if (S_Analyzer.resultado.equals("Correcto")) {
+            status = true;
+        } else {
+            status = false;
+        }
+
         return status;
-    }
-
-    public void resetStatus() {
-        status = false;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
     }
 }

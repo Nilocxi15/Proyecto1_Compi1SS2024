@@ -765,72 +765,72 @@ public class L_Analyzer_Users implements java_cup.runtime.Scanner {
           // fall through
           case 18: break;
           case 3:
-            { System.out.println("Reconocio "+yytext()+" comillas"); return new Symbol(Symbols_Users.QuotationMark, (yycolumn + 1), (yyline + 1), yytext());
+            { return new Symbol(Symbols_Users.QuotationMark, (yycolumn + 1), (yyline + 1), yytext());
             }
           // fall through
           case 19: break;
           case 4:
-            { System.out.println("Reconocio "+yytext()+" parentesis abierto"); return new Symbol(Symbols_Users.OpenParenthesis, (yycolumn + 1), (yyline + 1), yytext());
+            { return new Symbol(Symbols_Users.OpenParenthesis, (yycolumn + 1), (yyline + 1), yytext());
             }
           // fall through
           case 20: break;
           case 5:
-            { System.out.println("Reconocio "+yytext()+" parentesis cerrado"); return new Symbol(Symbols_Users.CloseParenthesis, (yycolumn + 1), (yyline + 1), yytext());
+            { return new Symbol(Symbols_Users.CloseParenthesis, (yycolumn + 1), (yyline + 1), yytext());
             }
           // fall through
           case 21: break;
           case 6:
-            { System.out.println("Reconocio "+yytext()+" coma"); return new Symbol(Symbols_Users.Comma, (yycolumn + 1), (yyline + 1), yytext());
+            { return new Symbol(Symbols_Users.Comma, (yycolumn + 1), (yyline + 1), yytext());
             }
           // fall through
           case 22: break;
           case 7:
-            { System.out.println("Reconocio "+yytext()+" valor de usuario o contraseña"); return new Symbol(Symbols_Users.UPValue, (yycolumn + 1), (yyline + 1), yytext());
+            { return new Symbol(Symbols_Users.UPValue, (yycolumn + 1), (yyline + 1), yytext());
             }
           // fall through
           case 23: break;
           case 8:
-            { System.out.println("Reconocio "+yytext()+" dos puntos"); return new Symbol(Symbols_Users.Colon, (yycolumn + 1), (yyline + 1), yytext());
+            { return new Symbol(Symbols_Users.Colon, (yycolumn + 1), (yyline + 1), yytext());
             }
           // fall through
           case 24: break;
           case 9:
-            { System.out.println("Reconocio "+yytext()+" valor de nombre o institucion"); return new Symbol(Symbols_Users.NIValue, (yycolumn + 1), (yyline + 1), yytext());
+            { return new Symbol(Symbols_Users.NIValue, (yycolumn + 1), (yyline + 1), yytext());
             }
           // fall through
           case 25: break;
           case 10:
-            { System.out.println("Reconocio "+yytext()+" llave izquierda"); return new Symbol(Symbols_Users.LeftBrace, (yycolumn + 1), (yyline + 1), yytext());
+            { return new Symbol(Symbols_Users.LeftBrace, (yycolumn + 1), (yyline + 1), yytext());
             }
           // fall through
           case 26: break;
           case 11:
-            { System.out.println("Reconocio "+yytext()+" llave derecha"); return new Symbol(Symbols_Users.RightBrace, (yycolumn + 1), (yyline + 1), yytext());
+            { return new Symbol(Symbols_Users.RightBrace, (yycolumn + 1), (yyline + 1), yytext());
             }
           // fall through
           case 27: break;
           case 12:
-            { System.out.println("Reconocio "+yytext()+" NOMBRE"); return new Symbol(Symbols_Users.Name, (yycolumn + 1), (yyline + 1), yytext());
+            { return new Symbol(Symbols_Users.Name, (yycolumn + 1), (yyline + 1), yytext());
             }
           // fall through
           case 28: break;
           case 13:
-            { System.out.println("Reconocio "+yytext()+" USUARIO"); return new Symbol(Symbols_Users.User, (yycolumn + 1), (yyline + 1), yytext());
+            { return new Symbol(Symbols_Users.User, (yycolumn + 1), (yyline + 1), yytext());
             }
           // fall through
           case 29: break;
           case 14:
-            { System.out.println("Reconocio "+yytext()+" db.users"); return new Symbol(Symbols_Users.Init, (yycolumn + 1), (yyline + 1), yytext());
+            { return new Symbol(Symbols_Users.Init, (yycolumn + 1), (yyline + 1), yytext());
             }
           // fall through
           case 30: break;
           case 15:
-            { System.out.println("Reconocio "+yytext()+" PASSWORD"); return new Symbol(Symbols_Users.Password, (yycolumn + 1), (yyline + 1), yytext());
+            { return new Symbol(Symbols_Users.Password, (yycolumn + 1), (yyline + 1), yytext());
             }
           // fall through
           case 31: break;
           case 16:
-            { System.out.println("Reconocio "+yytext()+" INSTITUCION"); return new Symbol(Symbols_Users.Institution, (yycolumn + 1), (yyline + 1), yytext());
+            { return new Symbol(Symbols_Users.Institution, (yycolumn + 1), (yyline + 1), yytext());
             }
           // fall through
           case 32: break;

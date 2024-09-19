@@ -31,10 +31,9 @@ public class S_Analyzer extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\014\000\002\002\004\000\002\002\003\000\002\003" +
-    "\041\000\002\004\006\000\002\006\004\000\002\006\002" +
-    "\000\002\005\012\000\002\007\004\000\002\007\002\000" +
-    "\002\010\004\000\002\011\003\000\002\011\002" });
+    "\000\007\000\002\002\004\000\002\002\003\000\002\002" +
+    "\003\000\002\003\061\000\002\004\051\000\002\005\004" +
+    "\000\002\005\003" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -42,32 +41,36 @@ public class S_Analyzer extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\066\000\004\004\005\001\002\000\004\002\000\001" +
-    "\002\000\004\006\010\001\002\000\004\002\007\001\002" +
-    "\000\004\002\001\001\002\000\004\010\011\001\002\000" +
-    "\004\011\012\001\002\000\004\007\013\001\002\000\004" +
-    "\013\014\001\002\000\004\012\015\001\002\000\004\013" +
-    "\016\001\002\000\004\006\017\001\002\000\004\005\020" +
-    "\001\002\000\004\004\021\001\002\000\004\014\022\001" +
-    "\002\000\004\015\023\001\002\000\004\016\024\001\002" +
-    "\000\004\013\025\001\002\000\004\017\026\001\002\000" +
-    "\004\013\027\001\002\000\004\005\030\001\002\000\004" +
-    "\020\031\001\002\000\004\013\032\001\002\000\004\017" +
-    "\033\001\002\000\004\013\034\001\002\000\004\016\035" +
-    "\001\002\000\004\022\036\001\002\000\004\020\037\001" +
-    "\002\000\004\013\047\001\002\000\004\023\041\001\002" +
-    "\000\004\021\042\001\002\000\004\004\043\001\002\000" +
-    "\004\026\044\001\002\000\004\014\045\001\002\000\004" +
-    "\005\046\001\002\000\004\002\uffff\001\002\000\004\017" +
-    "\055\001\002\000\004\021\051\001\002\000\006\023\ufffc" +
-    "\024\052\001\002\000\004\020\037\001\002\000\004\023" +
-    "\ufffe\001\002\000\004\023\ufffd\001\002\000\004\013\056" +
-    "\001\002\000\004\016\057\001\002\000\004\013\060\001" +
-    "\002\000\004\025\061\001\002\000\006\013\ufff6\025\061" +
-    "\001\002\000\004\013\063\001\002\000\006\021\ufff9\024" +
-    "\064\001\002\000\004\013\047\001\002\000\004\021\ufffb" +
-    "\001\002\000\004\021\ufffa\001\002\000\004\013\ufff8\001" +
-    "\002\000\004\013\ufff7\001\002" });
+    "\000\077\000\004\004\005\001\002\000\004\002\000\001" +
+    "\002\000\004\006\011\001\002\000\004\002\uffff\001\002" +
+    "\000\004\002\010\001\002\000\004\002\001\001\002\000" +
+    "\004\010\012\001\002\000\004\011\013\001\002\000\004" +
+    "\007\014\001\002\000\004\013\015\001\002\000\004\012" +
+    "\016\001\002\000\004\013\017\001\002\000\004\006\020" +
+    "\001\002\000\004\005\021\001\002\000\004\004\022\001" +
+    "\002\000\004\014\023\001\002\000\004\015\024\001\002" +
+    "\000\004\016\025\001\002\000\004\013\026\001\002\000" +
+    "\004\026\027\001\002\000\004\013\030\001\002\000\004" +
+    "\005\031\001\002\000\004\017\032\001\002\000\004\013" +
+    "\033\001\002\000\004\027\034\001\002\000\004\013\035" +
+    "\001\002\000\004\016\036\001\002\000\004\021\037\001" +
+    "\002\000\004\017\040\001\002\000\004\013\041\001\002" +
+    "\000\004\030\042\001\002\000\004\013\043\001\002\000" +
+    "\004\016\044\001\002\000\004\013\045\001\002\000\006" +
+    "\024\046\025\047\001\002\000\004\013\060\001\002\000" +
+    "\004\013\050\001\002\000\004\020\051\001\002\000\004" +
+    "\022\052\001\002\000\004\020\053\001\002\000\004\004" +
+    "\054\001\002\000\004\033\055\001\002\000\004\014\056" +
+    "\001\002\000\004\005\057\001\002\000\004\002\ufffd\001" +
+    "\002\000\004\023\061\001\002\000\004\013\062\001\002" +
+    "\000\004\031\063\001\002\000\004\013\064\001\002\000" +
+    "\004\016\065\001\002\000\004\013\066\001\002\000\004" +
+    "\032\067\001\002\000\006\013\ufffb\032\067\001\002\000" +
+    "\004\013\071\001\002\000\004\020\072\001\002\000\004" +
+    "\022\073\001\002\000\004\020\074\001\002\000\004\004" +
+    "\075\001\002\000\004\033\076\001\002\000\004\014\077" +
+    "\001\002\000\004\005\100\001\002\000\004\002\ufffe\001" +
+    "\002\000\004\013\ufffc\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -75,7 +78,9 @@ public class S_Analyzer extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\066\000\006\002\005\003\003\001\001\000\002\001" +
+    "\000\077\000\010\002\006\003\003\004\005\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
@@ -83,17 +88,17 @@ public class S_Analyzer extends java_cup.runtime.lr_parser {
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\004\004" +
-    "\037\001\001\000\004\005\047\001\001\000\002\001\001" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\004\006\052\001\001\000" +
-    "\004\004\053\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\004\010\061\001\001\000\006\010\067\011\066\001\001" +
-    "\000\002\001\001\000\004\007\064\001\001\000\004\005" +
-    "\065\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001" });
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\004\005\067\001\001\000\004\005" +
+    "\100\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -132,7 +137,8 @@ public class S_Analyzer extends java_cup.runtime.lr_parser {
 
 
 
-    public boolean resultado = false;
+    public static String resultado = null;
+    public static String usuario = null;
 
     //Metodo al que se llama automaticamente ante algun error sintactico
     public void syntax_error(Symbol s)
@@ -205,7 +211,7 @@ class CUP$S_Analyzer$actions {
           return CUP$S_Analyzer$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 1: // INICIO ::= A 
+          case 1: // INICIO ::= CORRECTO 
             {
               String RESULT =null;
 
@@ -214,93 +220,62 @@ class CUP$S_Analyzer$actions {
           return CUP$S_Analyzer$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 2: // A ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan LessThan ExclamationMark RealizarSolicitud Colon QuotationMark RequestName QuotationMark GreaterThan LeftBrace QuotationMark RequestName QuotationMark Colon LeftBracket B RightBracket RightBrace LessThan FinSolicitud ExclamationMark GreaterThan 
+          case 2: // INICIO ::= INCORRECTO 
             {
               String RESULT =null;
+
+              CUP$S_Analyzer$result = parser.getSymbolFactory().newSymbol("INICIO",0, ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), RESULT);
+            }
+          return CUP$S_Analyzer$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 3: // CORRECTO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan LessThan ExclamationMark RealizarSolicitud Colon QuotationMark LoginUsuario QuotationMark GreaterThan LeftBrace QuotationMark Respuesta QuotationMark Colon LeftBracket LeftBrace QuotationMark Status QuotationMark Colon QuotationMark Ok QuotationMark Comma QuotationMark Usuario QuotationMark Colon QuotationMark NAME QuotationMark RightBrace RightBracket RightBrace LessThan FinSolicitud ExclamationMark GreaterThan 
+            {
+              String RESULT =null;
+		int nameleft = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-8)).left;
+		int nameright = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-8)).right;
+		String name = (String)((java_cup.runtime.Symbol) CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-8)).value;
 		System.out.println("Sentencia correcta y aceptada");
-      resultado = true; 
-              CUP$S_Analyzer$result = parser.getSymbolFactory().newSymbol("A",1, ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-30)), ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), RESULT);
+            resultado = "Correcto";
+            usuario = name;
+              CUP$S_Analyzer$result = parser.getSymbolFactory().newSymbol("CORRECTO",1, ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-46)), ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 3: // B ::= LeftBrace C RightBrace D 
+          case 4: // INCORRECTO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan LessThan ExclamationMark RealizarSolicitud Colon QuotationMark LoginUsuario QuotationMark GreaterThan LeftBrace QuotationMark Respuesta QuotationMark Colon LeftBracket LeftBrace QuotationMark Status QuotationMark Colon QuotationMark Error QuotationMark RightBrace RightBracket RightBrace LessThan FinSolicitud ExclamationMark GreaterThan 
             {
               String RESULT =null;
-
-              CUP$S_Analyzer$result = parser.getSymbolFactory().newSymbol("B",2, ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-3)), ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), RESULT);
+		System.out.println("Sentencia correcta y password incorrecta");
+                resultado = "Incorrecto";
+              CUP$S_Analyzer$result = parser.getSymbolFactory().newSymbol("INCORRECTO",2, ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-38)), ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 4: // D ::= Comma B 
+          case 5: // NAME ::= Name NAME 
             {
               String RESULT =null;
-
-              CUP$S_Analyzer$result = parser.getSymbolFactory().newSymbol("D",4, ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-1)), ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), RESULT);
+		int aleft = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-1)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-1)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()).right;
+		String b = (String)((java_cup.runtime.Symbol) CUP$S_Analyzer$stack.peek()).value;
+		RESULT = String.valueOf(a) + " " + String.valueOf(b);
+              CUP$S_Analyzer$result = parser.getSymbolFactory().newSymbol("NAME",3, ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-1)), ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 5: // D ::= 
+          case 6: // NAME ::= Name 
             {
               String RESULT =null;
-
-              CUP$S_Analyzer$result = parser.getSymbolFactory().newSymbol("D",4, ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), RESULT);
-            }
-          return CUP$S_Analyzer$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 6: // C ::= QuotationMark RequestName QuotationMark Colon QuotationMark F QuotationMark E 
-            {
-              String RESULT =null;
-
-              CUP$S_Analyzer$result = parser.getSymbolFactory().newSymbol("C",3, ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-7)), ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), RESULT);
-            }
-          return CUP$S_Analyzer$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 7: // E ::= Comma C 
-            {
-              String RESULT =null;
-
-              CUP$S_Analyzer$result = parser.getSymbolFactory().newSymbol("E",5, ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-1)), ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), RESULT);
-            }
-          return CUP$S_Analyzer$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 8: // E ::= 
-            {
-              String RESULT =null;
-
-              CUP$S_Analyzer$result = parser.getSymbolFactory().newSymbol("E",5, ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), RESULT);
-            }
-          return CUP$S_Analyzer$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 9: // F ::= Values G 
-            {
-              String RESULT =null;
-
-              CUP$S_Analyzer$result = parser.getSymbolFactory().newSymbol("F",6, ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-1)), ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), RESULT);
-            }
-          return CUP$S_Analyzer$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 10: // G ::= F 
-            {
-              String RESULT =null;
-
-              CUP$S_Analyzer$result = parser.getSymbolFactory().newSymbol("G",7, ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), RESULT);
-            }
-          return CUP$S_Analyzer$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 11: // G ::= 
-            {
-              String RESULT =null;
-
-              CUP$S_Analyzer$result = parser.getSymbolFactory().newSymbol("G",7, ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), RESULT);
+		int aleft = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$S_Analyzer$stack.peek()).value;
+		RESULT = String.valueOf(a);
+              CUP$S_Analyzer$result = parser.getSymbolFactory().newSymbol("NAME",3, ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer$result;
 
