@@ -11,6 +11,11 @@ parser code
 {:
 
     public String requestName = null;
+    public String userName = null;
+    public String password = null;
+    public String name = null;
+    public String institution = null;
+
     public static LinkedList<login> loginList = new LinkedList<login>();
 
     //Metodo al que se llama automaticamente ante algun error sintactico
@@ -28,6 +33,7 @@ parser code
         login data = new login("error", "errror");
         loginList.add(0, data);
         requestName = "error";
+        cleandata();
     }
 
     //Metodo al que se llama en el momento en que ya no es posible una recuperacion de errores
@@ -45,6 +51,15 @@ parser code
         login data = new login("error", "errror");
         loginList.add(0, data);
         requestName = "error";
+        cleandata();
+    }
+
+    private void cleandata(){
+        requestName = "error";
+        userName = "error";
+        password = "error";
+        name = "error";
+        institution = "error";
     }
 :}
 
@@ -114,18 +129,22 @@ ELIMINARUSUARIO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMa
 USUARIONUEVO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
                 LessThan ExclamationMark RealizarSolicitud Colon QuotationMark UsuarioNuevo QuotationMark GreaterThan
                 LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket LeftBrace
-                QuotationMark Usuario QuotationMark Colon QuotationMark VALUES QuotationMark Comma
-                QuotationMark Password QuotationMark Colon QuotationMark VALUES QuotationMark Comma
-                QuotationMark Nombre QuotationMark Colon QuotationMark NAMES QuotationMark Comma
-                QuotationMark Institucion QuotationMark Colon QuotationMark NAMES QuotationMark
+                QuotationMark Usuario QuotationMark Colon QuotationMark VALUES:username QuotationMark Comma
+                QuotationMark Password QuotationMark Colon QuotationMark VALUES:passwordVal QuotationMark Comma
+                QuotationMark Nombre QuotationMark Colon QuotationMark NAMES:nameVal QuotationMark Comma
+                QuotationMark Institucion QuotationMark Colon QuotationMark NAMES:institutionVal QuotationMark
                 RightBrace RightBracket
                 RightBrace
                 LessThan FinSolicitud ExclamationMark GreaterThan
                 {:System.out.println("Sentencia de creacion de usuario reconocida y aceptada");
-                requestName = "nuevo";:};
+                requestName = "nuevo";
+                userName = username;
+                password = passwordVal;
+                name = nameVal;
+                institution = institutionVal;:};
 
 VALUES ::= Values:a {:RESULT = String.valueOf(a);:}
           |niValue:b {:RESULT = String.valueOf(b);:};
 
-NAMES ::= niValue:a {:RESULT = String.valueOf(a);:} NAMES
+NAMES ::= niValue:a NAMES:b {:RESULT = String.valueOf(a) + " " + String.valueOf(b);:}
         |niValue:b {:RESULT = String.valueOf(b);:};

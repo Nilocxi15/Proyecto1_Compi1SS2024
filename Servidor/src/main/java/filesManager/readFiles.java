@@ -28,4 +28,8 @@ public class readFiles {
         }
     }
 
+    public void clearUsers() {
+        usersList.clear();
+    }
+
 }

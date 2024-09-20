@@ -58,5 +58,23 @@ db.users(
 		"PASSWORD": "bcde5678",
 		"NOMBRE": "DIEGO TORRES",
 		"INSTITUCION": "UFM",
+	},
+	{
+		"USUARIO": "juanito619",
+		"PASSWORD": "123456789",
+		"NOMBRE": "JUAN PEREZ",
+		"INSTITUCION": "CUNOC",
+	},
+	{
+		"USUARIO": "juanitoJuan",
+		"PASSWORD": "1234",
+		"NOMBRE": "JUAN JIMENEZ",
+		"INSTITUCION": "CUNOC",
+	},
+	{
+		"USUARIO": "mapache",
+		"PASSWORD": "12",
+		"NOMBRE": "JAVIER IXCOLIN",
+		"INSTITUCION": "CUNOC",
 	}
 )

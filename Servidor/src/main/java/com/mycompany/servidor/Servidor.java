@@ -14,7 +14,6 @@ public class Servidor {
     public static void main(String[] args) {
 
         readFiles read = new readFiles();
-        read.loadUsers();
 
         String response = null;
 
@@ -44,13 +43,10 @@ public class Servidor {
                 try {
                     sintactic_main.parse();
 
-                    System.out.println("------------------------------------------------------");
-                    System.out.println(S_Analyzer_main.loginList.getFirst().getUsername());
-                    System.out.println(S_Analyzer_main.loginList.getFirst().getPassword());
-                    System.out.println("------------------------------------------------------");
-
                     switch (sintactic_main.requestName) {
                         case "login":
+                            read.clearUsers();
+                            read.loadUsers();
 
                             for (user u : readFiles.usersList) {
                                 String formUser = S_Analyzer_main.loginList.getFirst().getUsername();
@@ -82,13 +78,49 @@ public class Servidor {
 
                             break;
                         case "modificar":
-                            System.out.println("Se solicita el analisis de REGISTRO_USUARIO");
+                            System.out.println("Se solicita el analisis de MODIFICAR_USUARIO");
                             break;
                         case "eliminar":
                             System.out.println("Se solicita el analisis de ELIMINAR_USUARIO");
                             break;
                         case "nuevo":
-                            System.out.println("Se solicita el analisis de USUARIO_NUEVO");
+                            boolean userExists = false;
+                            read.clearUsers();
+                            read.loadUsers();
+
+                            String username = sintactic_main.userName;
+                            String password = sintactic_main.password;
+                            String name = sintactic_main.name;
+                            String institution = sintactic_main.institution;
+
+                            for (user u : readFiles.usersList) {
+                                if (u.getUserName().equals(username)) {
+                                    userExists = true;
+                                    break;
+                                }
+                            }
+
+                            if (userExists) {
+                                response = "<?xson version=\"1.0\" ?>\n";
+                                response += "<!envio_respuesta: \"LOGIN_USUARIO\" >\n";
+                                response += "{ \"RESPUESTA\":[{\n";
+                                response += "\"STATUS\": \"Error\"\n";
+                                response += "}]\n";
+                                response += "}\n";
+                                response += "<fin_envio_respuesta!>";
+                            } else {
+                                response = "<?xson version=\"1.0\" ?>\n";
+                                response += "<!envio_respuesta: \"MODIFICAR_USUARIO\" >\n";
+                                response += "{ \"RESPUESTA\":[{\n";
+                                response += "\"STATUS\": \"Ok\",\n";
+                                response += "\"USUARIO\": \"" + username + "\",\n";
+                                response += "\"PASSWORD\": \"" + password + "\",\n";
+                                response += "\"NOMBRE\": \"" + name + "\",\n";
+                                response += "\"INSTITUCION\": \"" + institution + "\"\n";
+                                response += "}]\n";
+                                response += "}\n";
+                                response += "<fin_envio_respuesta!>";
+                            }
                             break;
                         default:
                             System.out.println("No se reconoce la solicitud");
