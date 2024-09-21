@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import util.registerDataValidation;
 import util.userConstructor;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.util.List;
 public class registerSrv extends HttpServlet {
 
     client o = new client();
+    registerDataValidation util = new registerDataValidation();
 
     // GET method
     @Override
@@ -25,6 +27,9 @@ public class registerSrv extends HttpServlet {
 
         if ("true".equals(register)) {
             String requestContent = req.getParameter("user-details");
+            String requestVerified = util.ensureFechaCreacion(requestContent);
+
+            System.out.println("Request content: " + requestVerified);
 
             if (requestContent != null && requestContent.contains("USUARIO_NUEVO")) {
                 if (o.sendMessage(requestContent)) {
