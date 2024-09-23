@@ -35,8 +35,13 @@ modificarUsuario = "MODIFICAR_USUARIO"
 respuesta = "RESPUESTA"
 status = "STATUS"
 usuario = "USUARIO"
+fechaCreacion = "FECHA_CREACION"
 name = [A-Z]+
 values = [A-Za-z0-9_ÁÉÍÓÚáéíóúñÑ]+
+day = [0-3][0-9]
+month = [0-1][0-9]
+year = [1-2][0-9][0-9][0-9]
+date = {day} "/" {month} "/" {year}
 finSolicitudRealizada = "fin_envio_respuesta"
 
 //------> Estados
@@ -75,8 +80,10 @@ finSolicitudRealizada = "fin_envio_respuesta"
 <YYINITIAL> {respuesta} {System.out.println("Reconocio "+yytext()+" respuesta"); return new Symbol(Symbols.Respuesta, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {status} {System.out.println("Reconocio "+yytext()+" status"); return new Symbol(Symbols.Status, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {usuario} {System.out.println("Reconocio "+yytext()+" usuario"); return new Symbol(Symbols.Usuario, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {fechaCreacion} {System.out.println("Reconocio "+yytext()+" fecha de creacion"); return new Symbol(Symbols.FechaCreacion, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {name} {System.out.println("Reconocio "+yytext()+" nombre"); return new Symbol(Symbols.Name, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {values} {System.out.println("Reconocio "+yytext()+" valores"); return new Symbol(Symbols.Values, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {date} {System.out.println("Reconocio "+yytext()+" fecha"); return new Symbol(Symbols.Date, (yycolumn + 1), (yyline + 1), yytext());}
 {WhiteSpace} {/* Ignorar espacios en blanco */}
 
 //------> Errores Lexicos

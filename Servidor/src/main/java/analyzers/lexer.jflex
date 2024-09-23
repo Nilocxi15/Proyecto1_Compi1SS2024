@@ -35,9 +35,14 @@ modificarUsuario = "MODIFICAR_USUARIO"
 eliminarUsuario = "ELIMINAR_USUARIO"
 loginUsuario = "LOGIN_USUARIO"
 datosUsuario = "DATOS_USUARIO"
+fechaCreacion = "FECHA_CREACION"
 realizarSolicitud = "realizar_solicitud"
 niValue = [A-Z]+
 values = [A-Za-z0-9_ÁÉÍÓÚáéíóúñÑ]+
+day = [0-3][0-9]
+month = [0-1][0-9]
+year = [1-2][0-9][0-9][0-9]
+date = {day} "/" {month} "/" {year}
 finSolicitudRealizada = "fin_solicitud_realizada"
 
 //------> Estados
@@ -68,6 +73,7 @@ finSolicitudRealizada = "fin_solicitud_realizada"
 <YYINITIAL> {password} {System.out.println("Reconocio "+yytext()+" password"); return new Symbol(Symbols_main.Password, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {nombre} {System.out.println("Reconocio "+yytext()+" nombre"); return new Symbol(Symbols_main.Nombre, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {institucion} {System.out.println("Reconocio "+yytext()+" institucion"); return new Symbol(Symbols_main.Institucion, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {fechaCreacion} {System.out.println("Reconocio "+yytext()+" fecha de creacion"); return new Symbol(Symbols_main.FechaCreacion, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {datosUsuario} {System.out.println("Reconocio "+yytext()+" datos usuario"); return new Symbol(Symbols_main.DatosUsuario, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {realizarSolicitud} {System.out.println("Reconocio "+yytext()+" realizar solicitud"); return new Symbol(Symbols_main.RealizarSolicitud, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {usuarioNuevo} {System.out.println("Reconocio "+yytext()+" usuario nuevo"); return new Symbol(Symbols_main.UsuarioNuevo, (yycolumn + 1), (yyline + 1), yytext());}
@@ -79,6 +85,7 @@ finSolicitudRealizada = "fin_solicitud_realizada"
 <YYINITIAL> {finSolicitudRealizada} {System.out.println("Reconocio "+yytext()+" fin solicitud finalizada"); return new Symbol(Symbols_main.FinSolicitud, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {niValue} {System.out.println("Reconocio "+yytext()+" valor de nombre"); return new Symbol(Symbols_main.niValue, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {values} {System.out.println("Reconocio "+yytext()+" valores"); return new Symbol(Symbols_main.Values, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {date} {System.out.println("Reconocio "+yytext()+" fecha"); return new Symbol(Symbols_main.Date, (yycolumn + 1), (yyline + 1), yytext());}
 {WhiteSpace} {/* Ignorar espacios en blanco */}
 
 //------> Errores Lexicos

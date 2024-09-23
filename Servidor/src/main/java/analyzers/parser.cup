@@ -15,6 +15,7 @@ parser code
     public String password = null;
     public String name = null;
     public String institution = null;
+    public String date = null;
 
     public static LinkedList<login> loginList = new LinkedList<login>();
 
@@ -60,6 +61,7 @@ parser code
         password = "error";
         name = "error";
         institution = "error";
+        date = "error";
     }
 :}
 
@@ -77,7 +79,8 @@ action code
 terminal String LessThan, GreaterThan, QuestionMark, Equal, XSONsentence, Version, VersionNumber, QuotationMark,
                 ExclamationMark, RealizarSolicitud, Colon, UsuarioNuevo, ModificarUsuario, EliminarUsuario,
                 LoginUsuario, LeftBrace, RightBrace, LeftBracket, RightBracket, Comma, Values, FinSolicitud,
-                Usuario, Password, Nombre, Institucion, DatosUsuario, UsuarioAntiguo, NuevoPassword, niValue;
+                Usuario, Password, Nombre, Institucion, DatosUsuario, UsuarioAntiguo, NuevoPassword, niValue,
+                FechaCreacion, Date;
 
 //------> declaracion de no terminales
 nonterminal String INICIO, USUARIONUEVO, MODIFICARUSUARIO, ELIMINARUSUARIO, LOGINUSUARIO,
@@ -132,7 +135,8 @@ USUARIONUEVO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark 
                 QuotationMark Usuario QuotationMark Colon QuotationMark VALUES:username QuotationMark Comma
                 QuotationMark Password QuotationMark Colon QuotationMark VALUES:passwordVal QuotationMark Comma
                 QuotationMark Nombre QuotationMark Colon QuotationMark NAMES:nameVal QuotationMark Comma
-                QuotationMark Institucion QuotationMark Colon QuotationMark NAMES:institutionVal QuotationMark
+                QuotationMark Institucion QuotationMark Colon QuotationMark NAMES:institutionVal QuotationMark Comma
+                QuotationMark FechaCreacion QuotationMark Colon QuotationMark Date:dateVal QuotationMark
                 RightBrace RightBracket
                 RightBrace
                 LessThan FinSolicitud ExclamationMark GreaterThan
@@ -141,7 +145,8 @@ USUARIONUEVO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark 
                 userName = username;
                 password = passwordVal;
                 name = nameVal;
-                institution = institutionVal;:};
+                institution = institutionVal;
+                date = dateVal;:};
 
 VALUES ::= Values:a {:RESULT = String.valueOf(a);:}
           |niValue:b {:RESULT = String.valueOf(b);:};

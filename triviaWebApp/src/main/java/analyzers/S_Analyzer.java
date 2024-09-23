@@ -34,7 +34,7 @@ public class S_Analyzer extends java_cup.runtime.lr_parser {
     "\000\015\000\002\002\004\000\002\002\003\000\002\002" +
     "\003\000\002\002\003\000\002\002\003\000\002\003\061" +
     "\000\002\004\051\000\002\005\004\000\002\005\003\000" +
-    "\002\010\003\000\002\010\003\000\002\006\111\000\002" +
+    "\002\010\003\000\002\010\003\000\002\006\121\000\002" +
     "\007\051" });
 
   /** Access to production table. */
@@ -43,7 +43,7 @@ public class S_Analyzer extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\204\000\004\004\010\001\002\000\004\002\ufffe\001" +
+    "\000\214\000\004\004\010\001\002\000\004\002\ufffe\001" +
     "\002\000\004\002\000\001\002\000\004\002\ufffd\001\002" +
     "\000\004\002\uffff\001\002\000\004\006\013\001\002\000" +
     "\004\002\012\001\002\000\004\002\001\001\002\000\004" +
@@ -101,11 +101,14 @@ public class S_Analyzer extends java_cup.runtime.lr_parser {
     "\002\000\004\013\171\001\002\000\004\037\172\001\002" +
     "\000\004\013\173\001\002\000\004\016\174\001\002\000" +
     "\004\013\175\001\002\000\004\032\072\001\002\000\004" +
-    "\013\177\001\002\000\004\020\200\001\002\000\004\022" +
-    "\201\001\002\000\004\020\202\001\002\000\004\004\203" +
-    "\001\002\000\004\033\204\001\002\000\004\014\205\001" +
-    "\002\000\004\005\206\001\002\000\004\002\ufff6\001\002" +
-    "" });
+    "\013\177\001\002\000\004\023\200\001\002\000\004\013" +
+    "\201\001\002\000\004\042\202\001\002\000\004\013\203" +
+    "\001\002\000\004\016\204\001\002\000\004\013\205\001" +
+    "\002\000\004\041\206\001\002\000\004\013\207\001\002" +
+    "\000\004\020\210\001\002\000\004\022\211\001\002\000" +
+    "\004\020\212\001\002\000\004\004\213\001\002\000\004" +
+    "\033\214\001\002\000\004\014\215\001\002\000\004\005" +
+    "\216\001\002\000\004\002\ufff6\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -113,7 +116,7 @@ public class S_Analyzer extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\204\000\014\002\010\003\004\004\006\006\003\007" +
+    "\000\214\000\014\002\010\003\004\004\006\006\003\007" +
     "\005\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
@@ -155,7 +158,9 @@ public class S_Analyzer extends java_cup.runtime.lr_parser {
     "\002\001\001\000\004\005\175\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001" });
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -201,6 +206,7 @@ public class S_Analyzer extends java_cup.runtime.lr_parser {
     public static String passwordUser = null;
     public static String name = null;
     public static String institution = null;
+    public static String date = null;
 
     //Metodo al que se llama automaticamente ante algun error sintactico
     public void syntax_error(Symbol s)
@@ -384,28 +390,32 @@ class CUP$S_Analyzer$actions {
           return CUP$S_Analyzer$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 11: // AGREGARCORRECTO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan LessThan ExclamationMark RealizarSolicitud Colon QuotationMark ModificarUsuario QuotationMark GreaterThan LeftBrace QuotationMark Respuesta QuotationMark Colon LeftBracket LeftBrace QuotationMark Status QuotationMark Colon QuotationMark Ok QuotationMark Comma QuotationMark Usuario QuotationMark Colon QuotationMark VALUES QuotationMark Comma QuotationMark Password QuotationMark Colon QuotationMark VALUES QuotationMark Comma QuotationMark NameSentence QuotationMark Colon QuotationMark NAME QuotationMark Comma QuotationMark Institution QuotationMark Colon QuotationMark NAME QuotationMark RightBrace RightBracket RightBrace LessThan FinSolicitud ExclamationMark GreaterThan 
+          case 11: // AGREGARCORRECTO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan LessThan ExclamationMark RealizarSolicitud Colon QuotationMark ModificarUsuario QuotationMark GreaterThan LeftBrace QuotationMark Respuesta QuotationMark Colon LeftBracket LeftBrace QuotationMark Status QuotationMark Colon QuotationMark Ok QuotationMark Comma QuotationMark Usuario QuotationMark Colon QuotationMark VALUES QuotationMark Comma QuotationMark Password QuotationMark Colon QuotationMark VALUES QuotationMark Comma QuotationMark NameSentence QuotationMark Colon QuotationMark NAME QuotationMark Comma QuotationMark Institution QuotationMark Colon QuotationMark NAME QuotationMark Comma QuotationMark FechaCreacion QuotationMark Colon QuotationMark Date QuotationMark RightBrace RightBracket RightBrace LessThan FinSolicitud ExclamationMark GreaterThan 
             {
               String RESULT =null;
-		int usernameleft = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-32)).left;
-		int usernameright = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-32)).right;
-		String username = (String)((java_cup.runtime.Symbol) CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-32)).value;
-		int passwordleft = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-24)).left;
-		int passwordright = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-24)).right;
-		String password = (String)((java_cup.runtime.Symbol) CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-24)).value;
-		int nameValleft = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-16)).left;
-		int nameValright = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-16)).right;
-		String nameVal = (String)((java_cup.runtime.Symbol) CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-16)).value;
-		int institutionValleft = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-8)).left;
-		int institutionValright = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-8)).right;
-		String institutionVal = (String)((java_cup.runtime.Symbol) CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-8)).value;
+		int usernameleft = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-40)).left;
+		int usernameright = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-40)).right;
+		String username = (String)((java_cup.runtime.Symbol) CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-40)).value;
+		int passwordleft = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-32)).left;
+		int passwordright = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-32)).right;
+		String password = (String)((java_cup.runtime.Symbol) CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-32)).value;
+		int nameValleft = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-24)).left;
+		int nameValright = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-24)).right;
+		String nameVal = (String)((java_cup.runtime.Symbol) CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-24)).value;
+		int institutionValleft = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-16)).left;
+		int institutionValright = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-16)).right;
+		String institutionVal = (String)((java_cup.runtime.Symbol) CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-16)).value;
+		int dateValleft = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-8)).left;
+		int dateValright = ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-8)).right;
+		String dateVal = (String)((java_cup.runtime.Symbol) CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-8)).value;
 		System.out.println("Sentencia de modificacion de usuario correcta y aceptada");
                     nameUser = username;
                     passwordUser = password;
                     name = nameVal;
                     institution = institutionVal;
+                    date = dateVal;
                     resultado = "Correcto";
-              CUP$S_Analyzer$result = parser.getSymbolFactory().newSymbol("AGREGARCORRECTO",4, ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-70)), ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), RESULT);
+              CUP$S_Analyzer$result = parser.getSymbolFactory().newSymbol("AGREGARCORRECTO",4, ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.elementAt(CUP$S_Analyzer$top-78)), ((java_cup.runtime.Symbol)CUP$S_Analyzer$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer$result;
 

@@ -13,6 +13,7 @@ parser code
     public static String passwordUser = null;
     public static String name = null;
     public static String institution = null;
+    public static String date = null;
 
     //Metodo al que se llama automaticamente ante algun error sintactico
     public void syntax_error(Symbol s)
@@ -53,7 +54,7 @@ action code
 terminal String LessThan, GreaterThan, QuestionMark, Equal, XSONsentence, Version, VersionNumber, QuotationMark,
                 ExclamationMark, RealizarSolicitud, Colon, LeftBrace, RightBrace, LeftBracket,
                 RightBracket, Comma, Ok, Error, LoginUsuario, Respuesta, Status, Usuario, Name, FinSolicitud,
-                Password, Values, NameSentence, Institution, ModificarUsuario;
+                Password, Values, NameSentence, Institution, ModificarUsuario, Date, FechaCreacion;
 
 //------> declaracion de no terminales
 nonterminal String INICIO, CORRECTO, INCORRECTO, NAME, AGREGARCORRECTO, AGREGARINCORRECTO, VALUES;
@@ -99,7 +100,8 @@ AGREGARCORRECTO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMa
                     QuotationMark Usuario QuotationMark Colon QuotationMark VALUES:username QuotationMark Comma
                     QuotationMark Password QuotationMark Colon QuotationMark VALUES:password QuotationMark Comma
                     QuotationMark NameSentence QuotationMark Colon QuotationMark NAME:nameVal QuotationMark Comma
-                    QuotationMark Institution QuotationMark Colon QuotationMark NAME:institutionVal QuotationMark
+                    QuotationMark Institution QuotationMark Colon QuotationMark NAME:institutionVal QuotationMark Comma
+                    QuotationMark FechaCreacion QuotationMark Colon QuotationMark Date:dateVal QuotationMark
                     RightBrace RightBracket
                     RightBrace
                     LessThan FinSolicitud ExclamationMark GreaterThan
@@ -108,6 +110,7 @@ AGREGARCORRECTO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMa
                     passwordUser = password;
                     name = nameVal;
                     institution = institutionVal;
+                    date = dateVal;
                     resultado = "Correcto";:};
 
 AGREGARINCORRECTO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan

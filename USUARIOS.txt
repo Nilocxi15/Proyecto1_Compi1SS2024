@@ -64,17 +64,13 @@ db.users(
 		"PASSWORD": "123456789",
 		"NOMBRE": "JUAN PEREZ",
 		"INSTITUCION": "CUNOC",
-	},
-	{
-		"USUARIO": "juanitoJuan",
-		"PASSWORD": "1234",
-		"NOMBRE": "JUAN JIMENEZ",
-		"INSTITUCION": "CUNOC",
+		"FECHA_CREACION": "22/09/2024"
 	},
 	{
 		"USUARIO": "mapache",
 		"PASSWORD": "12",
 		"NOMBRE": "JAVIER IXCOLIN",
 		"INSTITUCION": "CUNOC",
+		"FECHA_CREACION": "20/09/2024"
 	}
 )

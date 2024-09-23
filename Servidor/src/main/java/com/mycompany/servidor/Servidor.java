@@ -92,6 +92,7 @@ public class Servidor {
                             String password = sintactic_main.password;
                             String name = sintactic_main.name;
                             String institution = sintactic_main.institution;
+                            String date = sintactic_main.date;
 
                             for (user u : readFiles.usersList) {
                                 if (u.getUserName().equals(username)) {
@@ -116,7 +117,8 @@ public class Servidor {
                                 response += "\"USUARIO\": \"" + username + "\",\n";
                                 response += "\"PASSWORD\": \"" + password + "\",\n";
                                 response += "\"NOMBRE\": \"" + name + "\",\n";
-                                response += "\"INSTITUCION\": \"" + institution + "\"\n";
+                                response += "\"INSTITUCION\": \"" + institution + "\",\n";
+                                response += "\"FECHA_CREACION\": \""+ date + "\"\n";
                                 response += "}]\n";
                                 response += "}\n";
                                 response += "<fin_envio_respuesta!>";

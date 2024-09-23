@@ -32,8 +32,8 @@ public class registerSrv extends HttpServlet {
             System.out.println("Request content: " + requestVerified);
 
             if (requestContent != null && requestContent.contains("USUARIO_NUEVO")) {
-                if (o.sendMessage(requestContent)) {
-                    userConstructor data = new userConstructor(S_Analyzer.nameUser, S_Analyzer.passwordUser, S_Analyzer.name, S_Analyzer.institution);
+                if (o.sendMessage(requestVerified)) {
+                    userConstructor data = new userConstructor(S_Analyzer.nameUser, S_Analyzer.passwordUser, S_Analyzer.name, S_Analyzer.institution, S_Analyzer.date);
                     try {
                         System.out.println("Writing to file");
                         List<String> lines = Files.readAllLines(Paths.get("D:/Documentos/DocumentosUSAC/Compi1/Proyecto1/USUARIOS.txt"));

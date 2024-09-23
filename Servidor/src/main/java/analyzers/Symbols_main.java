@@ -14,6 +14,7 @@ public class Symbols_main {
   public static final int Password = 25;
   public static final int LeftBrace = 17;
   public static final int DatosUsuario = 28;
+  public static final int Date = 33;
   public static final int LeftBracket = 19;
   public static final int XSONsentence = 6;
   public static final int niValue = 31;
@@ -33,6 +34,7 @@ public class Symbols_main {
   public static final int EliminarUsuario = 15;
   public static final int ExclamationMark = 10;
   public static final int QuotationMark = 9;
+  public static final int FechaCreacion = 32;
   public static final int FinSolicitud = 23;
   public static final int error = 1;
   public static final int UsuarioNuevo = 13;
@@ -72,7 +74,9 @@ public class Symbols_main {
   "DatosUsuario",
   "UsuarioAntiguo",
   "NuevoPassword",
-  "niValue"
+  "niValue",
+  "FechaCreacion",
+  "Date"
   };
 }
 

@@ -19,7 +19,7 @@ public class registerDataValidation {
                 insertIndex = data.indexOf("\n", insertIndex) + 1;
 
                 StringBuilder sb = new StringBuilder(data);
-                sb.insert(insertIndex, "\t\"FECHA_CREACION\": \"" + formattedDate + "\",\n");
+                sb.insert(insertIndex, "\t\"FECHA_CREACION\": \"" + formattedDate + "\"\n");
 
                 return sb.toString();
             }

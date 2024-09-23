@@ -14,6 +14,7 @@ public class Symbols {
   public static final int Colon = 12;
   public static final int Password = 26;
   public static final int LeftBrace = 13;
+  public static final int Date = 31;
   public static final int XSONsentence = 6;
   public static final int LeftBracket = 15;
   public static final int Comma = 17;
@@ -32,6 +33,7 @@ public class Symbols {
   public static final int Ok = 18;
   public static final int ExclamationMark = 10;
   public static final int QuotationMark = 9;
+  public static final int FechaCreacion = 32;
   public static final int FinSolicitud = 25;
   public static final int error = 1;
   public static final int NameSentence = 28;
@@ -70,7 +72,9 @@ public class Symbols {
   "Values",
   "NameSentence",
   "Institution",
-  "ModificarUsuario"
+  "ModificarUsuario",
+  "Date",
+  "FechaCreacion"
   };
 }
 
