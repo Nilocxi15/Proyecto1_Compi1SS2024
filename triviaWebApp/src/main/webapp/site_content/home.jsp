@@ -31,16 +31,8 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active"
-                               href="http://localhost/triviaWebApp/site_content/createTrivia.jsp">Crear Trivia</a>
-                        </li>
-                        <li class="nav-itemt">
-                            <a class="nav-link" href="http://localhost/triviaWebApp/site_content/editUser.jsp">Editar
-                                Usuario</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="http://localhost/triviaWebApp/site_content/deleteUser.jsp">Eliminar
-                                Usuario</a>
+                            <a class="nav-link"
+                               href="http://localhost/triviaWebApp/site_content/createTrivia.jsp">Crear Solicitud</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/logout">Salir</a>
@@ -56,7 +48,9 @@
     </div>
     <div class="title">
         <h2>Lista de Trivias</h2>
-        <button class="btn btn-primary">Importar</button>
+        <button class="btn btn-primary" id="importButton">Importar</button>
+        <input type="file" id="fileInput" style="display: none">
+        <input type="hidden" id="filePathInput" name="filePath">
     </div>
     <div class="table">
         <div class="d-flex p-2">
@@ -99,5 +93,9 @@
 <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.0.5/js/dataTables.bootstrap5.min.js"></script>
 <script src="../scripts/dataTable.js"></script>
+<!-- Import -->
+<script src="../scripts/openFile.js"></script>
+<!-- Borrar datos de los textarea -->
+<script src="../scripts/deleteTextarea.js"></script>
 </body>
 </html>

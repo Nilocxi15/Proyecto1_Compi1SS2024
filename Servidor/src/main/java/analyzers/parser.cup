@@ -80,11 +80,11 @@ terminal String LessThan, GreaterThan, QuestionMark, Equal, XSONsentence, Versio
                 ExclamationMark, RealizarSolicitud, Colon, UsuarioNuevo, ModificarUsuario, EliminarUsuario,
                 LoginUsuario, LeftBrace, RightBrace, LeftBracket, RightBracket, Comma, Values, FinSolicitud,
                 Usuario, Password, Nombre, Institucion, DatosUsuario, UsuarioAntiguo, NuevoPassword, niValue,
-                FechaCreacion, Date;
+                FechaCreacion, Date, FinSolicitudes, RealizarSolicitudes;
 
 //------> declaracion de no terminales
 nonterminal String INICIO, USUARIONUEVO, MODIFICARUSUARIO, ELIMINARUSUARIO, LOGINUSUARIO,
-                    VALUES, NAMES;
+                    VALUES, NAMES, REQUESTBLOCK, REQUESTS, REQUESTSLOOP, USUARIONUEVOVALUES, USUARIONUEVOBLOCK;
 
 start with INICIO;
 
@@ -107,6 +107,45 @@ LOGINUSUARIO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark 
                    login data = new login(username, password);
                    loginList.add(0, data);:};
 
+REQUESTBLOCK ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuotationMark GreaterThan
+                REQUESTS
+                |LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
+                LessThan ExclamationMark RealizarSolicitudes GreaterThan
+                REQUESTSLOOP
+                LessThan FinSolicitudes ExclamationMark GreaterThan
+                {:System.out.println("Bloque de solicitudes reconocido y aceptado");:};
+
+REQUESTSLOOP ::= REQUESTS REQUESTSLOOP
+            |REQUESTS;
+
+REQUESTS ::= USUARIONUEVO
+            |MODIFICARUSUARIO
+            |ELIMINARUSUARIO;
+
+USUARIONUEVO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark UsuarioNuevo QuotationMark GreaterThan
+                LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket USUARIONUEVOBLOCK RightBracket RightBrace
+                LessThan FinSolicitud ExclamationMark GreaterThan
+                {:System.out.println("Sentencia de creacion de usuario reconocida y aceptada");:};
+
+USUARIONUEVOBLOCK ::= LeftBrace USUARIONUEVOVALUES RightBrace Comma USUARIONUEVOBLOCK
+                    |LeftBrace USUARIONUEVOVALUES RightBrace;
+
+USUARIONUEVOVALUES ::= QuotationMark Usuario QuotationMark Colon QuotationMark VALUES:username QuotationMark Comma USUARIONUEVOVALUES
+                    |QuotationMark Password QuotationMark Colon QuotationMark VALUES:password QuotationMark Comma USUARIONUEVOVALUES
+                    |QuotationMark Nombre QuotationMark Colon QuotationMark VALUES:name QuotationMark Comma USUARIONUEVOVALUES
+                    |QuotationMark Institucion QuotationMark Colon QuotationMark VALUES:institution QuotationMark Comma USUARIONUEVOVALUES
+                    |QuotationMark FechaCreacion QuotationMark Colon QuotationMark Date:date QuotationMark USUARIONUEVOVALUES
+                    |QuotationMark Usuario QuotationMark Colon QuotationMark VALUES:username QuotationMark
+                    |QuotationMark Password QuotationMark Colon QuotationMark VALUES:password QuotationMark
+                    |QuotationMark Nombre QuotationMark Colon QuotationMark VALUES:name QuotationMark
+                    |QuotationMark Institucion QuotationMark Colon QuotationMark VALUES:institution QuotationMark
+                    |QuotationMark FechaCreacion QuotationMark Colon QuotationMark Date:date QuotationMark
+                    {:userName = username;
+                    password = passwordVal;
+                    name = nameVal;
+                    institution = institutionVal;
+                    date = dateVal;:};
+
 MODIFICARUSUARIO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
                     LessThan ExclamationMark RealizarSolicitud Colon QuotationMark ModificarUsuario QuotationMark GreaterThan
                     LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket LeftBrace
@@ -128,25 +167,6 @@ ELIMINARUSUARIO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMa
                     LessThan FinSolicitud ExclamationMark GreaterThan
                     {:System.out.println("Sentencia de eliminacion de usuario reconocida y aceptada");
                     requestName = "eliminar";:};
-
-USUARIONUEVO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
-                LessThan ExclamationMark RealizarSolicitud Colon QuotationMark UsuarioNuevo QuotationMark GreaterThan
-                LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket LeftBrace
-                QuotationMark Usuario QuotationMark Colon QuotationMark VALUES:username QuotationMark Comma
-                QuotationMark Password QuotationMark Colon QuotationMark VALUES:passwordVal QuotationMark Comma
-                QuotationMark Nombre QuotationMark Colon QuotationMark NAMES:nameVal QuotationMark Comma
-                QuotationMark Institucion QuotationMark Colon QuotationMark NAMES:institutionVal QuotationMark Comma
-                QuotationMark FechaCreacion QuotationMark Colon QuotationMark Date:dateVal QuotationMark
-                RightBrace RightBracket
-                RightBrace
-                LessThan FinSolicitud ExclamationMark GreaterThan
-                {:System.out.println("Sentencia de creacion de usuario reconocida y aceptada");
-                requestName = "nuevo";
-                userName = username;
-                password = passwordVal;
-                name = nameVal;
-                institution = institutionVal;
-                date = dateVal;:};
 
 VALUES ::= Values:a {:RESULT = String.valueOf(a);:}
           |niValue:b {:RESULT = String.valueOf(b);:};

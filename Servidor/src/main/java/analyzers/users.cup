@@ -47,7 +47,7 @@ action code
 /*--------------- 2da Area: Declaraciones -----------------------*/
 //------> declaracion de terminales
 terminal String OpenParenthesis, CloseParenthesis, LeftBrace, RightBrace, Comma, QuotationMark, Colon, Init,
-                User, Password, Name, Institution, NIValue, UPValue;
+                User, Password, Name, Institution, NIValue, UPValue, FechaCreacion, Date;
 
 //------> declaracion de no terminales
 nonterminal String INICIO, A, B, C, D, E, F, G;
@@ -65,6 +65,7 @@ C ::= E:a
         F:b
         QuotationMark Name QuotationMark Colon QuotationMark G:c QuotationMark Comma
         QuotationMark Institution QuotationMark Colon QuotationMark G:d QuotationMark Comma
+        QuotationMark FechaCreacion QuotationMark Colon QuotationMark Date QuotationMar
         {:String userName = String.valueOf(a);
         String password = String.valueOf(b);
         String name = String.valueOf(c);

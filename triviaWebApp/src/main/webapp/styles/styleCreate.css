@@ -29,3 +29,21 @@ textarea {
     font-size: 14px;
 }
 
+.btn-requests {
+    width: 20%;
+}
+
+.tables {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100vw;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.centered {
+    text-align: center !important;
+    vertical-align: middle !important;
+}

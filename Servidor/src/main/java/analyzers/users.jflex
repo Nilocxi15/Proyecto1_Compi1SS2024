@@ -27,6 +27,7 @@ user = "USUARIO"
 password = "PASSWORD"
 name = "NOMBRE"
 institution = "INSTITUCION"
+fechaCreacion = "FECHA_CREACION"
 
 //Name and Institution values
 niValue = [A-Z]+
@@ -34,6 +35,11 @@ niValue = [A-Z]+
 //User and Password values
 upValue = [a-zA-Z0-9_]+
 
+//Date values
+day = [0-3][0-9]
+month = [0-1][0-9]
+year = [1-2][0-9][0-9][0-9]
+date = {day} "/" {month} "/" {year}
 %%
 
 /*------------  3ra Area: Reglas Lexicas ---------*/
@@ -53,8 +59,10 @@ upValue = [a-zA-Z0-9_]+
 <YYINITIAL> {password}      {return new Symbol(Symbols_Users.Password, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {name}          {return new Symbol(Symbols_Users.Name, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {institution}   {return new Symbol(Symbols_Users.Institution, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {fechaCreacion} {return new Symbol(Symbols_Users.FechaCreacion, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {niValue}       {return new Symbol(Symbols_Users.NIValue, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {upValue}       {return new Symbol(Symbols_Users.UPValue, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {date}          {return new Symbol(Symbols_Users.Date, (yycolumn + 1), (yyline + 1), yytext());}
 {WhiteSpace} {/* Ignorar espacios en blanco */}
 
 //------> Errores Lexicos

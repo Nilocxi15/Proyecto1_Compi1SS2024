@@ -1,3 +1,8 @@
+<%@ page import="models.TError" %>
+<%@ page import="java.util.LinkedList" %>
+<%@ page import="analyzers.L_Analyzer_Requests" %>
+<%@ page import="analyzers.S_Analyzer_Requests" %>
+<%@ page import="java.util.Iterator" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -28,13 +33,7 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page"
-                               href="http://localhost/triviaWebApp/site_content/createTrivia.jsp">Crear Trivia</a>
-                        </li>
-                        <li class="nav-itemt">
-                            <a class="nav-link" href="http://localhost/triviaWebApp/site_content/editUser.jsp">Editar Usuario</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="http://localhost/triviaWebApp/site_content/deleteUser.jsp">Eliminar Usuario</a>
+                               href="http://localhost/triviaWebApp/site_content/createTrivia.jsp">Crear Solicitud</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/logout" method="POST">Salir</a>
@@ -42,29 +41,105 @@
                     </ul>
                     <span class="navbar-text">
                     <i class="bi bi-person-circle"></i>
-                    Bienvenido 'usuario'
+                    Bienvenido <%= session.getAttribute("user") %>
                 </span>
                 </div>
             </div>
         </nav>
     </div>
     <div class="text-areas">
-        <div class="create-area">
+        <form class="create-area" action="${pageContext.request.contextPath}/createTrivia" method="post">
             <div class="header">
-                <h2>Crear Trivia</h2>
+                <h2>Área para solicitudes</h2>
                 <button class="btn btn-primary">Exportar</button>
             </div>
             <div class="input-group">
-                <textarea class="form-control" aria-label="With textarea" id="createTextarea"></textarea>
+                <textarea class="form-control" aria-label="With textarea" id="createTextarea"
+                          name="createTextarea"></textarea>
             </div>
             <div>Línea: <span id="createLine">1</span>, Columna: <span id="createColumn">1</span></div>
-        </div>
-        <div class="query-area">
+            <button type="submit" class="btn btn-success btn-requests" name="compileBtn" value="XSON">Enviar
+                solicitud(es)
+            </button>
+        </form>
+        <form class="query-area" action="${pageContext.request.contextPath}/createTrivia" method="post">
             <h2>Consultas SQLKV</h2>
-            <textarea class="form-control" aria-label="With textarea" id="queryTextarea"></textarea>
+            <textarea class="form-control" aria-label="With textarea" id="queryTextarea"
+                      name="queryTextarea"></textarea>
             <div>Línea: <span id="queryLine">1</span>, Columna: <span id="queryColumn">1</span></div>
-        </div>
+            <button type="submit" class="btn btn-success btn-requests" name="compileBtn" value="SQLKV">Enviar SQLKV
+            </button>
+        </form>
     </div>
+    <div class="tables">
+        <table id="errors" class="table table-striped">
+            <thead>
+            <tr>
+                <th class="centered">Línea</th>
+                <th class="centered">Columna</th>
+                <th class="centered">Token</th>
+                <th class="centered">Descripción</th>
+                <th class="centered">Tipo</th>
+            </tr>
+            </thead>
+            <%
+                LinkedList<TError> combinedList = new LinkedList<TError>();
+                combinedList.addAll(L_Analyzer_Requests.TablaEL);
+                combinedList.addAll(S_Analyzer_Requests.TablaESS);
+
+                Iterator<TError> iterator = combinedList.iterator();
+                TError error = null;
+
+                while (iterator.hasNext()) {
+                    error = iterator.next();
+            %>
+            <tbody>
+            <tr>
+                <td class="centered"><%=error.getLine()%>
+                </td>
+                <td class="centered"><%=error.getColumn()%>
+                </td>
+                <td class="centered"><%=error.getToken()%>
+                </td>
+                <td class="centered"><%=error.getDescription()%>
+                </td>
+                <td class="centered"><%=error.getType()%>
+                </td>
+                    <% }
+                L_Analyzer_Requests.TablaEL.clear();
+                S_Analyzer_Requests.TablaESS.clear();
+            %>
+            <tr>
+            </tbody>
+        </table>
+        <table id="errors2" class="table table-striped">
+            <thead>
+            <tr>
+                <th class="centered">Línea</th>
+                <th class="centered">Columna</th>
+                <th class="centered">Token</th>
+                <th class="centered">Descripción</th>
+                <th class="centered">Tipo</th>
+            </tr>
+            </thead>
+            <!--
+            <tbody>
+            <tr>
+                <td class="centered">
+                </td>
+                <td class="centered">
+                </td>
+                <td class="centered">
+                    <button type="button" class="btn btn-primary"><i class="bi bi-eye"></i></button>
+                    <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                </td>
+            <tr>
+            </tbody>
+            -->
+        </table>
+    </div>
+</div>
+</div>
 </div>
 <!--Bootstrap-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -72,5 +147,13 @@
         crossorigin="anonymous"></script>
 <!--Cursor Position-->
 <script src="../scripts/textareaPosition.js"></script>
+<!-- Tabla -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.0.5/js/dataTables.bootstrap5.min.js"></script>
+<!-- Guardado de los textarea -->
+<script src="../scripts/saveTextarea.js"></script>
 </body>
 </html>

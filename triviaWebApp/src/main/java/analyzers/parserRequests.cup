@@ -1,0 +1,247 @@
+/*--------------- 1ra Area: Codigo de Usuario -----------------------*/
+//-------> importaciones Y paquetes
+package analyzers;
+
+import java_cup.runtime.Symbol;
+import java.util.LinkedList;
+import models.TError;
+
+//------> Codigo para el parser,variables, metodos, etc.
+parser code
+{:
+    public static LinkedList<TError> TablaESS = new LinkedList<TError>();
+
+    //Metodo al que se llama automaticamente ante algun error sintactico
+public void syntax_error(Symbol s) {
+    String lexema = s.value.toString();
+    int fila = s.right;
+    int columna = s.left;
+    int tipo = s.sym;
+
+    System.out.println("!!!!!!! Error Sintactico Recuperado !!!!!!!");
+    System.out.println("\t\tLexema: " + lexema);
+    System.out.println("\t\tFila: " + fila);
+    System.out.println("\t\tColumna: " + columna);
+    System.out.println("\t\tTipo: " + tipo);
+
+    // Sugerencia del token esperado
+    String expectedToken = getExpectedToken(tipo);
+
+    TError data = new TError(lexema, fila, columna, "Sintáctico", "Se esperaba el token '" + expectedToken + "'");
+    TablaESS.add(data);
+}
+
+private String getExpectedToken(int tipo) {
+    switch (tipo) {
+        case Symbols_Requests.LessThan:
+            return ">' o '}";
+        case Symbols_Requests.GreaterThan:
+            return "?' o '!";
+        case Symbols_Requests.QuestionMark:
+            return "<' o ' \" (comilla)";
+        case Symbols_Requests.Equal:
+            return "version";
+        case Symbols_Requests.QuotationMark:
+            return "Comillas";
+        case Symbols_Requests.ExclamationMark:
+            return "<' o la sentencia 'fin_solicitud_realizada";
+        case Symbols_Requests.Colon:
+            return "de instrucción' o 'nombre del campo";
+        case Symbols_Requests.Comma:
+            return "Comma";
+        case Symbols_Requests.LeftBrace:
+            return "LeftBrace";
+        case Symbols_Requests.RightBrace:
+            return "RightBrace";
+        case Symbols_Requests.LeftBracket:
+            return "LeftBracket";
+        case Symbols_Requests.RightBracket:
+            return "RightBracket";
+        case Symbols_Requests.XSONsentence:
+            return "XSONsentence";
+        case Symbols_Requests.Version:
+            return "Version";
+        case Symbols_Requests.VersionNumber:
+            return "VersionNumber";
+        case Symbols_Requests.RealizarSolicitud:
+            return "RealizarSolicitud";
+        case Symbols_Requests.RealizarSolicitudes:
+            return "RealizarSolicitudes";
+        case Symbols_Requests.FinSolicitud:
+            return "FinSolicitud";
+        case Symbols_Requests.FinSolicitudes:
+            return "FinSolicitudes";
+        case Symbols_Requests.UsuarioNuevo:
+            return "UsuarioNuevo";
+        case Symbols_Requests.ModificarUsuario:
+            return "ModificarUsuario";
+        case Symbols_Requests.EliminarUsuario:
+            return "EliminarUsuario";
+        case Symbols_Requests.DatosUsuario:
+            return "DatosUsuario";
+        case Symbols_Requests.Usuario:
+            return "Usuario";
+        case Symbols_Requests.Password:
+            return "Password";
+        case Symbols_Requests.Nombre:
+            return "Nombre";
+        case Symbols_Requests.Institucion:
+            return "Institucion";
+        case Symbols_Requests.NIValue:
+            return "NIValue";
+        case Symbols_Requests.UPValue:
+            return "UPValue";
+        case Symbols_Requests.FechaCreacion:
+            return "FechaCreacion";
+        case Symbols_Requests.Date:
+            return "Date";
+        // Agrega más casos según los tokens que manejes
+        default:
+            return "token desconocido";
+    }
+}
+
+    //Metodo al que se llama en el momento en que ya no es posible una recuperacion de errores
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception
+    {
+        String lexema = s.value.toString();
+        int fila = s.right;
+        int columna = s.left;
+
+        System.out.println("!!!!!!! Error Sintactico, Panic Mode !!!!!!! ");
+        System.out.println("\t\tLexema: "+lexema);
+        System.out.println("\t\tFila: "+fila);
+        System.out.println("\t\tColumna: "+columna);
+
+    }
+:}
+
+//------> Codigo para las acciones gramaticales
+action code
+{:
+    //Verificación de campos completos USUARIONUEVO
+    int contUser = 0;
+    int contPass = 0;
+    int contName = 0;
+    int contInst = 0;
+    int contDate = 0;
+
+    public void contFields(String field){
+        switch(field){
+            case "Usuario":
+                contUser++;
+                break;
+            case "Password":
+                contPass++;
+                break;
+            case "Nombre":
+                contName++;
+                break;
+            case "Institucion":
+                contInst++;
+                break;
+            case "FechaCreacion":
+                contDate++;
+                break;
+        }
+    }
+
+    public void cleanFields(){
+        contUser = 0;
+        contPass = 0;
+        contName = 0;
+        contInst = 0;
+        contDate = 0;
+    }
+
+    public void checkFields(Symbol s){
+        int line = s.right;
+        int column = s.left;
+
+        if(contUser != 1){
+            System.out.println("Error: El campo Usuario no esta completo o esta duplicado");
+            TError datos = new TError("Usuario", line, column, "Semántico", "Campo USUARIO faltante o repetido");
+            TablaESS.add(datos);
+        }
+        if(contPass != 1){
+            System.out.println("Error: El campo Password no esta completo o esta duplicado");
+            TError datos = new TError("Password", line, column, "Semántico", "Campo PASSWORD faltante o repetido");
+            TablaESS.add(datos);
+        }
+        if(contName != 1){
+            System.out.println("Error: El campo Nombre no esta completo o esta duplicado");
+            TError datos = new TError("Nombre", line, column, "Semántico", "Campo NOMBRE faltante o repetido");
+            TablaESS.add(datos);
+        }
+        if(contInst != 1){
+            System.out.println("Error: El campo Institucion no esta completo o esta duplicado");
+            TError datos = new TError("Institucion", line, column, "Semántico", "Campo INSTITUCION faltante o repetido");
+            TablaESS.add(datos);
+        }
+        if(contDate > 1){
+            System.out.println("Error: El campo Fecha de Creacion esta repetido");
+            TError datos = new TError("FechaCreacion", line, column, "Semántico", "Campo FECHA_CREACION duplicado");
+            TablaESS.add(datos);
+        }
+    }
+:}
+
+/*--------------- 2da Area: Declaraciones -----------------------*/
+//------> declaracion de terminales
+terminal String LessThan, GreaterThan, QuestionMark, Equal, QuotationMark, ExclamationMark, Colon, Comma,
+                LeftBrace, RightBrace, LeftBracket, RightBracket, XSONsentence, Version, VersionNumber,
+                RealizarSolicitud, RealizarSolicitudes, FinSolicitud, FinSolicitudes, UsuarioNuevo,
+                ModificarUsuario, EliminarUsuario, DatosUsuario, Usuario, Password, Nombre, Institucion,
+                NIValue, UPValue, FechaCreacion, Date;
+
+//------> declaracion de no terminales
+nonterminal  INICIO, SINGLEREQUEST, USUARIONUEVO, MODIFICARUSUARIO, ELIMINARUSUARIO, NEWUSERLOOP, NEWUSERBLOCK,
+                VALUES, NAMES;
+
+start with INICIO;
+
+/*--------------- 3ra Area: Reglas Gramaticales -----------------------*/
+INICIO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
+            SINGLEREQUEST {:System.out.println("Sentencia correcta y aceptada");:}
+            | error {:System.out.println("Error en la sentencia inicial");
+            cleanFields();:};
+
+SINGLEREQUEST ::= USUARIONUEVO
+                | MODIFICARUSUARIO
+                | ELIMINARUSUARIO;
+
+USUARIONUEVO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark UsuarioNuevo QuotationMark GreaterThan
+                    LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket
+                    NEWUSERLOOP
+                    RightBracket RightBrace
+                    LessThan FinSolicitud ExclamationMark GreaterThan
+                | error USUARIONUEVO {:System.out.println("Error en la declaración de USUARIONUEVO"); :};
+
+MODIFICARUSUARIO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark ModificarUsuario QuotationMark GreaterThan
+                    LeftBrace LeftBracket RightBracket RightBrace
+                    LessThan FinSolicitud ExclamationMark GreaterThan
+                | error MODIFICARUSUARIO {:System.out.println("Error en la declaración de MODIFICARUSUARIO"); :};
+
+ELIMINARUSUARIO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark EliminarUsuario QuotationMark GreaterThan
+                    LeftBrace LeftBracket RightBracket RightBrace
+                    LessThan FinSolicitud ExclamationMark GreaterThan
+                | error ELIMINARUSUARIO {:System.out.println("Error en la declaración de ELIMINARUSUARIO"); :};
+
+NEWUSERLOOP ::= LeftBrace NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK RightBrace Comma NEWUSERLOOP
+                | LeftBrace NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK RightBrace
+                | error {:System.out.println("Error en la declaración de NEWUSERLOOP"); :};
+
+NEWUSERBLOCK ::= QuotationMark Usuario QuotationMark Colon QuotationMark VALUES QuotationMark Comma {:contFields("Usuario");:}
+                | QuotationMark Password QuotationMark Colon QuotationMark VALUES QuotationMark Comma {:contFields("Password");:}
+                | QuotationMark Nombre QuotationMark Colon QuotationMark NAMES QuotationMark Comma {:contFields("Nombre");:}
+                | QuotationMark Institucion QuotationMark Colon QuotationMark NAMES QuotationMark Comma {:contFields("Institucion");:}
+                | QuotationMark FechaCreacion QuotationMark Colon QuotationMark Date QuotationMark Comma {:contFields("FechaCreacion");:}
+                | error {:System.out.println("Error en la declaración de NEWUSERBLOCK"); :};
+
+VALUES ::= UPValue
+            | NIValue
+            | error {:System.out.println("Error en la declaración de VALUES"); :};
+
+NAMES ::= NIValue NAMES
+            | NIValue
+            | error {:System.out.println("Error en la declaración de NAMES"); :};

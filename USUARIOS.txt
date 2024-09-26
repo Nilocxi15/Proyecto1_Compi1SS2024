@@ -1,65 +1,5 @@
 db.users(
 	{
-		"USUARIO": "maria123",
-		"PASSWORD": "abcdef12",
-		"NOMBRE": "MARIA LOPEZ",
-		"INSTITUCION": "USAC",
-	},
-	{
-		"USUARIO": "carlos456",
-		"PASSWORD": "qwerty34",
-		"NOMBRE": "CARLOS GARCIA",
-		"INSTITUCION": "URL",
-	},
-	{
-		"USUARIO": "ana789",
-		"PASSWORD": "1234abcd",
-		"NOMBRE": "ANA FERNANDEZ",
-		"INSTITUCION": "UVG",
-	},
-	{
-		"USUARIO": "luis101",
-		"PASSWORD": "1234abcd",
-		"NOMBRE": "LUIS HERNANDEZ",
-		"INSTITUCION": "UFM",
-	},
-	{
-		"USUARIO": "sofia202",
-		"PASSWORD": "5678efgh",
-		"NOMBRE": "SOFIA RODRIGEZ",
-		"INSTITUCION": "CUSAM",
-	},
-	{
-		"USUARIO": "pedro303",
-		"PASSWORD": "ijkl9012",
-		"NOMBRE": "PEDRO GOMEZ",
-		"INSTITUCION": "UMG",
-	},
-	{
-		"USUARIO": "laura404",
-		"PASSWORD": "mnop3456",
-		"NOMBRE": "LAURA DIAZ",
-		"INSTITUCION": "URL",
-	},
-	{
-		"USUARIO": "jorge505",
-		"PASSWORD": "uvwx7809",
-		"NOMBRE": "JORGE RAMIREZ",
-		"INSTITUCION": "USAC",
-	},
-	{
-		"USUARIO": "elena606",
-		"PASSWORD": "yzaq1234",
-		"NOMBRE": "ELENA FERNANDEZ",
-		"INSTITUCION": "UVG",
-	},
-	{
-		"USUARIO": "diego707",
-		"PASSWORD": "bcde5678",
-		"NOMBRE": "DIEGO TORRES",
-		"INSTITUCION": "UFM",
-	},
-	{
 		"USUARIO": "juanito619",
 		"PASSWORD": "123456789",
 		"NOMBRE": "JUAN PEREZ",
@@ -72,5 +12,75 @@ db.users(
 		"NOMBRE": "JAVIER IXCOLIN",
 		"INSTITUCION": "CUNOC",
 		"FECHA_CREACION": "20/09/2024"
+	},
+	{
+		"USUARIO": "maria123",
+		"PASSWORD": "abcdef12",
+		"NOMBRE": "MARIA LOPEZ",
+		"INSTITUCION": "USAC",
+		"FECHA_CREACION": "03/08/2024"
+	},
+	{
+		"USUARIO": "carlos456",
+		"PASSWORD": "qwerty34",
+		"NOMBRE": "CARLOS GARCIA",
+		"INSTITUCION": "URL",
+		"FECHA_CREACION": "15/08/2024"
+	},
+	{
+		"USUARIO": "ana789",
+		"PASSWORD": "1234abcd",
+		"NOMBRE": "ANA FERNANDEZ",
+		"INSTITUCION": "UVG",
+		"FECHA_CREACION": "27/08/2024"
+	},
+	{
+		"USUARIO": "luis101",
+		"PASSWORD": "1234abcd",
+		"NOMBRE": "LUIS HERNANDEZ",
+		"INSTITUCION": "UFM",
+		"FECHA_CREACION": "05/09/2024"
+	},
+	{
+		"USUARIO": "sofia202",
+		"PASSWORD": "5678efgh",
+		"NOMBRE": "SOFIA RODRIGEZ",
+		"INSTITUCION": "CUSAM",
+		"FECHA_CREACION": "12/09/2024"
+	},
+	{
+		"USUARIO": "pedro303",
+		"PASSWORD": "ijkl9012",
+		"NOMBRE": "PEDRO GOMEZ",
+		"INSTITUCION": "UMG",
+		"FECHA_CREACION": "19/09/2024"
+	},
+	{
+		"USUARIO": "laura404",
+		"PASSWORD": "mnop3456",
+		"NOMBRE": "LAURA DIAZ",
+		"INSTITUCION": "URL",
+		"FECHA_CREACION": "25/09/2024"
+	},
+	{
+		"USUARIO": "jorge505",
+		"PASSWORD": "uvwx7809",
+		"NOMBRE": "JORGE RAMIREZ",
+		"INSTITUCION": "USAC",
+		"FECHA_CREACION": "01/10/2024"
+	},
+	{
+		"USUARIO": "elena606",
+		"PASSWORD": "yzaq1234",
+		"NOMBRE": "ELENA FERNANDEZ",
+		"INSTITUCION": "UVG",
+		"FECHA_CREACION": "10/10/2024"
+	},
+	{
+		"USUARIO": "diego707",
+		"PASSWORD": "bcde5678",
+		"NOMBRE": "DIEGO TORRES",
+		"INSTITUCION": "UFM",
+		"FECHA_CREACION": "20/10/2024"
 	}
 )
