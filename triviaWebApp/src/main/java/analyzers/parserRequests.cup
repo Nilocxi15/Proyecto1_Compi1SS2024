@@ -4,12 +4,16 @@ package analyzers;
 
 import java_cup.runtime.Symbol;
 import java.util.LinkedList;
+
 import models.TError;
+import models.createUser;
 
 //------> Codigo para el parser,variables, metodos, etc.
 parser code
 {:
     public static LinkedList<TError> TablaESS = new LinkedList<TError>();
+
+    public boolean result = false;
 
     //Metodo al que se llama automaticamente ante algun error sintactico
 public void syntax_error(Symbol s) {
@@ -126,22 +130,29 @@ action code
     int contInst = 0;
     int contDate = 0;
 
+    int contFields = 0;
+
     public void contFields(String field){
         switch(field){
             case "Usuario":
                 contUser++;
+                contFields++;
                 break;
             case "Password":
                 contPass++;
+                contFields++;
                 break;
             case "Nombre":
                 contName++;
+                contFields++;
                 break;
             case "Institucion":
                 contInst++;
+                contFields++;
                 break;
             case "FechaCreacion":
                 contDate++;
+                contFields++;
                 break;
         }
     }
@@ -154,36 +165,44 @@ action code
         contDate = 0;
     }
 
-    public void checkFields(Symbol s){
-        int line = s.right;
-        int column = s.left;
+    public void checkFields(){
+        int line = 0;
+        int column = 0;
 
-        if(contUser != 1){
+        result = true;
+
+        if((contFields/contUser) != 5){
+            result = false;
             System.out.println("Error: El campo Usuario no esta completo o esta duplicado");
             TError datos = new TError("Usuario", line, column, "Semántico", "Campo USUARIO faltante o repetido");
             TablaESS.add(datos);
         }
-        if(contPass != 1){
+        if((contFields/contPass) != 5){
+            result = false;
             System.out.println("Error: El campo Password no esta completo o esta duplicado");
             TError datos = new TError("Password", line, column, "Semántico", "Campo PASSWORD faltante o repetido");
             TablaESS.add(datos);
         }
-        if(contName != 1){
+        if((contFields/contName) != 5){
+            result = false;
             System.out.println("Error: El campo Nombre no esta completo o esta duplicado");
             TError datos = new TError("Nombre", line, column, "Semántico", "Campo NOMBRE faltante o repetido");
             TablaESS.add(datos);
         }
-        if(contInst != 1){
+        if((contFields/contInst) != 5){
+            result = false;
             System.out.println("Error: El campo Institucion no esta completo o esta duplicado");
             TError datos = new TError("Institucion", line, column, "Semántico", "Campo INSTITUCION faltante o repetido");
             TablaESS.add(datos);
         }
-        if(contDate > 1){
+        if((contFields/contDate) != 5){
+            result = false;
             System.out.println("Error: El campo Fecha de Creacion esta repetido");
             TError datos = new TError("FechaCreacion", line, column, "Semántico", "Campo FECHA_CREACION duplicado");
             TablaESS.add(datos);
         }
     }
+
 :}
 
 /*--------------- 2da Area: Declaraciones -----------------------*/
@@ -215,6 +234,7 @@ USUARIONUEVO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark 
                     NEWUSERLOOP
                     RightBracket RightBrace
                     LessThan FinSolicitud ExclamationMark GreaterThan
+                    {:cleanFields();:}
                 | error USUARIONUEVO {:System.out.println("Error en la declaración de USUARIONUEVO"); :};
 
 MODIFICARUSUARIO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark ModificarUsuario QuotationMark GreaterThan
@@ -228,15 +248,33 @@ ELIMINARUSUARIO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMa
                 | error ELIMINARUSUARIO {:System.out.println("Error en la declaración de ELIMINARUSUARIO"); :};
 
 NEWUSERLOOP ::= LeftBrace NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK RightBrace Comma NEWUSERLOOP
+                {:System.out.println("Entra a NEWUSERLOOP");
+                checkFields();
+                System.out.println("Sale de NEWUSERLOOP");:}
                 | LeftBrace NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK RightBrace
+                {:System.out.println("Entra a NEWUSERLOOP SINGLE");
+                checkFields();
+                System.out.println("Sale de NEWUSERLOOP SINGLE");:}
                 | error {:System.out.println("Error en la declaración de NEWUSERLOOP"); :};
 
-NEWUSERBLOCK ::= QuotationMark Usuario QuotationMark Colon QuotationMark VALUES QuotationMark Comma {:contFields("Usuario");:}
-                | QuotationMark Password QuotationMark Colon QuotationMark VALUES QuotationMark Comma {:contFields("Password");:}
-                | QuotationMark Nombre QuotationMark Colon QuotationMark NAMES QuotationMark Comma {:contFields("Nombre");:}
-                | QuotationMark Institucion QuotationMark Colon QuotationMark NAMES QuotationMark Comma {:contFields("Institucion");:}
-                | QuotationMark FechaCreacion QuotationMark Colon QuotationMark Date QuotationMark Comma {:contFields("FechaCreacion");:}
-                | error {:System.out.println("Error en la declaración de NEWUSERBLOCK"); :};
+NEWUSERBLOCK ::= QuotationMark Usuario QuotationMark Colon QuotationMark VALUES QuotationMark Comma
+                {:contFields("Usuario");
+                System.out.println("Entra en un valor ");:}
+                | QuotationMark Password QuotationMark Colon QuotationMark VALUES QuotationMark Comma
+                 {:contFields("Password");
+                 System.out.println("Entra en un valor ");:}
+                | QuotationMark Nombre QuotationMark Colon QuotationMark NAMES QuotationMark Comma
+                {:contFields("Nombre");
+                System.out.println("Entra en un valor ");:}
+                | QuotationMark Institucion QuotationMark Colon QuotationMark NAMES QuotationMark Comma
+                {:contFields("Institucion");
+                System.out.println("Entra en un valor ");:}
+                | QuotationMark FechaCreacion QuotationMark Colon QuotationMark Date QuotationMark Comma
+                {:contFields("FechaCreacion");
+                System.out.println("Entra en un valor ");:}
+                | error {:System.out.println("Error en la declaración de NEWUSERBLOCK");
+                result = false;
+                cleanFields();:};
 
 VALUES ::= UPValue
             | NIValue

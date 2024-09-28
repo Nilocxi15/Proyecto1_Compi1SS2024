@@ -1,5 +1,6 @@
 package com.example.triviaapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.widget.Button
@@ -61,7 +62,8 @@ class MainActivity : AppCompatActivity() {
                 override fun onResult(result: String) {
                     val status = result.toBoolean()
                     if (status) {
-                        Toast.makeText(this@MainActivity, "Bienvenido", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@MainActivity, LoginActivity::class.java)
+                        startActivity(intent)
                     } else {
                         Toast.makeText(this@MainActivity, "Contraseña o usuario incorrectos", Toast.LENGTH_SHORT).show()
                     }

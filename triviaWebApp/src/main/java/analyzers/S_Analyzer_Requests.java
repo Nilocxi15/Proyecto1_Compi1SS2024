@@ -8,6 +8,7 @@ package analyzers;
 import java_cup.runtime.Symbol;
 import java.util.LinkedList;
 import models.TError;
+import models.createUser;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -197,6 +198,8 @@ public class S_Analyzer_Requests extends java_cup.runtime.lr_parser {
 
     public static LinkedList<TError> TablaESS = new LinkedList<TError>();
 
+    public boolean result = false;
+
     //Metodo al que se llama automaticamente ante algun error sintactico
 public void syntax_error(Symbol s) {
     String lexema = s.value.toString();
@@ -314,22 +317,29 @@ class CUP$S_Analyzer_Requests$actions {
     int contInst = 0;
     int contDate = 0;
 
+    int contFields = 0;
+
     public void contFields(String field){
         switch(field){
             case "Usuario":
                 contUser++;
+                contFields++;
                 break;
             case "Password":
                 contPass++;
+                contFields++;
                 break;
             case "Nombre":
                 contName++;
+                contFields++;
                 break;
             case "Institucion":
                 contInst++;
+                contFields++;
                 break;
             case "FechaCreacion":
                 contDate++;
+                contFields++;
                 break;
         }
     }
@@ -342,36 +352,44 @@ class CUP$S_Analyzer_Requests$actions {
         contDate = 0;
     }
 
-    public void checkFields(Symbol s){
-        int line = s.right;
-        int column = s.left;
+    public void checkFields(){
+        int line = 0;
+        int column = 0;
 
-        if(contUser != 1){
+        result = true;
+
+        if((contFields/contUser) != 5){
+            result = false;
             System.out.println("Error: El campo Usuario no esta completo o esta duplicado");
             TError datos = new TError("Usuario", line, column, "Semántico", "Campo USUARIO faltante o repetido");
             TablaESS.add(datos);
         }
-        if(contPass != 1){
+        if((contFields/contPass) != 5){
+            result = false;
             System.out.println("Error: El campo Password no esta completo o esta duplicado");
             TError datos = new TError("Password", line, column, "Semántico", "Campo PASSWORD faltante o repetido");
             TablaESS.add(datos);
         }
-        if(contName != 1){
+        if((contFields/contName) != 5){
+            result = false;
             System.out.println("Error: El campo Nombre no esta completo o esta duplicado");
             TError datos = new TError("Nombre", line, column, "Semántico", "Campo NOMBRE faltante o repetido");
             TablaESS.add(datos);
         }
-        if(contInst != 1){
+        if((contFields/contInst) != 5){
+            result = false;
             System.out.println("Error: El campo Institucion no esta completo o esta duplicado");
             TError datos = new TError("Institucion", line, column, "Semántico", "Campo INSTITUCION faltante o repetido");
             TablaESS.add(datos);
         }
-        if(contDate > 1){
+        if((contFields/contDate) != 5){
+            result = false;
             System.out.println("Error: El campo Fecha de Creacion esta repetido");
             TError datos = new TError("FechaCreacion", line, column, "Semántico", "Campo FECHA_CREACION duplicado");
             TablaESS.add(datos);
         }
     }
+
 
   private final S_Analyzer_Requests parser;
 
@@ -458,7 +476,7 @@ class CUP$S_Analyzer_Requests$actions {
           case 6: // USUARIONUEVO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark UsuarioNuevo QuotationMark GreaterThan LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket NEWUSERLOOP RightBracket RightBrace LessThan FinSolicitud ExclamationMark GreaterThan 
             {
               Object RESULT =null;
-
+		cleanFields();
               CUP$S_Analyzer_Requests$result = parser.getSymbolFactory().newSymbol("USUARIONUEVO",2, ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.elementAt(CUP$S_Analyzer_Requests$top-20)), ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer_Requests$result;
@@ -512,7 +530,9 @@ class CUP$S_Analyzer_Requests$actions {
           case 12: // NEWUSERLOOP ::= LeftBrace NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK RightBrace Comma NEWUSERLOOP 
             {
               Object RESULT =null;
-
+		System.out.println("Entra a NEWUSERLOOP");
+                checkFields();
+                System.out.println("Sale de NEWUSERLOOP");
               CUP$S_Analyzer_Requests$result = parser.getSymbolFactory().newSymbol("NEWUSERLOOP",5, ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.elementAt(CUP$S_Analyzer_Requests$top-8)), ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer_Requests$result;
@@ -521,7 +541,9 @@ class CUP$S_Analyzer_Requests$actions {
           case 13: // NEWUSERLOOP ::= LeftBrace NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK RightBrace 
             {
               Object RESULT =null;
-
+		System.out.println("Entra a NEWUSERLOOP SINGLE");
+                checkFields();
+                System.out.println("Sale de NEWUSERLOOP SINGLE");
               CUP$S_Analyzer_Requests$result = parser.getSymbolFactory().newSymbol("NEWUSERLOOP",5, ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.elementAt(CUP$S_Analyzer_Requests$top-6)), ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer_Requests$result;
@@ -540,6 +562,7 @@ class CUP$S_Analyzer_Requests$actions {
             {
               Object RESULT =null;
 		contFields("Usuario");
+                System.out.println("Entra en un valor ");
               CUP$S_Analyzer_Requests$result = parser.getSymbolFactory().newSymbol("NEWUSERBLOCK",6, ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.elementAt(CUP$S_Analyzer_Requests$top-7)), ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer_Requests$result;
@@ -549,6 +572,7 @@ class CUP$S_Analyzer_Requests$actions {
             {
               Object RESULT =null;
 		contFields("Password");
+                 System.out.println("Entra en un valor ");
               CUP$S_Analyzer_Requests$result = parser.getSymbolFactory().newSymbol("NEWUSERBLOCK",6, ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.elementAt(CUP$S_Analyzer_Requests$top-7)), ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer_Requests$result;
@@ -558,6 +582,7 @@ class CUP$S_Analyzer_Requests$actions {
             {
               Object RESULT =null;
 		contFields("Nombre");
+                System.out.println("Entra en un valor ");
               CUP$S_Analyzer_Requests$result = parser.getSymbolFactory().newSymbol("NEWUSERBLOCK",6, ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.elementAt(CUP$S_Analyzer_Requests$top-7)), ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer_Requests$result;
@@ -567,6 +592,7 @@ class CUP$S_Analyzer_Requests$actions {
             {
               Object RESULT =null;
 		contFields("Institucion");
+                System.out.println("Entra en un valor ");
               CUP$S_Analyzer_Requests$result = parser.getSymbolFactory().newSymbol("NEWUSERBLOCK",6, ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.elementAt(CUP$S_Analyzer_Requests$top-7)), ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer_Requests$result;
@@ -576,6 +602,7 @@ class CUP$S_Analyzer_Requests$actions {
             {
               Object RESULT =null;
 		contFields("FechaCreacion");
+                System.out.println("Entra en un valor ");
               CUP$S_Analyzer_Requests$result = parser.getSymbolFactory().newSymbol("NEWUSERBLOCK",6, ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.elementAt(CUP$S_Analyzer_Requests$top-7)), ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer_Requests$result;
@@ -584,7 +611,9 @@ class CUP$S_Analyzer_Requests$actions {
           case 20: // NEWUSERBLOCK ::= error 
             {
               Object RESULT =null;
-		System.out.println("Error en la declaración de NEWUSERBLOCK"); 
+		System.out.println("Error en la declaración de NEWUSERBLOCK");
+                result = false;
+                cleanFields();
               CUP$S_Analyzer_Requests$result = parser.getSymbolFactory().newSymbol("NEWUSERBLOCK",6, ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.peek()), ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer_Requests$result;

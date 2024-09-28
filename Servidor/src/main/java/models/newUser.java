@@ -34,4 +34,15 @@ public class newUser {
     public String getDate() {
         return this.date;
     }
+
+    @Override
+    public String toString() {
+        return "\t{\n" +
+                "\t\t\"USUARIO\": \"" + username + "\",\n" +
+                "\t\t\"PASSWORD\": \"" + password + "\",\n" +
+                "\t\t\"NOMBRE\": \"" + name + "\",\n" +
+                "\t\t\"INSTITUCION\": \"" + institution + "\",\n" +
+                "\t\t\"FECHA_CREACION\": \"" + date + "\"\n" +
+                "\t}";
+    }
 }

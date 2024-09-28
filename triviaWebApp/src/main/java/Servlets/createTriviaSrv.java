@@ -2,6 +2,7 @@ package Servlets;
 
 import analyzers.L_Analyzer_Requests;
 import analyzers.S_Analyzer_Requests;
+import clientSide.client;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,11 +21,20 @@ public class createTriviaSrv extends HttpServlet {
         if (value.equals("XSON")) {
             String contentRequest = req.getParameter("createTextarea");
             if (contentRequest != null) {
+                boolean state = true;
+
                 L_Analyzer_Requests lexer = new L_Analyzer_Requests(new BufferedReader(new StringReader(contentRequest)));
                 S_Analyzer_Requests sintactic = new S_Analyzer_Requests(lexer);
 
+
                 try {
                     sintactic.parse();
+                    System.out.println("Resultado " + sintactic.result);
+
+                    if (state) {
+                        client util = new client();
+                        util.sendMessage(contentRequest);
+                    }
                 } catch (Exception e) {
                     System.out.println("Error: " + e.getMessage());
                 }

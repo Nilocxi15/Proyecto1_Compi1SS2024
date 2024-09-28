@@ -8,20 +8,17 @@ package analyzers;
 /** CUP generated class containing symbol constants. */
 public class Symbols {
   /* terminals */
-  public static final int Values = 27;
-  public static final int Institution = 29;
+  public static final int Values = 26;
   public static final int GreaterThan = 3;
   public static final int Colon = 12;
-  public static final int Password = 26;
   public static final int LeftBrace = 13;
-  public static final int Date = 31;
   public static final int XSONsentence = 6;
   public static final int LeftBracket = 15;
   public static final int Comma = 17;
   public static final int LessThan = 2;
   public static final int Name = 24;
   public static final int Usuario = 23;
-  public static final int ModificarUsuario = 30;
+  public static final int ModificarUsuario = 27;
   public static final int RealizarSolicitud = 11;
   public static final int LoginUsuario = 20;
   public static final int Version = 7;
@@ -33,10 +30,9 @@ public class Symbols {
   public static final int Ok = 18;
   public static final int ExclamationMark = 10;
   public static final int QuotationMark = 9;
-  public static final int FechaCreacion = 32;
   public static final int FinSolicitud = 25;
   public static final int error = 1;
-  public static final int NameSentence = 28;
+  public static final int UsuarioNuevo = 28;
   public static final int Equal = 5;
   public static final int QuestionMark = 4;
   public static final int RightBracket = 16;
@@ -68,13 +64,9 @@ public class Symbols {
   "Usuario",
   "Name",
   "FinSolicitud",
-  "Password",
   "Values",
-  "NameSentence",
-  "Institution",
   "ModificarUsuario",
-  "Date",
-  "FechaCreacion"
+  "UsuarioNuevo"
   };
 }
 

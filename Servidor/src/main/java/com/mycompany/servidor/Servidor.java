@@ -1,9 +1,12 @@
 package com.mycompany.servidor;
 
 import analyzers.L_Analyzer_main;
+import analyzers.S_Analyzer_Users;
 import analyzers.S_Analyzer_main;
 import filesManager.readFiles;
+import filesManager.writeFiles;
 import models.login;
+import models.newUser;
 import models.user;
 
 import java.net.*;
@@ -42,7 +45,6 @@ public class Servidor {
 
                 try {
                     sintactic_main.parse();
-
                     switch (sintactic_main.requestName) {
                         case "login":
                             read.clearUsers();
@@ -88,22 +90,41 @@ public class Servidor {
                             read.clearUsers();
                             read.loadUsers();
 
-                            String username = sintactic_main.userName;
-                            String password = sintactic_main.password;
-                            String name = sintactic_main.name;
-                            String institution = sintactic_main.institution;
-                            String date = sintactic_main.date;
+                            for (newUser u : S_Analyzer_main.newUserList) {
+                                System.out.println("Username: " + u.getUsername());
+                                System.out.println("Password: " + u.getPassword());
+                                System.out.println("Name: " + u.getName());
+                                System.out.println("Institution: " + u.getInstitution());
+                                System.out.println("Date: " + u.getDate());
 
-                            for (user u : readFiles.usersList) {
-                                if (u.getUserName().equals(username)) {
-                                    userExists = true;
+                                for (user ul : readFiles.usersList) {
+                                    if (ul.getUserName().equals(u.getUsername())) {
+                                        userExists = true;
+                                        break;
+                                    }
+                                }
+
+                                for (newUser u2 : S_Analyzer_main.newUserList) {
+                                    if(!u.equals(u2) && u.getUsername().equals(u2.getUsername())){
+                                        System.out.println("Usuario repetido");
+                                        userExists = true;
+                                        break;
+                                    }
+                                }
+
+                                if (userExists) {
                                     break;
                                 }
                             }
 
+                            if (!userExists) {
+                                writeFiles write = new writeFiles();
+                                write.writeNewUsers();
+                            }
+
                             if (userExists) {
                                 response = "<?xson version=\"1.0\" ?>\n";
-                                response += "<!envio_respuesta: \"LOGIN_USUARIO\" >\n";
+                                response += "<!envio_respuesta: \"USUARIO_NUEVO\" >\n";
                                 response += "{ \"RESPUESTA\":[{\n";
                                 response += "\"STATUS\": \"Error\"\n";
                                 response += "}]\n";
@@ -111,18 +132,14 @@ public class Servidor {
                                 response += "<fin_envio_respuesta!>";
                             } else {
                                 response = "<?xson version=\"1.0\" ?>\n";
-                                response += "<!envio_respuesta: \"MODIFICAR_USUARIO\" >\n";
+                                response += "<!envio_respuesta: \"USUARIO_NUEVO\" >\n";
                                 response += "{ \"RESPUESTA\":[{\n";
-                                response += "\"STATUS\": \"Ok\",\n";
-                                response += "\"USUARIO\": \"" + username + "\",\n";
-                                response += "\"PASSWORD\": \"" + password + "\",\n";
-                                response += "\"NOMBRE\": \"" + name + "\",\n";
-                                response += "\"INSTITUCION\": \"" + institution + "\",\n";
-                                response += "\"FECHA_CREACION\": \""+ date + "\"\n";
+                                response += "\"STATUS\": \"Ok\"\n";
                                 response += "}]\n";
                                 response += "}\n";
                                 response += "<fin_envio_respuesta!>";
                             }
+
                             break;
                         default:
                             System.out.println("No se reconoce la solicitud");
@@ -146,6 +163,7 @@ public class Servidor {
 
                 sc.close();
                 System.out.println("Cliente desconectado");
+                S_Analyzer_main.newUserList.clear();
             }
 
         } catch (IOException e) {

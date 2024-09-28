@@ -54,7 +54,7 @@ action code
 terminal String LessThan, GreaterThan, QuestionMark, Equal, XSONsentence, Version, VersionNumber, QuotationMark,
                 ExclamationMark, RealizarSolicitud, Colon, LeftBrace, RightBrace, LeftBracket,
                 RightBracket, Comma, Ok, Error, LoginUsuario, Respuesta, Status, Usuario, Name, FinSolicitud,
-                Password, Values, NameSentence, Institution, ModificarUsuario, Date, FechaCreacion;
+                Values, ModificarUsuario, UsuarioNuevo;
 
 //------> declaracion de no terminales
 nonterminal String INICIO, CORRECTO, INCORRECTO, NAME, AGREGARCORRECTO, AGREGARINCORRECTO, VALUES;
@@ -94,27 +94,17 @@ VALUES ::= Values:a {:RESULT = String.valueOf(a);:}
         | Name:a {:RESULT = String.valueOf(a);:};
 
 AGREGARCORRECTO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
-                    LessThan ExclamationMark RealizarSolicitud Colon QuotationMark  ModificarUsuario QuotationMark GreaterThan
+                    LessThan ExclamationMark RealizarSolicitud Colon QuotationMark  UsuarioNuevo QuotationMark GreaterThan
                     LeftBrace QuotationMark Respuesta QuotationMark Colon LeftBracket LeftBrace
-                    QuotationMark Status QuotationMark Colon QuotationMark Ok QuotationMark Comma
-                    QuotationMark Usuario QuotationMark Colon QuotationMark VALUES:username QuotationMark Comma
-                    QuotationMark Password QuotationMark Colon QuotationMark VALUES:password QuotationMark Comma
-                    QuotationMark NameSentence QuotationMark Colon QuotationMark NAME:nameVal QuotationMark Comma
-                    QuotationMark Institution QuotationMark Colon QuotationMark NAME:institutionVal QuotationMark Comma
-                    QuotationMark FechaCreacion QuotationMark Colon QuotationMark Date:dateVal QuotationMark
+                    QuotationMark Status QuotationMark Colon QuotationMark Ok QuotationMark
                     RightBrace RightBracket
                     RightBrace
                     LessThan FinSolicitud ExclamationMark GreaterThan
-                    {:System.out.println("Sentencia de modificacion de usuario correcta y aceptada");
-                    nameUser = username;
-                    passwordUser = password;
-                    name = nameVal;
-                    institution = institutionVal;
-                    date = dateVal;
+                    {:System.out.println("Sentencia de usuario nuevo correcta y aceptada");
                     resultado = "Correcto";:};
 
 AGREGARINCORRECTO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
-                      LessThan ExclamationMark RealizarSolicitud Colon QuotationMark ModificarUsuario QuotationMark GreaterThan
+                      LessThan ExclamationMark RealizarSolicitud Colon QuotationMark UsuarioNuevo QuotationMark GreaterThan
                       LeftBrace QuotationMark Respuesta QuotationMark Colon LeftBracket LeftBrace
                       QuotationMark Status QuotationMark Colon QuotationMark Error QuotationMark
                       RightBrace RightBracket
