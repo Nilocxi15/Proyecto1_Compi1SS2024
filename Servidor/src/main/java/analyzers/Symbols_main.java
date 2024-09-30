@@ -34,6 +34,7 @@ public class Symbols_main {
   public static final int Colon = 12;
   public static final int UsuarioNuevo = 13;
   public static final int FinSolicitudes = 34;
+  public static final int ListaTrivias = 44;
   public static final int Values = 22;
   public static final int EOF = 0;
   public static final int VersionNumber = 8;
@@ -96,7 +97,8 @@ public class Symbols_main {
   "Tema",
   "UsuarioCreacion",
   "Time",
-  "IDTrivia"
+  "IDTrivia",
+  "ListaTrivias"
   };
 }
 

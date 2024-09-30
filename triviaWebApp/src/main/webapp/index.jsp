@@ -41,11 +41,6 @@
                 <div class="d-grid">
                     <button type="submit" name="verify" value="true" class="btn btn-primary">Iniciar Sesion</button>
                 </div>
-                <div class="mb-3">
-                            <span>¿No tienes cuenta?
-                                <a href="http://localhost/triviaWebApp/site_content/register.jsp">Registrarse</a>
-                            </span>
-                </div>
             </form>
         </div>
     </div>

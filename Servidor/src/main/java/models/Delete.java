@@ -1,9 +1,9 @@
 package models;
 
-public class delete {
+public class Delete {
     private String username;
 
-    public delete(String username) {
+    public Delete(String username) {
         this.username = username;
     }
 

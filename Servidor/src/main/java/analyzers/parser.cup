@@ -5,9 +5,9 @@ package analyzers;
 import java_cup.runtime.Symbol;
 import java.util.LinkedList;
 
-import models.login;
-import models.newUser;
-import models.newTrivia;
+import models.Login;
+import models.NewUser;
+import models.NewTrivia;
 
 //------> Codigo para el parser,variables, metodos, etc.
 parser code
@@ -23,10 +23,10 @@ parser code
     public String date = null;
 
     //Listas para almacenar los datos de los usuarios logeados
-    public static LinkedList<login> loginList = new LinkedList<login>();
+    public static LinkedList<Login> loginList = new LinkedList<Login>();
 
     //Listas para almacenar los datos de los usuarios nuevos
-    public static LinkedList<newUser> newUserList = new LinkedList<newUser>();
+    public static LinkedList<NewUser> newUserList = new LinkedList<NewUser>();
     private LinkedList<String> userNameList = new LinkedList<String>();
     private LinkedList<String> passwordList = new LinkedList<String>();
     private LinkedList<String> nameList = new LinkedList<String>();
@@ -34,7 +34,7 @@ parser code
     private LinkedList<String> dateList = new LinkedList<String>();
 
     //Listas para almacenar los datos de la trivia nueva
-    public static LinkedList<newTrivia> newTriviaList = new LinkedList<newTrivia>();
+    public static LinkedList<NewTrivia> newTriviaList = new LinkedList<NewTrivia>();
     private LinkedList<String> idTriviaList = new LinkedList<String>();
     private LinkedList<String> timeList = new LinkedList<String>();
     private LinkedList<String> nameListTrivia = new LinkedList<String>();
@@ -54,7 +54,7 @@ parser code
         System.out.println("\t\tFila: "+fila);
         System.out.println("\t\tColumna: "+columna);
 
-        login data = new login("error", "errror");
+        Login data = new Login("error", "errror");
         loginList.add(0, data);
         requestName = "error";
         cleandata();
@@ -72,7 +72,7 @@ parser code
         System.out.println("\t\tFila: "+fila);
         System.out.println("\t\tColumna: "+columna);
 
-        login data = new login("error", "errror");
+        Login data = new Login("error", "errror");
         loginList.add(0, data);
         requestName = "error";
         cleandata();
@@ -101,12 +101,12 @@ terminal String LessThan, GreaterThan, QuestionMark, Equal, XSONsentence, Versio
                 LoginUsuario, LeftBrace, RightBrace, LeftBracket, RightBracket, Comma, Values, FinSolicitud,
                 Usuario, Password, Nombre, Institucion, DatosUsuario, UsuarioAntiguo, NuevoPassword, niValue,
                 FechaCreacion, Date, FinSolicitudes, RealizarSolicitudes, NuevaTrivia, ParametrosTrivia,
-                IDTriviaSentence, TiempoPregunta, Tema, UsuarioCreacion, Time, IDTrivia;
+                IDTriviaSentence, TiempoPregunta, Tema, UsuarioCreacion, Time, IDTrivia, ListaTrivias;
 
 //------> declaracion de no terminales
 nonterminal String INICIO, SINGLEREQUEST, USUARIONUEVO, MODIFICARUSUARIO, ELIMINARUSUARIO, LOGINUSUARIO, NUEVATRIVIA,
                     NEWUSERLOOP, NEWUSERBLOCK, NEWTRIVIALOOP, NEWTRIVIABLOCK, VALUES, NAMES, VALUESCONCAT, LOOP,
-                    LOOP2, HEADER;
+                    LOOP2, HEADER, LISTATRIVIAS;
 
 start with INICIO;
 
@@ -130,7 +130,8 @@ LOOP2 ::= SINGLEREQUEST LOOP2
 SINGLEREQUEST ::= USUARIONUEVO
                 | MODIFICARUSUARIO
                 | ELIMINARUSUARIO
-                | NUEVATRIVIA;
+                | NUEVATRIVIA
+                | LISTATRIVIAS;
 
 
 LOGINUSUARIO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark LoginUsuario QuotationMark GreaterThan
@@ -142,7 +143,7 @@ LOGINUSUARIO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark 
                 LessThan FinSolicitud ExclamationMark GreaterThan
                 {:System.out.println("Sentencia de login reconocida y aceptada");
                    requestName = "login";
-                   login data = new login(username, password);
+                   Login data = new Login(username, password);
                    loginList.add(0, data);:};
 
 
@@ -155,10 +156,10 @@ USUARIONUEVO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark 
 
 
 NEWUSERLOOP ::= LeftBrace NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK RightBrace Comma NEWUSERLOOP
-                {:newUser data = new newUser(userNameList.poll(), passwordList.poll(), nameList.poll(), institutionList.poll(), dateList.poll());
+                {:NewUser data = new NewUser(userNameList.poll(), passwordList.poll(), nameList.poll(), institutionList.poll(), dateList.poll());
                 newUserList.add(data);:}
                 | LeftBrace NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK RightBrace
-                {:newUser data = new newUser(userNameList.poll(), passwordList.poll(), nameList.poll(), institutionList.poll(), dateList.poll());
+                {:NewUser data = new NewUser(userNameList.poll(), passwordList.poll(), nameList.poll(), institutionList.poll(), dateList.poll());
                 newUserList.add(data);:};
 
 
@@ -188,11 +189,11 @@ NUEVATRIVIA ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark N
 
 
 NEWTRIVIALOOP ::= LeftBrace NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK RightBrace Comma NEWTRIVIALOOP
-                {:newTrivia data = new newTrivia(idTriviaList.poll(), timeList.poll(), nameListTrivia.poll(), temaList.poll(), usuarioTriviaList.poll(),
+                {:NewTrivia data = new NewTrivia(idTriviaList.poll(), timeList.poll(), nameListTrivia.poll(), temaList.poll(), usuarioTriviaList.poll(),
                                                 dateTriviaList.poll());
                 newTriviaList.add(data);:}
                 | LeftBrace NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK RightBrace
-                {:newTrivia data = new newTrivia(idTriviaList.poll(), timeList.poll(), nameListTrivia.poll(), temaList.poll(), usuarioTriviaList.poll(),
+                {:NewTrivia data = new NewTrivia(idTriviaList.poll(), timeList.poll(), nameListTrivia.poll(), temaList.poll(), usuarioTriviaList.poll(),
                                                  dateTriviaList.poll());
                 newTriviaList.add(data);:};
 
@@ -233,6 +234,11 @@ ELIMINARUSUARIO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMa
                     LessThan FinSolicitud ExclamationMark GreaterThan
                     {:System.out.println("Sentencia de eliminacion de usuario reconocida y aceptada");
                     requestName = "eliminar";:};
+
+LISTATRIVIAS ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark ListaTrivias QuotationMark GreaterThan
+                LessThan FinSolicitud ExclamationMark GreaterThan
+                {:System.out.println("Sentencia de lista de trivias reconocida y aceptada");
+                requestName = "listaTrivias";:};
 
 
 VALUES ::= Values:a {:RESULT = String.valueOf(a);:}

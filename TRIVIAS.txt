@@ -36,47 +36,125 @@ db.trivia(
 			"RESPUESTA": "Alejandro Giammattei"
 		},
 		{
-			"ID_COMPONENTE_": "$_ficher_documento",
+			"ID_COMPONENTE_5": "$_ficher_documento",
 			"CLASE": "FICHERO",
 			"TEXTO_VISIBLE": "Sube un documento relacionado con la independencia de Guatemala:",
 			"RESPUESTA": "documento_independencia.pdf"
 		},
 		{
-			"ID_COMPONENTE_": "$_combo_pais",
+			"ID_COMPONENTE_6": "$_combo_pais",
 			"CLASE": "COMBO",
 			"TEXTO_VISIBLE": "Selecciona tu país de origen:",
 			"OPCIONES": "Guatemala|México|El Salvador|Honduras",
 			"RESPUESTA": "Guatemala"
 		},
 		{
-			"ID_COMPONENTE_": "$_texto_rio_mas_largo",
+			"ID_COMPONENTE_7": "$_texto_rio_mas_largo",
 			"CLASE": "CAMPO_TEXTO",
 			"TEXTO_VISIBLE": "¿Cuál es el río más largo del mundo?",
 			"RESPUESTA": "Río Amazonas"
 		},
 		{
-			"ID_COMPONENTE_": "$_text_opinion_himno",
+			"ID_COMPONENTE_8": "$_text_opinion_himno",
 			"CLASE": "AREA_TEXTO",
 			"TEXTO_VISIBLE": "Escribe tu opinión sobre el Himno Nacional de Guatamala",
 			"FILAS": 4,
-			"COLUMNAS": 50;
+			"COLUMNAS": 50,
 			"RESPUESTA": "El Himno Nacional de Guatemala es muy significativo porque..."
 		},
 		{
-			"ID_COMPONENTE_": "$_checkbox_comidas",
+			"ID_COMPONENTE_9": "$_checkbox_comidas",
 			"CLASE": "CHECKBOX",
 			"TEXTO_VISIBLE": "Selecciona tus comidas favoritas",
 			"OPCIONES": "Tacos|Pupusas|Tamalas|Ceviche",
 			"RESPUESTA": "Tacos|Tamales"
 		},
 		{
-			"ID_COMPONENTE_": "$_radio_capital_francia",
+			"ID_COMPONENTE_10": "$_radio_capital_francia",
 			"CLASE": "RADIO",
 			"TEXTO_VISIBLE": "¿Cuál es la capital de Francia?",
 			"OPCIONES": "París|Lyon|Marsella|Niza",
 			"RESPUESTA": "París"
 		}
-		
+		)
+	],
+	[
+		"ID_TRIVIA": "$id_trivia2",
+		"NOMBRE": "trivia_encuesta2",
+		"TEMA": "Cultura2",
+		"TIEMPO_PREGUNTA": 50,
+		"USUARIO_CREACION": "maria123",
+		"ESTRUCTURA":(
+		{
+			"ID_COMPONENTE_1": "$_text_capital_mexico",
+			"CLASE": "CAMPO_TEXTO",
+			"TEXTO_VISIBLE": "¿Cuál es la capital de México?",
+			"RESPUESTA": "Ciudad de México"
+		},
+		{
+			"ID_COMPONENTE_2": "$_text_descripcion_himno",
+			"CLASE": "AREA_TEXTO",
+			"TEXTO_VISIBLE": "Describe el significado del Himno Nacional de Guatemala",
+			"FILAS": 5,
+			"COLUMNAS": 40,
+			"RESPUESTA": "El Himno Nacional de Guatemala es un símbolo patrio que representa..."
+		},
+		{
+			"ID_COMPONENTE_3": "$_checkbox_deportes",
+			"CLASE": "CHECKBOX",
+			"TEXTO_VISIBLE": "Selecciona tus deportes favoritos:",
+			"OPCIONES": "Fútbol|Baloncesto|Béisbol|Natación",
+			"RESPUESTA": "Fútbol|Natación"
+		},
+		{
+			"ID_COMPONENTE_4": "$_radio_presidente",
+			"CLASE": "RADIO",
+			"TEXTO_VISIBLE": "¿Quién es el presidente actual de Guatemala?",
+			"OPCIONES": "Alejandro Giammattei|Sandra Torres|Manuel Baldizón|Otro",
+			"RESPUESTA": "Alejandro Giammattei"
+		},
+		{
+			"ID_COMPONENTE_5": "$_ficher_documento",
+			"CLASE": "FICHERO",
+			"TEXTO_VISIBLE": "Sube un documento relacionado con la independencia de Guatemala:",
+			"RESPUESTA": "documento_independencia.pdf"
+		},
+		{
+			"ID_COMPONENTE_6": "$_combo_pais",
+			"CLASE": "COMBO",
+			"TEXTO_VISIBLE": "Selecciona tu país de origen:",
+			"OPCIONES": "Guatemala|México|El Salvador|Honduras",
+			"RESPUESTA": "Guatemala"
+		},
+		{
+			"ID_COMPONENTE_7": "$_texto_rio_mas_largo",
+			"CLASE": "CAMPO_TEXTO",
+			"TEXTO_VISIBLE": "¿Cuál es el río más largo del mundo?",
+			"RESPUESTA": "Río Amazonas"
+		},
+		{
+			"ID_COMPONENTE_8": "$_text_opinion_himno",
+			"CLASE": "AREA_TEXTO",
+			"TEXTO_VISIBLE": "Escribe tu opinión sobre el Himno Nacional de Guatamala",
+			"FILAS": 4,
+			"COLUMNAS": 50,
+			"RESPUESTA": "El Himno Nacional de Guatemala es muy significativo porque..."
+		},
+		{
+			"ID_COMPONENTE_9": "$_checkbox_comidas",
+			"CLASE": "CHECKBOX",
+			"TEXTO_VISIBLE": "Selecciona tus comidas favoritas",
+			"OPCIONES": "Tacos|Pupusas|Tamalas|Ceviche",
+			"RESPUESTA": "Tacos|Tamales"
+		},
+		{
+			"ID_COMPONENTE_10": "$_radio_capital_francia",
+			"CLASE": "RADIO",
+			"TEXTO_VISIBLE": "¿Cuál es la capital de Francia?",
+			"OPCIONES": "París|Lyon|Marsella|Niza",
+			"RESPUESTA": "París"
+		}
+		)
 	]
 }
 )

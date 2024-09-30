@@ -3,7 +3,7 @@
 package analyzers;
 
 import java_cup.runtime.Symbol;
-import models.user;
+import models.User;
 import filesManager.readFiles;
 
 //------> Codigo para el parser,variables, metodos, etc.

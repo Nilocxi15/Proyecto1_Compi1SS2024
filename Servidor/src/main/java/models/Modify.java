@@ -1,12 +1,12 @@
 package models;
 
-public class modify {
+public class Modify {
     private String oldUsername;
     private String newUsername;
     private String newPassword;
     private String date;
 
-    public modify(String oldUsername, String newUsername, String newPassword, String date) {
+    public Modify(String oldUsername, String newUsername, String newPassword, String date) {
         this.oldUsername = oldUsername;
         this.newUsername = newUsername;
         this.newPassword = newPassword;

@@ -4,9 +4,9 @@ import analyzers.L_Analyzer_main;
 import analyzers.S_Analyzer_main;
 import filesManager.readFiles;
 import filesManager.writeFiles;
-import models.newTrivia;
-import models.newUser;
-import models.user;
+import models.NewUser;
+import models.Trivia;
+import models.User;
 
 import java.net.*;
 import java.io.*;
@@ -49,7 +49,7 @@ public class Servidor {
                             read.clearUsers();
                             read.loadUsers();
 
-                            for (user u : readFiles.usersList) {
+                            for (User u : readFiles.usersList) {
                                 String formUser = S_Analyzer_main.loginList.getFirst().getUsername();
                                 String formPass = S_Analyzer_main.loginList.getFirst().getPassword();
                                 String dbUser = u.getUserName();
@@ -89,21 +89,21 @@ public class Servidor {
                             read.clearUsers();
                             read.loadUsers();
 
-                            for (newUser u : S_Analyzer_main.newUserList) {
+                            for (NewUser u : S_Analyzer_main.newUserList) {
                                 System.out.println("Username: " + u.getUsername());
                                 System.out.println("Password: " + u.getPassword());
                                 System.out.println("Name: " + u.getName());
                                 System.out.println("Institution: " + u.getInstitution());
                                 System.out.println("Date: " + u.getDate());
 
-                                for (user ul : readFiles.usersList) {
+                                for (User ul : readFiles.usersList) {
                                     if (ul.getUserName().equals(u.getUsername())) {
                                         userExists = true;
                                         break;
                                     }
                                 }
 
-                                for (newUser u2 : S_Analyzer_main.newUserList) {
+                                for (NewUser u2 : S_Analyzer_main.newUserList) {
                                     if(!u.equals(u2) && u.getUsername().equals(u2.getUsername())){
                                         System.out.println("Usuario repetido");
                                         userExists = true;
@@ -150,6 +150,31 @@ public class Servidor {
                             response += "}\n";
                             response += "<fin_envio_respuesta!>";
                             break;
+                        case "listaTrivias":
+                            try {
+                                read.clearTrivias();
+                            } catch (Exception e) {
+                                System.out.println("Error clearTrivias: " + e.getMessage());
+                            }
+
+                            read.loadTrivias();
+
+                            System.out.println("Se solicita el analisis de LISTA_TRIVIAS");
+
+                            response = "<?xson version=\"1.0\" ?>\n";
+                            response += "<!envio_respuesta: \"LISTA_TRIVIAS\" >\n";
+                            response += "{ \"RESPUESTA\":[\n";
+                            for (Trivia t : readFiles.triviaList) {
+                                response += "{\n";
+                                response += "\"ID_TRIVIA\": \"" + t.getIdTrivia() + "\",\n";
+                                response += "\"NOMBRE\": \"" + t.getName() + "\",\n";
+                                response += "\"TEMA\": \"" + t.getTopic() + "\",\n";
+                                response += "\"USUARIO_CREACION\": \"" + t.getCreationUser() + "\"\n";
+                                response += "},\n";
+                            }
+                            response += "]}\n";
+                            response += "<fin_envio_respuesta!>";
+                            break;
                         default:
                             System.out.println("No se reconoce la solicitud");
                             response = "<?xson version=\"1.0\" ?>\n";
@@ -166,8 +191,6 @@ public class Servidor {
 
                 }
 
-                //System.out.println(mensaje);
-
                 out.writeUTF(response);
 
                 sc.close();
@@ -177,6 +200,7 @@ public class Servidor {
 
         } catch (IOException e) {
             System.out.println("Error: no se pudo iniciar el servidor");
+            System.out.println(e.getMessage());
         }
     }
 

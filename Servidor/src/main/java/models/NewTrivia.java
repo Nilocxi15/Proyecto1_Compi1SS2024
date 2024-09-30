@@ -1,6 +1,6 @@
 package models;
 
-public class newTrivia {
+public class NewTrivia {
     private String idTrivia = null;
     private String time = null;
     private String nombre = null;
@@ -8,7 +8,7 @@ public class newTrivia {
     private String usuarioCreacion = null;
     private String fechaCreacion = null;
 
-    public newTrivia(String idTrivia, String time, String nombre, String tema, String usuarioCreacion, String fechaCreacion) {
+    public NewTrivia(String idTrivia, String time, String nombre, String tema, String usuarioCreacion, String fechaCreacion) {
         this.idTrivia = idTrivia;
         this.time = time;
         this.nombre = nombre;

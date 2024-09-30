@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,7 +48,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         mData = items;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name, topic, author, time;
 
         ViewHolder(View itemView) {
@@ -56,6 +57,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             topic = itemView.findViewById(R.id.topicCV);
             author = itemView.findViewById(R.id.authorCV);
             time = itemView.findViewById(R.id.timeCV);
+            itemView.setOnClickListener(this);
         }
 
         void bindData(final ListElement item) {
@@ -63,6 +65,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             topic.setText(item.getTopic());
             author.setText(item.getAuthor());
             time.setText(item.getTime());
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                ListElement element = mData.get(position);
+                Toast.makeText(mContext, "Clicked: " + element.getName() + " " + element.getId(), Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

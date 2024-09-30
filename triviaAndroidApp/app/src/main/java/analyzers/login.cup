@@ -4,6 +4,9 @@ package analyzers;
 
 import java_cup.runtime.Symbol;
 
+import models.Trivia;
+import com.example.triviaapp.LoginActivity;
+
 //------> Codigo para el parser,variables, metodos, etc.
 parser code
 {:
@@ -52,36 +55,72 @@ action code
 //------> declaracion de terminales
 terminal String LessThan, GreaterThan, QuestionMark, Equal, QuotationMark, ExclamationMark, Colon, LeftBrace, RightBrace,
         LeftBracket, RightBracket, Comma, Xson, Version, VersionNumber, EnvioRespuesta, Ok, Error, FinEnvioRespuesta,
-        LoginUsuario, Respuesta, Status, Usuario, UserValue;
+        LoginUsuario, Respuesta, Status, Usuario, UserValue, ListaTrivias, IdTrivia, Nombre, Tema, TiempoPregunta,
+        UsuarioCreacion, Number, IdTriviaValue, SpecialText;
 
 //------> declaracion de no terminales
-nonterminal String S, OK, ERROR, NAME;
+nonterminal String S, OK, ERROR, NAME, TRIVIALIST, HEADER, ANSWERS, TRIVIALOOP, TRIVIABLOCK, SPECIALTEXT;
 
 start with S;
 
 /*--------------- 3ra Area: Reglas Semanticas -----------------------*/
-S ::= OK {:System.out.println("Sentencia STATUS OK reconocida");
-            status = true;:}
+S ::= HEADER ANSWERS
     | ERROR {:System.out.println("Sentencia STATUS ERROR reconocida");
             status = false;:};
 
-OK ::= LessThan QuestionMark Xson Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
-        LessThan ExclamationMark EnvioRespuesta Colon QuotationMark LoginUsuario QuotationMark GreaterThan
+HEADER ::= LessThan Xson Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan;
+
+ANSWERS ::= OK
+        {:System.out.println("Sentencia STATUS OK reconocida");
+        status = true;:}
+        | ERROR
+        {:System.out.println("Sentencia STATUS ERROR reconocida");
+        status = false;:}
+        | TRIVIALIST
+        {:System.out.println("Sentencia STATUS TRIVIALIST reconocida");
+        status = true;:};
+
+OK ::= LessThan EnvioRespuesta Colon QuotationMark LoginUsuario QuotationMark GreaterThan
         LeftBrace QuotationMark Respuesta QuotationMark Colon LeftBracket LeftBrace
         QuotationMark Status QuotationMark Colon QuotationMark Ok QuotationMark Comma
         QuotationMark Usuario QuotationMark Colon QuotationMark NAME:name QuotationMark
         RightBrace
         RightBracket RightBrace
-        LessThan FinEnvioRespuesta ExclamationMark GreaterThan
+        LessThan FinEnvioRespuesta GreaterThan
         {:username = name;:};
 
-ERROR ::= LessThan QuestionMark Xson Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
-        LessThan ExclamationMark EnvioRespuesta Colon QuotationMark LoginUsuario QuotationMark GreaterThan
+ERROR ::= LessThan EnvioRespuesta Colon QuotationMark LoginUsuario QuotationMark GreaterThan
         LeftBrace QuotationMark Respuesta QuotationMark Colon LeftBracket LeftBrace
         QuotationMark Status QuotationMark Colon QuotationMark Error QuotationMark
         RightBrace
         RightBracket RightBrace
         LessThan FinEnvioRespuesta ExclamationMark GreaterThan;
 
+TRIVIALIST ::= LessThan EnvioRespuesta Colon QuotationMark ListaTrivias QuotationMark GreaterThan
+                LeftBrace QuotationMark Respuesta QuotationMark Colon LeftBracket
+                TRIVIALOOP
+                RightBracket RightBrace
+                LessThan FinEnvioRespuesta GreaterThan;
+
+TRIVIALOOP ::= TRIVIABLOCK TRIVIALOOP
+            | TRIVIABLOCK;
+
+TRIVIABLOCK ::= LeftBrace QuotationMark IdTrivia QuotationMark Colon QuotationMark IdTriviaValue:idTriviaVal QuotationMark Comma
+                QuotationMark Nombre QuotationMark Colon QuotationMark SPECIALTEXT:nameVal QuotationMark Comma
+                QuotationMark Tema QuotationMark Colon QuotationMark SPECIALTEXT:topicVal QuotationMark Comma
+                QuotationMark TiempoPregunta QuotationMark Colon QuotationMark Number:timeVal QuotationMark Comma
+                QuotationMark UsuarioCreacion QuotationMark Colon QuotationMark SpecialText:authorVal QuotationMark
+                RightBrace Comma
+                {:Trivia data = new Trivia(String.valueOf(idTriviaVal), String.valueOf(nameVal),
+                String.valueOf(topicVal), String.valueOf(timeVal), String.valueOf(authorVal));
+                LoginActivity.getTrivias.add(data);:};
+
 NAME ::= UserValue:a NAME:b {:RESULT = String.valueOf(a) + " " + String.valueOf(b);:}
         | UserValue:a {::};
+
+SPECIALTEXT ::= SpecialText:a SPECIALTEXT:b {:RESULT = String.valueOf(a) + " " + String.valueOf(b);:}
+            | UserValue:a SPECIALTEXT:b {:RESULT = String.valueOf(a) + " " + String.valueOf(b);:}
+            | Number:a SPECIALTEXT:b {:RESULT = String.valueOf(a) + " " + String.valueOf(b);:}
+            | UserValue:a {:RESULT = String.valueOf(a);:}
+            | Number:a {:RESULT = String.valueOf(a);:}
+            | SpecialText:a {:RESULT = String.valueOf(a);:};

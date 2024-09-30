@@ -43,6 +43,7 @@ idTriviaSentence = "ID_TRIVIA"
 tiempoPregunta = "TIEMPO_PREGUNTA"
 tema = "TEMA"
 usuarioCreacion = "USUARIO_CREACION"
+listaTrivias = "LISTA_TRIVIAS"
 
 realizarSolicitud = "realizar_solicitud"
 realizarSolicitudes = "realizar_solicitudes"
@@ -102,6 +103,7 @@ finSolicitudesRealizadas = "fin_solicitudes_realizadas"
 <YYINITIAL> {tiempoPregunta} {System.out.println("Reconocio "+yytext()+" tiempo de pregunta"); return new Symbol(Symbols_main.TiempoPregunta, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {tema} {System.out.println("Reconocio "+yytext()+" tema"); return new Symbol(Symbols_main.Tema, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {usuarioCreacion} {System.out.println("Reconocio "+yytext()+" usuario de creacion"); return new Symbol(Symbols_main.UsuarioCreacion, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {listaTrivias} {System.out.println("Reconocio "+yytext()+" lista de trivias"); return new Symbol(Symbols_main.ListaTrivias, (yycolumn + 1), (yyline + 1), yytext());}
 
 <YYINITIAL> {finSolicitudRealizada} {System.out.println("Reconocio "+yytext()+" fin solicitud finalizada"); return new Symbol(Symbols_main.FinSolicitud, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {finSolicitudesRealizadas} {System.out.println("Reconocio "+yytext()+" fin solicitudes finalizadas"); return new Symbol(Symbols_main.FinSolicitudes, (yycolumn + 1), (yyline + 1), yytext());}

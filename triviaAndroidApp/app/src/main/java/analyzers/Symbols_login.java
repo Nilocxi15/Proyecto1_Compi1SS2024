@@ -20,20 +20,29 @@ public class Symbols_login {
   public static final int LoginUsuario = 21;
   public static final int Version = 15;
   public static final int VersionNumber = 16;
+  public static final int UsuarioCreacion = 31;
+  public static final int Tema = 29;
   public static final int RightBrace = 10;
   public static final int Respuesta = 22;
+  public static final int SpecialText = 34;
+  public static final int TiempoPregunta = 30;
+  public static final int IdTriviaValue = 33;
   public static final int EOF = 0;
   public static final int Status = 23;
   public static final int Ok = 18;
+  public static final int IdTrivia = 27;
   public static final int ExclamationMark = 7;
   public static final int QuotationMark = 6;
   public static final int UserValue = 25;
   public static final int error = 1;
+  public static final int ListaTrivias = 26;
   public static final int Equal = 5;
   public static final int QuestionMark = 4;
   public static final int RightBracket = 12;
   public static final int EnvioRespuesta = 17;
   public static final int Error = 19;
+  public static final int Number = 32;
+  public static final int Nombre = 28;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -60,7 +69,16 @@ public class Symbols_login {
   "Respuesta",
   "Status",
   "Usuario",
-  "UserValue"
+  "UserValue",
+  "ListaTrivias",
+  "IdTrivia",
+  "Nombre",
+  "Tema",
+  "TiempoPregunta",
+  "UsuarioCreacion",
+  "Number",
+  "IdTriviaValue",
+  "SpecialText"
   };
 }
 

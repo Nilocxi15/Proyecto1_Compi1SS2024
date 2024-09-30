@@ -6,9 +6,8 @@
 package analyzers;
 
 import java_cup.runtime.Symbol;
-import models.user;
+import models.User;
 import filesManager.readFiles;
-import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
   */
@@ -260,7 +259,7 @@ class CUP$S_Analyzer_Users$actions {
         String password = String.valueOf(b);
         String name = String.valueOf(c);
         String institution = String.valueOf(d);
-        user data = new user(userName, password, name, institution);
+        User data = new User(userName, password, name, institution);
         readFiles.usersList.add(data);
               CUP$S_Analyzer_Users$result = parser.getSymbolFactory().newSymbol("C",3, ((java_cup.runtime.Symbol)CUP$S_Analyzer_Users$stack.elementAt(CUP$S_Analyzer_Users$top-24)), ((java_cup.runtime.Symbol)CUP$S_Analyzer_Users$stack.peek()), RESULT);
             }

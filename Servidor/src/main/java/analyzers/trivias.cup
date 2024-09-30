@@ -1,0 +1,176 @@
+/*--------------- 1ra Area: Codigo de Usuario -----------------------*/
+ //-------> importaciones Y paquetes
+ package analyzers;
+
+ import java_cup.runtime.Symbol;
+ import java.util.LinkedList;
+
+ import filesManager.readFiles;
+ import models.Component;
+ import models.Trivia;
+
+ //------> Codigo para el parser,variables, metodos, etc.
+ parser code
+ {:
+
+     private String idTrivia;
+     private String name;
+     private String topic;
+     private String time;
+     private String userCreation;
+
+     private String idComponent;
+     private String classComponent;
+     private String textVisible;
+     private String answer;
+
+     private String lines;
+     private String columns;
+
+     private String options;
+
+     private LinkedList<Component> components = new LinkedList<>();
+
+  //Metodo al que se llama automaticamente ante algun error sintactico
+     public void syntax_error(Symbol s)
+     {
+         String lexema = s.value.toString();
+         int fila = s.right;
+         int columna = s.left;
+
+         System.out.println("!!!!!!! Error Sintactico Recuperado !!!!!!!");
+         System.out.println("\t\tLexema: "+lexema);
+         System.out.println("\t\tFila: "+fila);
+         System.out.println("\t\tColumna: "+columna);
+
+     }
+
+         //Metodo al que se llama en el momento en que ya no es posible una recuperacion de errores
+         public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception
+         {
+             String lexema = s.value.toString();
+             int fila = s.right;
+             int columna = s.left;
+
+             System.out.println("!!!!!!! Error Sintactico, Panic Mode !!!!!!! ");
+             System.out.println("\t\tLexema: "+lexema);
+             System.out.println("\t\tFila: "+fila);
+             System.out.println("\t\tColumna: "+columna);
+
+         }
+ :}
+
+ //------> Codigo para las acciones gramaticales
+ action code
+ {:
+     private void cleanVariablesComponent(){
+         idComponent = null;
+         classComponent = null;
+         textVisible = null;
+         answer = null;
+         lines = null;
+         columns = null;
+         options = null;
+     }
+
+     private void cleanVariablesTrivia(){
+         idTrivia = null;
+         name = null;
+         topic = null;
+         time = null;
+         userCreation = null;
+     }
+ :}
+
+ /*--------------- 2da Area: Declaraciones -----------------------*/
+ //------> declaracion de terminales
+ terminal String LeftPar, RightPar, Comma, Colon, LeftBrace, RightBrace, LeftBracket, RightBracket, QuotationMark,
+                 Header, IdTriviaSentence, Nombre, Tema, TiempoPregunta, UsuarioCreacion, Estructura,
+                 IdComponente, Clase, CampoTexto, AreaTexto, Checkbox, Radio, Fichero, Combo, TextoVisible,
+                 Respuesta, Filas, Columnas, Opciones, Number, IdTrivia, SpecialText;
+
+ //------> declaracion de no terminales
+ nonterminal String INICIO, TRIVIALOOP, TRIVIABLOCK, COMPONENTLOOP, COMPONENTHEADER, COMPONENT, CLASESONE, CLASESTWO, SENTENCES;
+
+ start with INICIO;
+
+ /*--------------- 3ra Area: Reglas Gramaticales -----------------------*/
+ INICIO ::= Header LeftPar LeftBrace
+             TRIVIALOOP
+             RightBrace RightPar {:System.out.println("Analisis Sintactico Exitoso");:};
+
+ TRIVIALOOP ::= TRIVIABLOCK Comma TRIVIALOOP {:System.out.println("Entra en trivialoop");:}
+                 | TRIVIABLOCK {:System.out.println("Entra en trivialoop");:};
+
+ TRIVIABLOCK ::= LeftBracket
+                 QuotationMark IdTriviaSentence QuotationMark Colon QuotationMark IdTrivia:idTriviaVal QuotationMark Comma
+                 QuotationMark Nombre QuotationMark Colon QuotationMark SENTENCES:nameVal QuotationMark Comma
+                 QuotationMark Tema QuotationMark Colon QuotationMark SENTENCES:topicVal QuotationMark Comma
+                 QuotationMark TiempoPregunta QuotationMark Colon Number:timeVal Comma
+                 QuotationMark UsuarioCreacion QuotationMark Colon QuotationMark SpecialText:userCreationVal QuotationMark Comma
+                 QuotationMark Estructura QuotationMark Colon LeftPar
+                 COMPONENTLOOP
+                 RightPar
+                 RightBracket
+                 {:System.out.println("Entra en triviablock");
+                 idTrivia = String.valueOf(idTriviaVal);
+                 name = String.valueOf(nameVal);
+                 topic = String.valueOf(topicVal);
+                 time = String.valueOf(timeVal);
+                 userCreation = String.valueOf(userCreationVal);
+
+                 Trivia data = new Trivia(idTrivia, name, topic, time, userCreation, components);
+                 readFiles.triviaList.add(data);
+                 cleanVariablesTrivia();:};
+
+ COMPONENTLOOP ::= LeftBrace COMPONENTHEADER RightBrace Comma COMPONENTLOOP {:System.out.println("Entra en componentloop");:}
+                     | LeftBrace COMPONENTHEADER RightBrace {:System.out.println("Entra en componentloop");:};
+
+ COMPONENTHEADER ::= QuotationMark IdComponente QuotationMark Colon QuotationMark IdTrivia:idComponentVal QuotationMark Comma
+                     QuotationMark Clase QuotationMark Colon QuotationMark COMPONENT
+                     {:System.out.println("Entra en componentheader");
+                     idComponent = idComponentVal;
+
+                     Component data = new Component(idComponent, classComponent, lines, columns, textVisible, answer, options);
+                     components.add(data);
+                     cleanVariablesComponent();:};
+
+ COMPONENT ::= CLASESONE:classesVal QuotationMark Comma
+                 QuotationMark TextoVisible QuotationMark Colon QuotationMark SENTENCES:sentenceVal QuotationMark Comma
+                 QuotationMark Respuesta QuotationMark Colon QuotationMark SENTENCES:answerVal QuotationMark
+                 {:System.out.println("Entra en component");
+                 classComponent = String.valueOf(classesVal);
+                 textVisible = String.valueOf(sentenceVal);
+                 answer = String.valueOf(answerVal);:}
+                 |AreaTexto QuotationMark Comma
+                 QuotationMark TextoVisible QuotationMark Colon QuotationMark SENTENCES:sentenceVal QuotationMark Comma
+                 QuotationMark Filas QuotationMark Colon Number:lineVal Comma
+                 QuotationMark Columnas QuotationMark Colon Number:columnVal Comma
+                 QuotationMark Respuesta QuotationMark Colon QuotationMark SENTENCES:answerVal QuotationMark
+                 {:System.out.println("Entra en componenet2");
+                 classComponent = "AREA_TEXTO";
+                 textVisible = String.valueOf(sentenceVal);
+                 lines = String.valueOf(lineVal);
+                 columns = String.valueOf(columnVal);
+                 answer = String.valueOf(answerVal);:}
+                 |CLASESTWO:classesVal QuotationMark Comma
+                 QuotationMark TextoVisible QuotationMark Colon QuotationMark SENTENCES:sentenceVal QuotationMark Comma
+                 QuotationMark Opciones QuotationMark Colon QuotationMark SENTENCES:optionsVal QuotationMark Comma
+                 QuotationMark Respuesta QuotationMark Colon QuotationMark SENTENCES:answerVal QuotationMark
+                 {:System.out.println("Entra en component3");
+                 classComponent = String.valueOf(classesVal);
+                 textVisible = String.valueOf(sentenceVal);
+                 options = String.valueOf(optionsVal);
+                 answer = String.valueOf(answerVal);:};
+
+ CLASESONE ::= CampoTexto:a {:RESULT = "CAMPO_TEXTO";:}
+                 |  Fichero:a {:RESULT = "FICHERO";:};
+
+ CLASESTWO ::= Checkbox:a {:RESULT = "CHECKBOX";:}
+                 | Radio:a {:RESULT = "RADIO";:}
+                 | Combo:a {:RESULT = "COMBO";:};
+
+ SENTENCES ::= SpecialText:a SENTENCES:b {:RESULT = String.valueOf(a) + " " + String.valueOf(b);:}
+                 |Colon:a SENTENCES:b {:RESULT = String.valueOf(a) + " " + String.valueOf(b);:}
+                 | SpecialText:a {:RESULT = String.valueOf(a);:}
+                 | Colon:a {:RESULT = ":";:};
