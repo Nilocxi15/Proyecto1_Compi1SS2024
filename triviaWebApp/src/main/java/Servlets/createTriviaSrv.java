@@ -21,7 +21,7 @@ public class createTriviaSrv extends HttpServlet {
         if (value.equals("XSON")) {
             String contentRequest = req.getParameter("createTextarea");
             if (contentRequest != null) {
-                boolean state = true;
+                boolean state;
 
                 L_Analyzer_Requests lexer = new L_Analyzer_Requests(new BufferedReader(new StringReader(contentRequest)));
                 S_Analyzer_Requests sintactic = new S_Analyzer_Requests(lexer);
@@ -30,10 +30,18 @@ public class createTriviaSrv extends HttpServlet {
                 try {
                     sintactic.parse();
                     System.out.println("Resultado " + sintactic.result);
+                    state = sintactic.result;
 
                     if (state) {
                         client util = new client();
-                        util.sendMessage(contentRequest);
+                        boolean result = util.sendMessage(contentRequest);
+                        if (result) {
+                            req.getSession().setAttribute("result", "success");
+                        } else {
+                            req.getSession().setAttribute("result", "failure");
+                        }
+                    } else {
+                        req.getSession().setAttribute("result", "failure");
                     }
                 } catch (Exception e) {
                     System.out.println("Error: " + e.getMessage());

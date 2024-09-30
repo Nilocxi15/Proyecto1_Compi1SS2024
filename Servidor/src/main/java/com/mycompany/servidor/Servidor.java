@@ -1,11 +1,10 @@
 package com.mycompany.servidor;
 
 import analyzers.L_Analyzer_main;
-import analyzers.S_Analyzer_Users;
 import analyzers.S_Analyzer_main;
 import filesManager.readFiles;
 import filesManager.writeFiles;
-import models.login;
+import models.newTrivia;
 import models.newUser;
 import models.user;
 
@@ -140,6 +139,16 @@ public class Servidor {
                                 response += "<fin_envio_respuesta!>";
                             }
 
+                            break;
+                        case "nuevaTrivia":
+                            System.out.println("Se solicita el analisis de NUEVA_TRIVIA");
+                            response = "<?xson version=\"1.0\" ?>\n";
+                            response += "<!envio_respuesta: \"USUARIO_NUEVO\" >\n";
+                            response += "{ \"RESPUESTA\":[{\n";
+                            response += "\"STATUS\": \"Ok\"\n";
+                            response += "}]\n";
+                            response += "}\n";
+                            response += "<fin_envio_respuesta!>";
                             break;
                         default:
                             System.out.println("No se reconoce la solicitud");

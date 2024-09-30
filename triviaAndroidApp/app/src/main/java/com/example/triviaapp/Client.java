@@ -12,7 +12,7 @@ import java.net.Socket;
 import analyzers.L_Analyzer_login;
 import analyzers.S_Analyzer_login;
 
-public class client {
+public class Client {
     DataInputStream in;
     DataOutputStream out;
 

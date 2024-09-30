@@ -1,4 +1,4 @@
-/*--------------- 1ra Area: Codigo de Usuario -----------------------*/
+    /*--------------- 1ra Area: Codigo de Usuario -----------------------*/
 //-------> importaciones Y paquetes
 package analyzers;
 
@@ -16,24 +16,24 @@ parser code
     public boolean result = false;
 
     //Metodo al que se llama automaticamente ante algun error sintactico
-public void syntax_error(Symbol s) {
-    String lexema = s.value.toString();
-    int fila = s.right;
-    int columna = s.left;
-    int tipo = s.sym;
+    public void syntax_error(Symbol s) {
+        String lexema = s.value.toString();
+        int fila = s.right;
+        int columna = s.left;
+        int tipo = s.sym;
 
-    System.out.println("!!!!!!! Error Sintactico Recuperado !!!!!!!");
-    System.out.println("\t\tLexema: " + lexema);
-    System.out.println("\t\tFila: " + fila);
-    System.out.println("\t\tColumna: " + columna);
-    System.out.println("\t\tTipo: " + tipo);
+        System.out.println("!!!!!!! Error Sintactico Recuperado !!!!!!!");
+        System.out.println("\t\tLexema: " + lexema);
+        System.out.println("\t\tFila: " + fila);
+        System.out.println("\t\tColumna: " + columna);
+        System.out.println("\t\tTipo: " + tipo);
 
-    // Sugerencia del token esperado
-    String expectedToken = getExpectedToken(tipo);
+        // Sugerencia del token esperado
+        String expectedToken = getExpectedToken(tipo);
 
-    TError data = new TError(lexema, fila, columna, "Sintáctico", "Se esperaba el token '" + expectedToken + "'");
-    TablaESS.add(data);
-}
+        TError data = new TError(lexema, fila, columna, "Sintáctico", "Se esperaba el token '" + expectedToken + "'");
+        TablaESS.add(data);
+    }
 
 private String getExpectedToken(int tipo) {
     switch (tipo) {
@@ -163,6 +163,7 @@ action code
         contName = 0;
         contInst = 0;
         contDate = 0;
+        contFields = 0;
     }
 
     public void checkFields(){
@@ -203,6 +204,168 @@ action code
         }
     }
 
+    //Verificación de campos completos NUEVATRIVIA
+    int contIDTrivia = 0;
+    int contTime = 0;
+    int contNameNV = 0;
+    int contTheme = 0;
+    int contUserNV = 0;
+    int contDateNV = 0;
+    int contFieldsNV = 0;
+
+    private void contFieldsNV(String field){
+        contFieldsNV++;
+        switch(field){
+            case "IDTrivia":
+                contIDTrivia++;
+                break;
+            case "Tiempo":
+                contTime++;
+                break;
+            case "Nombre":
+                contNameNV++;
+                break;
+            case "Tema":
+                contTheme++;
+                break;
+            case "UsuarioCreacion":
+                contUserNV++;
+                break;
+            case "FechaCreacion":
+                contDateNV++;
+                break;
+        }
+    }
+
+    private void checkFieldsNV(){
+        int line = 0;
+        int column = 0;
+
+        result = true;
+
+        if((contFieldsNV/contIDTrivia) != 6){
+            result = false;
+            System.out.println("Error: El campo IDTrivia no esta completo o esta duplicado");
+            TError datos = new TError("IDTrivia", line, column, "Semántico", "Campo ID_TRIVIA faltante o repetido");
+            TablaESS.add(datos);
+        }
+        if((contFieldsNV/contTime) != 6){
+            result = false;
+            System.out.println("Error: El campo Tiempo no esta completo o esta duplicado");
+            TError datos = new TError("Tiempo", line, column, "Semántico", "Campo TIEMPO_PREGUNTA faltante o repetido");
+            TablaESS.add(datos);
+        }
+        if((contFieldsNV/contNameNV) != 6){
+            result = false;
+            System.out.println("Error: El campo Nombre no esta completo o esta duplicado");
+            TError datos = new TError("Nombre", line, column, "Semántico", "Campo NOMBRE faltante o repetido");
+            TablaESS.add(datos);
+        }
+        if((contFieldsNV/contTheme) != 6){
+            result = false;
+            System.out.println("Error: El campo Tema no esta completo o esta duplicado");
+            TError datos = new TError("Tema", line, column, "Semántico", "Campo TEMA faltante o repetido");
+            TablaESS.add(datos);
+        }
+        if((contFieldsNV/contUserNV) != 6){
+            result = false;
+            System.out.println("Error: El campo Usuario de Creacion no esta completo o esta duplicado");
+            TError datos = new TError("UsuarioCreacion", line, column, "Semántico", "Campo USUARIO_CREACION faltante o repetido");
+            TablaESS.add(datos);
+        }
+        if((contFieldsNV/contDateNV) != 6){
+            result = false;
+            System.out.println("Error: El campo Fecha de Creacion no esta completo o esta duplicado");
+            TError datos = new TError("FechaCreacion", line, column, "Semántico", "Campo FECHA_CREACION faltante o repetido");
+            TablaESS.add(datos);
+        }
+    }
+
+    private void cleanFieldsNV(){
+        contIDTrivia = 0;
+        contTime = 0;
+        contNameNV = 0;
+        contTheme = 0;
+        contUserNV = 0;
+        contDateNV = 0;
+        contFieldsNV = 0;
+    }
+
+    //Verificación de campos completos MODIFICARUSUARIO
+    int contUserA = 0;
+    int contUserN = 0;
+    int contPassN = 0;
+    int fechaMod = 0;
+    int inst = 0;
+    int contFieldsMU = 0;
+
+    private void contFieldsMU(String field){
+        contFieldsMU++;
+        switch(field){
+            case "UsuarioAntiguo":
+                contUserA++;
+                break;
+            case "UsuarioNuevo":
+                contUserN++;
+                break;
+            case "NuevoPassword":
+                contPassN++;
+                break;
+            case "FechaModificacion":
+                fechaMod++;
+                break;
+            case "Institucion":
+                inst++;
+                break;
+        }
+    }
+
+    private void cleanFieldsMU(){
+        contUserA = 0;
+        contUserN = 0;
+        contPassN = 0;
+        fechaMod = 0;
+        inst = 0;
+        contFieldsMU = 0;
+    }
+
+    private void checkFieldsMU(){
+        int line = 0;
+        int column = 0;
+
+        result = true;
+
+        if((contFieldsMU/contUserA) != 5){
+            result = false;
+            System.out.println("Error: El campo Usuario Antiguo no esta completo o esta duplicado");
+            TError datos = new TError("UsuarioAntiguo", line, column, "Semántico", "Campo USUARIO_ANTIGUO faltante o repetido");
+            TablaESS.add(datos);
+        }
+        if((contFieldsMU/contUserN) != 5){
+            result = false;
+            System.out.println("Error: El campo Usuario Nuevo no esta completo o esta duplicado");
+            TError datos = new TError("UsuarioNuevo", line, column, "Semántico", "Campo USUARIO_NUEVO faltante o repetido");
+            TablaESS.add(datos);
+        }
+        if((contFieldsMU/contPassN) != 5){
+            result = false;
+            System.out.println("Error: El campo Nuevo Password no esta completo o esta duplicado");
+            TError datos = new TError("NuevoPassword", line, column, "Semántico", "Campo NUEVO_PASSWORD faltante o repetido");
+            TablaESS.add(datos);
+        }
+        if((contFieldsMU/fechaMod) != 5){
+            result = false;
+            System.out.println("Error: El campo Fecha de Modificacion no esta completo o esta duplicado");
+            TError datos = new TError("FechaModificacion", line, column, "Semántico", "Campo FECHA_MODIFICACION faltante o repetido");
+            TablaESS.add(datos);
+        }
+        if((contFieldsMU/inst) != 5){
+            result = false;
+            System.out.println("Error: El campo Institucion no esta completo o esta duplicado");
+            TError datos = new TError("Institucion", line, column, "Semántico", "Campo INSTITUCION faltante o repetido");
+            TablaESS.add(datos);
+        }
+    }
 :}
 
 /*--------------- 2da Area: Declaraciones -----------------------*/
@@ -211,23 +374,37 @@ terminal String LessThan, GreaterThan, QuestionMark, Equal, QuotationMark, Excla
                 LeftBrace, RightBrace, LeftBracket, RightBracket, XSONsentence, Version, VersionNumber,
                 RealizarSolicitud, RealizarSolicitudes, FinSolicitud, FinSolicitudes, UsuarioNuevo,
                 ModificarUsuario, EliminarUsuario, DatosUsuario, Usuario, Password, Nombre, Institucion,
-                NIValue, UPValue, FechaCreacion, Date;
+                NIValue, UPValue, FechaCreacion, Date, ParametrosTrivia, IDTriviaSentence, TiempoPregunta, Tema,
+                Time, IDTrivia, NuevaTrivia, UsuarioCreacion, UsuarioAntiguo, NuevoPassword, FechaModificacion,
+                EliminarTrivia;
 
 //------> declaracion de no terminales
-nonterminal  INICIO, SINGLEREQUEST, USUARIONUEVO, MODIFICARUSUARIO, ELIMINARUSUARIO, NEWUSERLOOP, NEWUSERBLOCK,
-                VALUES, NAMES;
+nonterminal  INICIO, SINGLEREQUEST, USUARIONUEVO, MODIFICARUSUARIO, ELIMINARUSUARIO, NUEVATRIVIA,
+                NEWUSERLOOP, NEWUSERBLOCK, NEWTRIVIALOOP, NEWTRIVIABLOCK, VALUES, NAMES, VALUESCONCAT,
+                LOOP, LOOP2, HEADER, MODIFICARUSUARIOLOOP, MODIFICARUSUARIOBLOCK, ELIMINARUSUARIOLOOP,
+                ELIMINARTRIVIA, ELIMINARTRIVIALOOP;
 
 start with INICIO;
 
 /*--------------- 3ra Area: Reglas Gramaticales -----------------------*/
-INICIO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
-            SINGLEREQUEST {:System.out.println("Sentencia correcta y aceptada");:}
+INICIO ::= HEADER LOOP
             | error {:System.out.println("Error en la sentencia inicial");
             cleanFields();:};
 
+HEADER ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan;
+
+LOOP ::= SINGLEREQUEST
+	| LessThan ExclamationMark RealizarSolicitudes GreaterThan LOOP2 {:System.out.println("Entra en sentencia multiple");:}
+    | /*epsilon*/;
+
+LOOP2 ::= SINGLEREQUEST LOOP2
+        |LessThan FinSolicitudes ExclamationMark GreaterThan {:System.out.println("Sale de sentencia multiple");:};
+
 SINGLEREQUEST ::= USUARIONUEVO
                 | MODIFICARUSUARIO
-                | ELIMINARUSUARIO;
+                | ELIMINARUSUARIO
+                | NUEVATRIVIA
+                | ELIMINARTRIVIA;
 
 USUARIONUEVO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark UsuarioNuevo QuotationMark GreaterThan
                     LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket
@@ -237,48 +414,126 @@ USUARIONUEVO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark 
                     {:cleanFields();:}
                 | error USUARIONUEVO {:System.out.println("Error en la declaración de USUARIONUEVO"); :};
 
-MODIFICARUSUARIO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark ModificarUsuario QuotationMark GreaterThan
-                    LeftBrace LeftBracket RightBracket RightBrace
-                    LessThan FinSolicitud ExclamationMark GreaterThan
-                | error MODIFICARUSUARIO {:System.out.println("Error en la declaración de MODIFICARUSUARIO"); :};
-
-ELIMINARUSUARIO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark EliminarUsuario QuotationMark GreaterThan
-                    LeftBrace LeftBracket RightBracket RightBrace
-                    LessThan FinSolicitud ExclamationMark GreaterThan
-                | error ELIMINARUSUARIO {:System.out.println("Error en la declaración de ELIMINARUSUARIO"); :};
-
 NEWUSERLOOP ::= LeftBrace NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK RightBrace Comma NEWUSERLOOP
-                {:System.out.println("Entra a NEWUSERLOOP");
-                checkFields();
-                System.out.println("Sale de NEWUSERLOOP");:}
+                {:checkFields();:}
                 | LeftBrace NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK RightBrace
-                {:System.out.println("Entra a NEWUSERLOOP SINGLE");
-                checkFields();
-                System.out.println("Sale de NEWUSERLOOP SINGLE");:}
+                {:checkFields();:}
                 | error {:System.out.println("Error en la declaración de NEWUSERLOOP"); :};
 
 NEWUSERBLOCK ::= QuotationMark Usuario QuotationMark Colon QuotationMark VALUES QuotationMark Comma
-                {:contFields("Usuario");
-                System.out.println("Entra en un valor ");:}
+                {:contFields("Usuario");:}
                 | QuotationMark Password QuotationMark Colon QuotationMark VALUES QuotationMark Comma
-                 {:contFields("Password");
-                 System.out.println("Entra en un valor ");:}
+                {:contFields("Password");:}
                 | QuotationMark Nombre QuotationMark Colon QuotationMark NAMES QuotationMark Comma
-                {:contFields("Nombre");
-                System.out.println("Entra en un valor ");:}
+                {:contFields("Nombre");:}
                 | QuotationMark Institucion QuotationMark Colon QuotationMark NAMES QuotationMark Comma
-                {:contFields("Institucion");
-                System.out.println("Entra en un valor ");:}
+                {:contFields("Institucion");:}
                 | QuotationMark FechaCreacion QuotationMark Colon QuotationMark Date QuotationMark Comma
-                {:contFields("FechaCreacion");
-                System.out.println("Entra en un valor ");:}
+                {:contFields("FechaCreacion");:}
                 | error {:System.out.println("Error en la declaración de NEWUSERBLOCK");
                 result = false;
                 cleanFields();:};
 
+MODIFICARUSUARIO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark ModificarUsuario QuotationMark GreaterThan
+                    LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket
+                    MODIFICARUSUARIOLOOP
+                    RightBracket RightBrace
+                    LessThan FinSolicitud ExclamationMark GreaterThan
+                    {:cleanFieldsMU();:}
+                    |error MODIFICARUSUARIO {:System.out.println("Error en la declaración de MODIFICARUSUARIO"); :};
+
+MODIFICARUSUARIOLOOP ::= LeftBrace MODIFICARUSUARIOBLOCK MODIFICARUSUARIOBLOCK MODIFICARUSUARIOBLOCK MODIFICARUSUARIOBLOCK MODIFICARUSUARIOBLOCK
+                        RightBrace Comma MODIFICARUSUARIOLOOP
+                        {:checkFieldsMU();:}
+                        |LeftBrace MODIFICARUSUARIOBLOCK MODIFICARUSUARIOBLOCK MODIFICARUSUARIOBLOCK MODIFICARUSUARIOBLOCK MODIFICARUSUARIOBLOCK RightBrace
+                        {:checkFieldsMU();:}
+                        |error {:System.out.println("Error en la declaración de MODIFICARUSUARIOLOOP"); :};
+
+MODIFICARUSUARIOBLOCK ::= QuotationMark UsuarioAntiguo QuotationMark Colon QuotationMark VALUES QuotationMark Comma
+                        {:contFieldsMU("UsuarioAntiguo");:}
+                        | QuotationMark UsuarioNuevo QuotationMark Colon QuotationMark VALUES QuotationMark Comma
+                        {:contFieldsMU("UsuarioNuevo");:}
+                        | QuotationMark NuevoPassword QuotationMark Colon QuotationMark VALUES QuotationMark Comma
+                        {:contFieldsMU("NuevoPassword");:}
+                        | QuotationMark FechaModificacion QuotationMark Colon QuotationMark Date QuotationMark Comma
+                        {:contFieldsMU("FechaModificacion");:}
+                        | QuotationMark Institucion QuotationMark Colon QuotationMark NAMES QuotationMark Comma
+                        {:contFieldsMU("Institucion");:}
+                        | error {:System.out.println("Error en la declaración de MODIFICARUSUARIOBLOCK");
+                        result = false;
+                        cleanFieldsMU();:};
+
+ELIMINARUSUARIO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark EliminarUsuario QuotationMark GreaterThan
+                    LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket
+                    ELIMINARUSUARIOLOOP
+                    RightBracket RightBrace
+                    LessThan FinSolicitud ExclamationMark GreaterThan
+                | error ELIMINARUSUARIO {:System.out.println("Error en la declaración de ELIMINARUSUARIO"); :};
+
+ELIMINARUSUARIOLOOP ::= LeftBrace
+                        QuotationMark Usuario QuotationMark Colon QuotationMark VALUES QuotationMark
+                        RightBrace Comma ELIMINARUSUARIOLOOP
+                        | LeftBrace
+                        QuotationMark Usuario QuotationMark Colon QuotationMark VALUES QuotationMark
+                        RightBrace
+                        | error {:System.out.println("Error en la declaración de ELIMINARUSUARIOLOOP"); :};
+
+NUEVATRIVIA ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark NuevaTrivia QuotationMark GreaterThan
+                LeftBrace QuotationMark ParametrosTrivia QuotationMark Colon LeftBracket
+                NEWTRIVIALOOP
+                RightBracket RightBrace
+                LessThan FinSolicitud ExclamationMark GreaterThan {:System.out.println("Sentencia de nueva trivia reconocida y aceptada");
+                cleanFieldsNV();:}
+                | error NUEVATRIVIA {:System.out.println("Error en la declaración de NUEVATRIVIA"); :};
+
+NEWTRIVIALOOP ::= LeftBrace NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK RightBrace Comma NEWTRIVIALOOP
+                {:checkFieldsNV();:}
+                | LeftBrace NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK RightBrace
+                {:checkFieldsNV();:}
+                | error {:System.out.println("Error en la declaración de NEWTRIVIALOOP"); :};
+
+NEWTRIVIABLOCK ::= QuotationMark IDTriviaSentence QuotationMark Colon QuotationMark IDTrivia QuotationMark Comma
+                    {:contFieldsNV("IDTrivia");:}
+                    | QuotationMark TiempoPregunta QuotationMark Colon Time Comma
+                    {:contFieldsNV("Tiempo");:}
+                    | QuotationMark Nombre QuotationMark Colon QuotationMark VALUESCONCAT QuotationMark Comma
+                    {:contFieldsNV("Nombre");:}
+                    | QuotationMark Tema QuotationMark Colon QuotationMark VALUESCONCAT QuotationMark Comma
+                    {:contFieldsNV("Tema");:}
+                    | QuotationMark UsuarioCreacion QuotationMark Colon QuotationMark NAMES QuotationMark Comma
+                    {:contFieldsNV("UsuarioCreacion");:}
+                    | QuotationMark FechaCreacion QuotationMark Colon QuotationMark Date QuotationMark Comma
+                    {:contFieldsNV("FechaCreacion");:}
+                    | error {:System.out.println("Error en la declaración de NEWTRIVIABLOCK");
+                    result = false;
+                    cleanFieldsNV();:};
+
+ELIMINARTRIVIA ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark EliminarTrivia QuotationMark GreaterThan
+                    LeftBrace QuotationMark ParametrosTrivia QuotationMark Colon LeftBracket
+                    ELIMINARTRIVIALOOP
+                    RightBracket RightBrace
+                    LessThan FinSolicitud ExclamationMark GreaterThan
+                | error ELIMINARTRIVIA {:System.out.println("Error en la declaración de ELIMINARTRIVIA"); :};
+
+ELIMINARTRIVIALOOP ::= LeftBrace
+                        QuotationMark IDTriviaSentence QuotationMark Colon QuotationMark IDTrivia QuotationMark
+                        RightBrace Comma ELIMINARTRIVIALOOP
+                        | LeftBrace
+                        QuotationMark IDTriviaSentence QuotationMark Colon QuotationMark IDTrivia QuotationMark
+                        RightBrace
+                        | error {:System.out.println("Error en la declaración de ELIMINARTRIVIALOOP"); :};
+
 VALUES ::= UPValue
             | NIValue
+            | Time
             | error {:System.out.println("Error en la declaración de VALUES"); :};
+
+VALUESCONCAT ::= UPValue VALUESCONCAT
+                | NIValue VALUESCONCAT
+                | UPValue
+                | NIValue
+                | error {:System.out.println("Error en la declaración de VALUESCONCAT"); :};
+
 
 NAMES ::= NIValue NAMES
             | NIValue

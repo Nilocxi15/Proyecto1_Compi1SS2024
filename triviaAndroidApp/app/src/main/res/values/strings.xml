@@ -5,4 +5,12 @@
     <string name="username">Nombre de usuario</string>
     <string name="password">Contraseña</string>
     <string name="see_password">Ver contraseña</string>
+    <string name="list_header">Listado de Trivias</string>
+    <string name="name_tittle_CV">Nombre:</string>
+    <string name="empty">Vacío</string>
+    <string name="topic_tittle_CV">Tema:</string>
+    <string name="author_tittle_CV">Autor:</string>
+    <string name="time_tittle_CV">Tiempo:</string>
+    <string name="seconds_sentence_CV">segundos</string>
+    <string name="logout_btn">Cerrar Sesión</string>
 </resources>

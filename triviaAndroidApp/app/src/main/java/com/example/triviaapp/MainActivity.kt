@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var username: EditText
     private lateinit var password: EditText
     private lateinit var passCheckBox: CheckBox
-    private lateinit var util: client
+    private lateinit var util: Client
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +57,8 @@ class MainActivity : AppCompatActivity() {
             request += "\t]}\n"
             request += "<fin_solicitud_realizada!>\n"
 
-            util = client()
-            util.sendMessage(request, object : client.SendMessageCallback {
+            util = Client()
+            util.sendMessage(request, object : Client.SendMessageCallback {
                 override fun onResult(result: String) {
                     val status = result.toBoolean()
                     if (status) {

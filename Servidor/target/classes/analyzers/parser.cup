@@ -7,7 +7,6 @@ import java.util.LinkedList;
 
 import models.login;
 import models.newUser;
-import models.newTrivia;
 
 //------> Codigo para el parser,variables, metodos, etc.
 parser code
@@ -15,32 +14,22 @@ parser code
 
     public String requestName = null;
 
-    //Variables para almacenar los datos de los usuarios nuevos
     public String userName = null;
     public String password = null;
     public String name = null;
     public String institution = null;
     public String date = null;
 
-    //Listas para almacenar los datos de los usuarios logeados
-    public static LinkedList<login> loginList = new LinkedList<login>();
+    private int blockCount = 0;
 
-    //Listas para almacenar los datos de los usuarios nuevos
+    public static LinkedList<login> loginList = new LinkedList<login>();
     public static LinkedList<newUser> newUserList = new LinkedList<newUser>();
+
     private LinkedList<String> userNameList = new LinkedList<String>();
     private LinkedList<String> passwordList = new LinkedList<String>();
     private LinkedList<String> nameList = new LinkedList<String>();
     private LinkedList<String> institutionList = new LinkedList<String>();
     private LinkedList<String> dateList = new LinkedList<String>();
-
-    //Listas para almacenar los datos de la trivia nueva
-    public static LinkedList<newTrivia> newTriviaList = new LinkedList<newTrivia>();
-    private LinkedList<String> idTriviaList = new LinkedList<String>();
-    private LinkedList<String> timeList = new LinkedList<String>();
-    private LinkedList<String> nameListTrivia = new LinkedList<String>();
-    private LinkedList<String> temaList = new LinkedList<String>();
-    private LinkedList<String> usuarioTriviaList = new LinkedList<String>();
-    private LinkedList<String> dateTriviaList = new LinkedList<String>();
 
     //Metodo al que se llama automaticamente ante algun error sintactico
     public void syntax_error(Symbol s)
@@ -100,40 +89,33 @@ terminal String LessThan, GreaterThan, QuestionMark, Equal, XSONsentence, Versio
                 ExclamationMark, RealizarSolicitud, Colon, UsuarioNuevo, ModificarUsuario, EliminarUsuario,
                 LoginUsuario, LeftBrace, RightBrace, LeftBracket, RightBracket, Comma, Values, FinSolicitud,
                 Usuario, Password, Nombre, Institucion, DatosUsuario, UsuarioAntiguo, NuevoPassword, niValue,
-                FechaCreacion, Date, FinSolicitudes, RealizarSolicitudes, NuevaTrivia, ParametrosTrivia,
-                IDTriviaSentence, TiempoPregunta, Tema, UsuarioCreacion, Time, IDTrivia;
+                FechaCreacion, Date, FinSolicitudes, RealizarSolicitudes;
 
 //------> declaracion de no terminales
-nonterminal String INICIO, SINGLEREQUEST, USUARIONUEVO, MODIFICARUSUARIO, ELIMINARUSUARIO, LOGINUSUARIO, NUEVATRIVIA,
-                    NEWUSERLOOP, NEWUSERBLOCK, NEWTRIVIALOOP, NEWTRIVIABLOCK, VALUES, NAMES, VALUESCONCAT, LOOP,
-                    LOOP2, HEADER;
+nonterminal String INICIO, SINGLEREQUEST, USUARIONUEVO, MODIFICARUSUARIO, ELIMINARUSUARIO, LOGINUSUARIO,
+                    NEWUSERLOOP, NEWUSERBLOCK, VALUES, NAMES;
 
 start with INICIO;
 
 /*--------------- 3ra Area: Reglas Semanticas -----------------------*/
-INICIO ::= HEADER LOOP
-            | HEADER LOGINUSUARIO;
-
-
-HEADER ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan;
-
-
-LOOP ::= SINGLEREQUEST
-        | LessThan ExclamationMark RealizarSolicitudes GreaterThan LOOP2 {:System.out.println("Entra en sentencia multiple");:}
-        | /*epsilon*/;
-
-
-LOOP2 ::= SINGLEREQUEST LOOP2
-        | LessThan FinSolicitudes ExclamationMark GreaterThan {:System.out.println("Fin de sentencias multiples");:};
-
+INICIO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
+            SINGLEREQUEST {:System.out.println("Sentencia correcta y aceptada");:}
+            | LOGINUSUARIO
+            | error {:System.out.println("Error en la sentencia inicial");:};
 
 SINGLEREQUEST ::= USUARIONUEVO
                 | MODIFICARUSUARIO
-                | ELIMINARUSUARIO
-                | NUEVATRIVIA;
+                | ELIMINARUSUARIO;
 
+/*
+INICIO ::= USUARIONUEVO
+        |MODIFICARUSUARIO
+        |ELIMINARUSUARIO
+        |LOGINUSUARIO;
+*/
 
-LOGINUSUARIO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark LoginUsuario QuotationMark GreaterThan
+LOGINUSUARIO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
+                LessThan ExclamationMark RealizarSolicitud Colon QuotationMark LoginUsuario QuotationMark GreaterThan
                 LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket LeftBrace
                 QuotationMark Usuario QuotationMark Colon QuotationMark VALUES:username QuotationMark Comma
                 QuotationMark Password QuotationMark Colon QuotationMark VALUES:password QuotationMark
@@ -151,16 +133,16 @@ USUARIONUEVO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark 
                     NEWUSERLOOP
                     RightBracket RightBrace
                     LessThan FinSolicitud ExclamationMark GreaterThan
-                    {:requestName = "nuevo";:};
-
+                    {:requestName = "nuevo";:}
+                | error USUARIONUEVO {:System.out.println("Error en la declaración de USUARIONUEVO"); :};
 
 NEWUSERLOOP ::= LeftBrace NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK RightBrace Comma NEWUSERLOOP
                 {:newUser data = new newUser(userNameList.poll(), passwordList.poll(), nameList.poll(), institutionList.poll(), dateList.poll());
                 newUserList.add(data);:}
                 | LeftBrace NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK NEWUSERBLOCK RightBrace
                 {:newUser data = new newUser(userNameList.poll(), passwordList.poll(), nameList.poll(), institutionList.poll(), dateList.poll());
-                newUserList.add(data);:};
-
+                newUserList.add(data);:}
+                | error {:System.out.println("Error en la declaración de NEWUSERLOOP"); :};
 
 NEWUSERBLOCK ::= QuotationMark Usuario QuotationMark Colon QuotationMark VALUES:usernameVal QuotationMark Comma
                 {:userName = (String) usernameVal;
@@ -176,39 +158,8 @@ NEWUSERBLOCK ::= QuotationMark Usuario QuotationMark Colon QuotationMark VALUES:
                 institutionList.add(institution);:}
                 | QuotationMark FechaCreacion QuotationMark Colon QuotationMark Date:dateVal QuotationMark Comma
                 {:date = (String) dateVal;
-                dateList.add(date);:};
-
-
-NUEVATRIVIA ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark NuevaTrivia QuotationMark GreaterThan
-                LeftBrace QuotationMark ParametrosTrivia QuotationMark Colon LeftBracket
-                NEWTRIVIALOOP
-                RightBracket RightBrace
-                LessThan FinSolicitud ExclamationMark GreaterThan {:System.out.println("Sentencia de nueva trivia reconocida y aceptada");
-                requestName = "nuevaTrivia";:};
-
-
-NEWTRIVIALOOP ::= LeftBrace NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK RightBrace Comma NEWTRIVIALOOP
-                {:newTrivia data = new newTrivia(idTriviaList.poll(), timeList.poll(), nameListTrivia.poll(), temaList.poll(), usuarioTriviaList.poll(),
-                                                dateTriviaList.poll());
-                newTriviaList.add(data);:}
-                | LeftBrace NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK NEWTRIVIABLOCK RightBrace
-                {:newTrivia data = new newTrivia(idTriviaList.poll(), timeList.poll(), nameListTrivia.poll(), temaList.poll(), usuarioTriviaList.poll(),
-                                                 dateTriviaList.poll());
-                newTriviaList.add(data);:};
-
-
-NEWTRIVIABLOCK ::= QuotationMark IDTriviaSentence QuotationMark Colon QuotationMark IDTrivia:idTriviaVal QuotationMark Comma
-                    {:idTriviaList.add(String.valueOf(idTriviaVal));:}
-                    | QuotationMark TiempoPregunta QuotationMark Colon Time:timeVal Comma
-                    {:timeList.add(String.valueOf(timeVal));:}
-                    | QuotationMark Nombre QuotationMark Colon QuotationMark VALUESCONCAT:nameVal QuotationMark Comma
-                    {:nameListTrivia.add(String.valueOf(nameVal));:}
-                    | QuotationMark Tema QuotationMark Colon QuotationMark VALUESCONCAT:temaVal QuotationMark Comma
-                    {:temaList.add(String.valueOf(temaVal));:}
-                    | QuotationMark UsuarioCreacion QuotationMark Colon QuotationMark NAMES:usuarioVal QuotationMark Comma
-                    {:usuarioTriviaList.add(String.valueOf(usuarioVal));:}
-                    | QuotationMark FechaCreacion QuotationMark Colon QuotationMark Date:dateVal QuotationMark Comma
-                    {:dateTriviaList.add(String.valueOf(dateVal));:};
+                dateList.add(date);:}
+                | error {:System.out.println("Error en la declaración de NEWUSERBLOCK");:};
 
 
 MODIFICARUSUARIO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
@@ -223,7 +174,6 @@ MODIFICARUSUARIO ::= LessThan QuestionMark XSONsentence Version Equal QuotationM
                     {:System.out.println("Sentencia de modificacion de usuario reconocida y aceptada");
                     requestName = "modificar";:};
 
-
 ELIMINARUSUARIO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
                     LessThan ExclamationMark RealizarSolicitud Colon QuotationMark EliminarUsuario QuotationMark GreaterThan
                     LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket LeftBrace
@@ -234,17 +184,8 @@ ELIMINARUSUARIO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMa
                     {:System.out.println("Sentencia de eliminacion de usuario reconocida y aceptada");
                     requestName = "eliminar";:};
 
-
 VALUES ::= Values:a {:RESULT = String.valueOf(a);:}
-          |niValue:b {:RESULT = String.valueOf(b);:}
-          |Time:a {:RESULT = String.valueOf(a);:};
-
-
-VALUESCONCAT ::= Values:a VALUESCONCAT:b {:RESULT = String.valueOf(a) + " " + String.valueOf(b);:}
-                | niValue:a VALUESCONCAT:b {:RESULT = String.valueOf(a) + " " + String.valueOf(b);:}
-                | Values:a {:RESULT = String.valueOf(a);:}
-                | niValue:a {:RESULT = String.valueOf(a);:};
-
+          |niValue:b {:RESULT = String.valueOf(b);:};
 
 NAMES ::= niValue:a NAMES:b {:RESULT = String.valueOf(a) + " " + String.valueOf(b);:}
         |niValue:b {:RESULT = String.valueOf(b);:};

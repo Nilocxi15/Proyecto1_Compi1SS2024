@@ -8,39 +8,51 @@ package analyzers;
 /** CUP generated class containing symbol constants. */
 public class Symbols_Requests {
   /* terminals */
-  public static final int GreaterThan = 3;
-  public static final int Colon = 8;
-  public static final int Password = 26;
-  public static final int LeftBrace = 10;
-  public static final int DatosUsuario = 24;
-  public static final int Date = 32;
-  public static final int XSONsentence = 14;
-  public static final int LeftBracket = 12;
-  public static final int Comma = 9;
-  public static final int LessThan = 2;
-  public static final int Usuario = 25;
-  public static final int ModificarUsuario = 22;
-  public static final int RealizarSolicitud = 17;
-  public static final int Version = 15;
-  public static final int FinSolicitudes = 20;
-  public static final int VersionNumber = 16;
-  public static final int RightBrace = 11;
-  public static final int Institucion = 28;
-  public static final int RealizarSolicitudes = 18;
-  public static final int EOF = 0;
-  public static final int EliminarUsuario = 23;
-  public static final int UPValue = 30;
-  public static final int ExclamationMark = 7;
-  public static final int QuotationMark = 6;
-  public static final int FechaCreacion = 31;
-  public static final int NIValue = 29;
-  public static final int FinSolicitud = 19;
-  public static final int error = 1;
-  public static final int UsuarioNuevo = 21;
-  public static final int Equal = 5;
-  public static final int QuestionMark = 4;
-  public static final int RightBracket = 13;
   public static final int Nombre = 27;
+  public static final int Institucion = 28;
+  public static final int Comma = 9;
+  public static final int RealizarSolicitud = 17;
+  public static final int EliminarTrivia = 44;
+  public static final int UPValue = 30;
+  public static final int RightBrace = 11;
+  public static final int DatosUsuario = 24;
+  public static final int UsuarioAntiguo = 41;
+  public static final int ParametrosTrivia = 33;
+  public static final int Password = 26;
+  public static final int GreaterThan = 3;
+  public static final int Equal = 5;
+  public static final int NuevaTrivia = 39;
+  public static final int IDTrivia = 38;
+  public static final int Tema = 36;
+  public static final int ExclamationMark = 7;
+  public static final int UsuarioCreacion = 40;
+  public static final int LeftBracket = 12;
+  public static final int QuestionMark = 4;
+  public static final int FinSolicitud = 19;
+  public static final int QuotationMark = 6;
+  public static final int IDTriviaSentence = 34;
+  public static final int TiempoPregunta = 35;
+  public static final int RightBracket = 13;
+  public static final int Colon = 8;
+  public static final int UsuarioNuevo = 21;
+  public static final int NIValue = 29;
+  public static final int FinSolicitudes = 20;
+  public static final int EOF = 0;
+  public static final int VersionNumber = 16;
+  public static final int error = 1;
+  public static final int LeftBrace = 10;
+  public static final int Time = 37;
+  public static final int Usuario = 25;
+  public static final int LessThan = 2;
+  public static final int NuevoPassword = 42;
+  public static final int ModificarUsuario = 22;
+  public static final int Date = 32;
+  public static final int Version = 15;
+  public static final int FechaCreacion = 31;
+  public static final int RealizarSolicitudes = 18;
+  public static final int XSONsentence = 14;
+  public static final int EliminarUsuario = 23;
+  public static final int FechaModificacion = 43;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -74,7 +86,19 @@ public class Symbols_Requests {
   "NIValue",
   "UPValue",
   "FechaCreacion",
-  "Date"
+  "Date",
+  "ParametrosTrivia",
+  "IDTriviaSentence",
+  "TiempoPregunta",
+  "Tema",
+  "Time",
+  "IDTrivia",
+  "NuevaTrivia",
+  "UsuarioCreacion",
+  "UsuarioAntiguo",
+  "NuevoPassword",
+  "FechaModificacion",
+  "EliminarTrivia"
   };
 }
 

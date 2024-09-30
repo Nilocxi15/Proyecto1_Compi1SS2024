@@ -53,6 +53,23 @@
                 <h2>Área para solicitudes</h2>
                 <button class="btn btn-primary">Exportar</button>
             </div>
+            <%
+                String requestStatus = (String) session.getAttribute("result");
+                if ("success".equals(requestStatus)) {
+            %>
+            <div class="alert alert-success" role="alert">
+                Solicitud enviada y procesada con éxito.
+            </div>
+            <%
+                } else if ("failure".equals(requestStatus)) {
+            %>
+            <div class="alert alert-danger" role="alert">
+                Ocurrió un error al procesar la solicitud.
+            </div>
+            <%
+                }
+                session.removeAttribute("result");
+            %>
             <div class="input-group">
                 <textarea class="form-control" aria-label="With textarea" id="createTextarea"
                           name="createTextarea"></textarea>

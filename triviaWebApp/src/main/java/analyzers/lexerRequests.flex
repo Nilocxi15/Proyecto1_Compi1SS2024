@@ -38,16 +38,28 @@ finSolicitudesRealizadas = "fin_solicitudes_realizadas"
 
 usuarioNuevo = "USUARIO_NUEVO"
 modificarUsuario = "MODIFICAR_USUARIO"
+usuarioAntiguo = "USUARIO_ANTIGUO"
 eliminarUsuario = "ELIMINAR_USUARIO"
+nuevoPassword = "NUEVO_PASSWORD"
 datosUsuario = "DATOS_USUARIO"
 usuario = "USUARIO"
 password = "PASSWORD"
 nombre = "NOMBRE"
 institucion = "INSTITUCION"
 fechaCreacion = "FECHA_CREACION"
+nuevaTrivia = "NUEVA_TRIVIA"
+parametrosTrivia = "PARAMETROS_TRIVIA"
+idTriviaSentence = "ID_TRIVIA"
+tiempoPregunta = "TIEMPO_PREGUNTA"
+tema = "TEMA"
+usuarioCreacion = "USUARIO_CREACION"
+fechaModificacion = "FECHA_MODIFICACION"
+eliminarTrivia = "ELIMINAR_TRIVIA"
 
 niValue = [A-Z]+
+time = [0-9]+
 values = [A-Za-z0-9_ÁÉÍÓÚáéíóúñÑ]+
+idTrivia = "$" {values}
 day = [0-3][0-9]
 month = [0-1][0-9]
 year = [1-2][0-9][0-9][0-9]
@@ -93,9 +105,21 @@ date = {day} "/" {month} "/" {year}
 <YYINITIAL> {nombre}                    {System.out.println("Reconocio "+yytext()+" nombre"); return new Symbol(Symbols_Requests.Nombre, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {institucion}               {System.out.println("Reconocio "+yytext()+" institucion"); return new Symbol(Symbols_Requests.Institucion, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {fechaCreacion}             {System.out.println("Reconocio "+yytext()+" fecha de creacion"); return new Symbol(Symbols_Requests.FechaCreacion, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {nuevaTrivia}               {System.out.println("Reconocio "+yytext()+" nueva trivia"); return new Symbol(Symbols_Requests.NuevaTrivia, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {parametrosTrivia}          {System.out.println("Reconocio "+yytext()+" parametros trivia"); return new Symbol(Symbols_Requests.ParametrosTrivia, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {idTriviaSentence}          {System.out.println("Reconocio "+yytext()+" sentencia id trivia"); return new Symbol(Symbols_Requests.IDTriviaSentence, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {tiempoPregunta}            {System.out.println("Reconocio "+yytext()+" tiempo pregunta"); return new Symbol(Symbols_Requests.TiempoPregunta, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {tema}                      {System.out.println("Reconocio "+yytext()+" tema"); return new Symbol(Symbols_Requests.Tema, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {usuarioCreacion}           {System.out.println("Reconocio "+yytext()+" usuario creacion"); return new Symbol(Symbols_Requests.UsuarioCreacion, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {usuarioAntiguo}            {System.out.println("Reconocio "+yytext()+" usuario antiguo"); return new Symbol(Symbols_Requests.UsuarioAntiguo, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {nuevoPassword}             {System.out.println("Reconocio "+yytext()+" nuevo password"); return new Symbol(Symbols_Requests.NuevoPassword, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {fechaModificacion}         {System.out.println("Reconocio "+yytext()+" fecha modificacion"); return new Symbol(Symbols_Requests.FechaModificacion, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {eliminarTrivia}            {System.out.println("Reconocio "+yytext()+" eliminar trivia"); return new Symbol(Symbols_Requests.EliminarTrivia, (yycolumn + 1), (yyline + 1), yytext());}
 
 <YYINITIAL> {niValue}                   {System.out.println("Reconocio "+yytext()+" valor de NI"); return new Symbol(Symbols_Requests.NIValue, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {time}                      {System.out.println("Reconocio "+yytext()+" tiempo"); return new Symbol(Symbols_Requests.Time, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {values}                    {System.out.println("Reconocio "+yytext()+" valor"); return new Symbol(Symbols_Requests.UPValue, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {idTrivia}                  {System.out.println("Reconocio "+yytext()+" id trivia"); return new Symbol(Symbols_Requests.IDTrivia, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {date}                      {System.out.println("Reconocio "+yytext()+" fecha"); return new Symbol(Symbols_Requests.Date, (yycolumn + 1), (yyline + 1), yytext());}
 
 {WhiteSpace} {/* ignore whitespace */}

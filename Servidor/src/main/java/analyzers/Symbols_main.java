@@ -15,14 +15,21 @@ public class Symbols_main {
   public static final int RightBrace = 18;
   public static final int DatosUsuario = 28;
   public static final int UsuarioAntiguo = 29;
+  public static final int ParametrosTrivia = 37;
   public static final int Password = 25;
   public static final int GreaterThan = 3;
   public static final int Equal = 5;
+  public static final int IDTrivia = 43;
+  public static final int NuevaTrivia = 36;
+  public static final int Tema = 40;
   public static final int ExclamationMark = 10;
+  public static final int UsuarioCreacion = 41;
   public static final int LeftBracket = 19;
+  public static final int IDTriviaSentence = 38;
   public static final int QuestionMark = 4;
   public static final int FinSolicitud = 23;
   public static final int QuotationMark = 9;
+  public static final int TiempoPregunta = 39;
   public static final int RightBracket = 20;
   public static final int Colon = 12;
   public static final int UsuarioNuevo = 13;
@@ -32,6 +39,7 @@ public class Symbols_main {
   public static final int VersionNumber = 8;
   public static final int error = 1;
   public static final int LeftBrace = 17;
+  public static final int Time = 42;
   public static final int Usuario = 24;
   public static final int LessThan = 2;
   public static final int NuevoPassword = 30;
@@ -80,7 +88,15 @@ public class Symbols_main {
   "FechaCreacion",
   "Date",
   "FinSolicitudes",
-  "RealizarSolicitudes"
+  "RealizarSolicitudes",
+  "NuevaTrivia",
+  "ParametrosTrivia",
+  "IDTriviaSentence",
+  "TiempoPregunta",
+  "Tema",
+  "UsuarioCreacion",
+  "Time",
+  "IDTrivia"
   };
 }
 
