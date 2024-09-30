@@ -48,6 +48,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loadElements() {
+        trivias.clear()
+        elements.clear()
+
         var request: String = null.toString()
         request = "<?xson version=\"1.0\"?>\n"
         request += "<!realizar_solicitud: \"LISTA_TRIVIAS\">\n"

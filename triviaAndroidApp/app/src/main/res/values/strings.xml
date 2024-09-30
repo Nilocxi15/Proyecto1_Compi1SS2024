@@ -13,4 +13,7 @@
     <string name="time_tittle_CV">Tiempo:</string>
     <string name="seconds_sentence_CV">segundos</string>
     <string name="logout_btn">Cerrar Sesión</string>
+    <string name="description_lobby_trivia">Estás a punto de iniciar la trivia:</string>
+    <string name="start_btn">Iniciar</string>
+    <string name="return_btn">Regresar</string>
 </resources>

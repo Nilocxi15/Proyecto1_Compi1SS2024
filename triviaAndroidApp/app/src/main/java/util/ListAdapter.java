@@ -1,6 +1,7 @@
 package util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.triviaapp.LobbyTrivia;
 import com.example.triviaapp.R;
 
 import java.util.List;
@@ -72,7 +74,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
                 ListElement element = mData.get(position);
-                Toast.makeText(mContext, "Clicked: " + element.getName() + " " + element.getId(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, LobbyTrivia.class);
+                intent.putExtra("TRIVIA_NAME", element.getName());
+                mContext.startActivity(intent);
             }
         }
     }

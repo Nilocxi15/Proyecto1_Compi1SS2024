@@ -40,65 +40,65 @@ private String getExpectedToken(int tipo) {
         case Symbols_Requests.LessThan:
             return ">' o '}";
         case Symbols_Requests.GreaterThan:
-            return "?' o '!";
+            return "?' , '!' o '";
         case Symbols_Requests.QuestionMark:
             return "<' o ' \" (comilla)";
         case Symbols_Requests.Equal:
             return "version";
         case Symbols_Requests.QuotationMark:
-            return "Comillas";
+            return ":' , '{' , ' , (coma)' o 'valor del campo";
         case Symbols_Requests.ExclamationMark:
-            return "<' o la sentencia 'fin_solicitud_realizada";
+            return "<' o la sentencia 'fin_solicitud(es)_realizada(s)";
         case Symbols_Requests.Colon:
             return "de instrucción' o 'nombre del campo";
         case Symbols_Requests.Comma:
-            return "Comma";
+            return "\" (comilla)' o '}";
         case Symbols_Requests.LeftBrace:
-            return "LeftBrace";
+            return ">' , '[' o ' , (coma)";
         case Symbols_Requests.RightBrace:
-            return "RightBrace";
+            return ", (coma)' o ']";
         case Symbols_Requests.LeftBracket:
-            return "LeftBracket";
+            return ":";
         case Symbols_Requests.RightBracket:
-            return "RightBracket";
+            return "]";
         case Symbols_Requests.XSONsentence:
-            return "XSONsentence";
+            return "?";
         case Symbols_Requests.Version:
-            return "Version";
+            return "xson";
         case Symbols_Requests.VersionNumber:
-            return "VersionNumber";
+            return "\" (comilla)";
         case Symbols_Requests.RealizarSolicitud:
-            return "RealizarSolicitud";
+            return "!";
         case Symbols_Requests.RealizarSolicitudes:
-            return "RealizarSolicitudes";
+            return "!";
         case Symbols_Requests.FinSolicitud:
-            return "FinSolicitud";
+            return "<";
         case Symbols_Requests.FinSolicitudes:
-            return "FinSolicitudes";
+            return "<";
         case Symbols_Requests.UsuarioNuevo:
-            return "UsuarioNuevo";
+            return "\" (comilla)";
         case Symbols_Requests.ModificarUsuario:
             return "ModificarUsuario";
         case Symbols_Requests.EliminarUsuario:
-            return "EliminarUsuario";
+            return "\" (comilla)";
         case Symbols_Requests.DatosUsuario:
-            return "DatosUsuario";
+            return "\" (comilla)";
         case Symbols_Requests.Usuario:
-            return "Usuario";
+            return "\" (comilla)";
         case Symbols_Requests.Password:
-            return "Password";
+            return "\" (comilla)";
         case Symbols_Requests.Nombre:
-            return "Nombre";
+            return "\" (comilla)";
         case Symbols_Requests.Institucion:
-            return "Institucion";
+            return "\" (comilla)";
         case Symbols_Requests.NIValue:
             return "NIValue";
         case Symbols_Requests.UPValue:
             return "UPValue";
         case Symbols_Requests.FechaCreacion:
-            return "FechaCreacion";
+            return "\" (comilla)";
         case Symbols_Requests.Date:
-            return "Date";
+            return "\" (comilla)";
         // Agrega más casos según los tokens que manejes
         default:
             return "token desconocido";
