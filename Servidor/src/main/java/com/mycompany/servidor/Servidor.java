@@ -4,6 +4,7 @@ import analyzers.L_Analyzer_main;
 import analyzers.S_Analyzer_main;
 import filesManager.readFiles;
 import filesManager.writeFiles;
+import models.Modify;
 import models.NewUser;
 import models.Trivia;
 import models.User;
@@ -81,6 +82,21 @@ public class Servidor {
                             break;
                         case "modificar":
                             System.out.println("Se solicita el analisis de MODIFICAR_USUARIO");
+                            for (Modify m : S_Analyzer_main.modifyList) {
+                                System.out.println("Old username: " + m.getOldUsername());
+                                System.out.println("New username: " + m.getNewUsername());
+                                System.out.println("New password: " + m.getNewPassword());
+                                System.out.println("New institution: " + m.getInstitution());
+                                System.out.println("Date: " + m.getDate());
+                                write.editUser(m.getOldUsername(), m.getNewUsername(), m.getNewPassword(), m.getInstitution(), m.getDate());
+                            }
+                            response = "<?xson version=\"1.0\" ?>\n";
+                            response += "<!envio_respuesta: \"MODIFICAR_USUARIO\" >\n";
+                            response += "{ \"RESPUESTA\":[{\n";
+                            response += "\"STATUS\": \"Ok\"\n";
+                            response += "}]\n";
+                            response += "}\n";
+                            response += "<fin_envio_respuesta!>";
                             break;
                         case "eliminar":
                             System.out.println("Se solicita el analisis de ELIMINAR_USUARIO");

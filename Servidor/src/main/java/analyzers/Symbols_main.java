@@ -52,6 +52,7 @@ public class Symbols_main {
   public static final int RealizarSolicitudes = 35;
   public static final int XSONsentence = 6;
   public static final int EliminarUsuario = 15;
+  public static final int FechaModificacion = 45;
   public static final int niValue = 31;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -98,7 +99,8 @@ public class Symbols_main {
   "UsuarioCreacion",
   "Time",
   "IDTrivia",
-  "ListaTrivias"
+  "ListaTrivias",
+  "FechaModificacion"
   };
 }
 

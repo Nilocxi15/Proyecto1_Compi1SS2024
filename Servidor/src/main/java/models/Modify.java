@@ -5,12 +5,14 @@ public class Modify {
     private String newUsername;
     private String newPassword;
     private String date;
+    private String institution;
 
-    public Modify(String oldUsername, String newUsername, String newPassword, String date) {
+    public Modify(String oldUsername, String newUsername, String newPassword, String newInstitution, String date) {
         this.oldUsername = oldUsername;
         this.newUsername = newUsername;
         this.newPassword = newPassword;
         this.date = date;
+        this.institution = newInstitution;
     }
 
     public String getOldUsername() {
@@ -27,5 +29,9 @@ public class Modify {
 
     public String getDate() {
         return this.date;
+    }
+
+    public String getInstitution() {
+        return this.institution;
     }
 }

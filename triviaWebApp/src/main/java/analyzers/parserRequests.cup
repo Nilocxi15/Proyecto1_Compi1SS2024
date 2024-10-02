@@ -439,6 +439,8 @@ MODIFICARUSUARIO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationM
                     MODIFICARUSUARIOLOOP
                     RightBracket RightBrace
                     LessThan FinSolicitud ExclamationMark GreaterThan
+                    {:result = true;
+                    System.out.println("MODIFICAR_USUARIO reconocido y aceptado");:}
                     {:cleanFieldsMU();:}
                     |error MODIFICARUSUARIO {:System.out.println("Error en la declaración de MODIFICARUSUARIO"); :};
 

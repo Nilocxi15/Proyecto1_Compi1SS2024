@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import models.Login;
 import models.NewUser;
 import models.NewTrivia;
+import models.Modify;
 
 //------> Codigo para el parser,variables, metodos, etc.
 parser code
@@ -44,6 +45,14 @@ parser code
 
     //Nombre de usuario a eliminar
     public static LinkedList<String> userToDelete = new LinkedList<>();
+
+    //Datos de usuarios a modificar
+    private String usernameMod = null;
+    private String newUsernameMod = null;
+    private String newPasswordMod = null;
+    private String newInstitutionMod = null;
+    private String newDateMod = null;
+    public static LinkedList<Modify> modifyList = new LinkedList<>();
 
     //Metodo al que se llama automaticamente ante algun error sintactico
     public void syntax_error(Symbol s)
@@ -104,12 +113,12 @@ terminal String LessThan, GreaterThan, QuestionMark, Equal, XSONsentence, Versio
                 LoginUsuario, LeftBrace, RightBrace, LeftBracket, RightBracket, Comma, Values, FinSolicitud,
                 Usuario, Password, Nombre, Institucion, DatosUsuario, UsuarioAntiguo, NuevoPassword, niValue,
                 FechaCreacion, Date, FinSolicitudes, RealizarSolicitudes, NuevaTrivia, ParametrosTrivia,
-                IDTriviaSentence, TiempoPregunta, Tema, UsuarioCreacion, Time, IDTrivia, ListaTrivias;
+                IDTriviaSentence, TiempoPregunta, Tema, UsuarioCreacion, Time, IDTrivia, ListaTrivias, FechaModificacion;
 
 //------> declaracion de no terminales
 nonterminal String INICIO, SINGLEREQUEST, USUARIONUEVO, MODIFICARUSUARIO, ELIMINARUSUARIO, LOGINUSUARIO, NUEVATRIVIA,
                     NEWUSERLOOP, NEWUSERBLOCK, NEWTRIVIALOOP, NEWTRIVIABLOCK, VALUES, NAMES, VALUESCONCAT, LOOP,
-                    LOOP2, HEADER, LISTATRIVIAS, ELIMINARUSUARIOLOOP;
+                    LOOP2, HEADER, LISTATRIVIAS, ELIMINARUSUARIOLOOP, MODIFICARUSUARIOLOOP, MODIFICARUSUARIOBLOCK;
 
 start with INICIO;
 
@@ -215,18 +224,32 @@ NEWTRIVIABLOCK ::= QuotationMark IDTriviaSentence QuotationMark Colon QuotationM
                     {:dateTriviaList.add(String.valueOf(dateVal));:};
 
 
-MODIFICARUSUARIO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
-                    LessThan ExclamationMark RealizarSolicitud Colon QuotationMark ModificarUsuario QuotationMark GreaterThan
-                    LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket LeftBrace
-                    QuotationMark UsuarioAntiguo QuotationMark Colon QuotationMark VALUES QuotationMark Comma
-                    QuotationMark UsuarioNuevo QuotationMark Colon QuotationMark VALUES QuotationMark Comma
-                    QuotationMark NuevoPassword QuotationMark Colon QuotationMark VALUES QuotationMark
-                    RightBrace RightBracket
-                    RightBrace
+MODIFICARUSUARIO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark ModificarUsuario QuotationMark GreaterThan
+                    LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket
+                    MODIFICARUSUARIOLOOP
+                    RightBracket RightBrace
                     LessThan FinSolicitud ExclamationMark GreaterThan
                     {:System.out.println("Sentencia de modificacion de usuario reconocida y aceptada");
                     requestName = "modificar";:};
 
+MODIFICARUSUARIOLOOP ::= LeftBrace MODIFICARUSUARIOBLOCK MODIFICARUSUARIOBLOCK MODIFICARUSUARIOBLOCK MODIFICARUSUARIOBLOCK MODIFICARUSUARIOBLOCK
+                        RightBrace Comma MODIFICARUSUARIOLOOP
+                        {:Modify data = new Modify(usernameMod, newUsernameMod, newPasswordMod, newInstitutionMod, newDateMod);
+                            modifyList.add(data);:}
+                        |LeftBrace MODIFICARUSUARIOBLOCK MODIFICARUSUARIOBLOCK MODIFICARUSUARIOBLOCK MODIFICARUSUARIOBLOCK MODIFICARUSUARIOBLOCK RightBrace
+                        {:Modify data = new Modify(usernameMod, newUsernameMod, newPasswordMod, newInstitutionMod, newDateMod);
+                            modifyList.add(data);:};
+
+MODIFICARUSUARIOBLOCK ::= QuotationMark UsuarioAntiguo QuotationMark Colon QuotationMark VALUES:usernameVal QuotationMark Comma
+                        {:usernameMod = String.valueOf(usernameVal);:}
+                        | QuotationMark UsuarioNuevo QuotationMark Colon QuotationMark VALUES:newUsernameVal QuotationMark Comma
+                        {:newUsernameMod = String.valueOf(newUsernameVal);:}
+                        | QuotationMark NuevoPassword QuotationMark Colon QuotationMark VALUES:newPasswordVal QuotationMark Comma
+                        {:newPasswordMod = String.valueOf(newPasswordVal);:}
+                        | QuotationMark FechaModificacion QuotationMark Colon QuotationMark Date:newDateVal QuotationMark Comma
+                        {:newDateMod = String.valueOf(newDateVal);:}
+                        | QuotationMark Institucion QuotationMark Colon QuotationMark NAMES:newInstitutionVal QuotationMark Comma
+                        {:newInstitutionMod = String.valueOf(newInstitutionVal);:};
 
 ELIMINARUSUARIO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark EliminarUsuario QuotationMark GreaterThan
                     LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket

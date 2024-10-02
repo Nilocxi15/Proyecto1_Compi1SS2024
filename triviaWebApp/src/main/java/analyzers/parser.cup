@@ -112,4 +112,5 @@ AGREGARINCORRECTO ::= LessThan QuestionMark XSONsentence Version Equal Quotation
 
 REQUESTS ::= EliminarUsuario
              |NuevaTrivia
-             |UsuarioNuevo;
+             |UsuarioNuevo
+             |ModificarUsuario;

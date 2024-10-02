@@ -997,7 +997,8 @@ class CUP$S_Analyzer_Requests$actions {
           case 25: // MODIFICARUSUARIO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark ModificarUsuario QuotationMark GreaterThan LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket MODIFICARUSUARIOLOOP RightBracket RightBrace LessThan FinSolicitud ExclamationMark GreaterThan 
             {
               Object RESULT =null;
-		cleanFieldsMU();
+		result = true;
+                    System.out.println("MODIFICAR_USUARIO reconocido y aceptado");cleanFieldsMU();
               CUP$S_Analyzer_Requests$result = parser.getSymbolFactory().newSymbol("MODIFICARUSUARIO",3, ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.elementAt(CUP$S_Analyzer_Requests$top-20)), ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer_Requests$result;
