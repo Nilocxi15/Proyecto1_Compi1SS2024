@@ -169,6 +169,7 @@ public class Servidor {
                                 response += "\"ID_TRIVIA\": \"" + t.getIdTrivia() + "\",\n";
                                 response += "\"NOMBRE\": \"" + t.getName() + "\",\n";
                                 response += "\"TEMA\": \"" + t.getTopic() + "\",\n";
+                                response += "\"TIEMPO_PREGUNTA\": \"" + t.getTime() + "\",\n";
                                 response += "\"USUARIO_CREACION\": \"" + t.getCreationUser() + "\"\n";
                                 response += "},\n";
                             }

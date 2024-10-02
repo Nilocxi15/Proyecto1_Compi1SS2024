@@ -66,6 +66,11 @@ class LoginActivity : AppCompatActivity() {
                         .show()
                 } else {
                     for (trivia in trivias) {
+                        System.out.println(trivia.name)
+                        System.out.println(trivia.topic)
+                        System.out.println(trivia.author)
+                        System.out.println(trivia.questionTime)
+                        System.out.println(trivia.idTrivia)
                         addElement(
                             trivia.name,
                             trivia.topic,

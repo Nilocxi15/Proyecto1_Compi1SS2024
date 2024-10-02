@@ -44,6 +44,7 @@ public class Client {
 
                 out.writeUTF(params[0]); // Enviamos un mensaje al servidor
                 response = in.readUTF(); // Leemos la respuesta
+                System.out.println("Respuesta del servidor: " + response);
 
                 L_Analyzer_login lexer = new L_Analyzer_login(new BufferedReader(new StringReader(response)));
                 S_Analyzer_login parser = new S_Analyzer_login(lexer);

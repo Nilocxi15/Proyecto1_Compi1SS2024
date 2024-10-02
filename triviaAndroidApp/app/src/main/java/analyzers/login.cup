@@ -113,7 +113,7 @@ TRIVIABLOCK ::= LeftBrace QuotationMark IdTrivia QuotationMark Colon QuotationMa
                 RightBrace Comma
                 {:Trivia data = new Trivia(String.valueOf(idTriviaVal), String.valueOf(nameVal),
                 String.valueOf(topicVal), String.valueOf(timeVal), String.valueOf(authorVal));
-                LoginActivity.getTrivias.add(data);:};
+                LoginActivity.getTrivias().add(data);:};
 
 NAME ::= UserValue:a NAME:b {:RESULT = String.valueOf(a) + " " + String.valueOf(b);:}
         | UserValue:a {::};
