@@ -41,6 +41,8 @@ public class client {
             throw new RuntimeException(ex);
         }
 
+        System.out.println("Resultado " + S_Analyzer.resultado);
+
         if (S_Analyzer.resultado.equals("Correcto")) {
             status = true;
         } else {

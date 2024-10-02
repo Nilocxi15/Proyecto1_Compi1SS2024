@@ -54,10 +54,10 @@ action code
 terminal String LessThan, GreaterThan, QuestionMark, Equal, XSONsentence, Version, VersionNumber, QuotationMark,
                 ExclamationMark, RealizarSolicitud, Colon, LeftBrace, RightBrace, LeftBracket,
                 RightBracket, Comma, Ok, Error, LoginUsuario, Respuesta, Status, Usuario, Name, FinSolicitud,
-                Values, ModificarUsuario, UsuarioNuevo;
+                Values, ModificarUsuario, UsuarioNuevo, EliminarUsuario, NuevaTrivia;
 
 //------> declaracion de no terminales
-nonterminal String INICIO, CORRECTO, INCORRECTO, NAME, AGREGARCORRECTO, AGREGARINCORRECTO, VALUES;
+nonterminal String INICIO, CORRECTO, INCORRECTO, NAME, AGREGARCORRECTO, AGREGARINCORRECTO, REQUESTS;
 
 start with INICIO;
 
@@ -90,24 +90,26 @@ INCORRECTO ::=  LessThan QuestionMark XSONsentence Version Equal QuotationMark V
 NAME ::= Name:a NAME:b {:RESULT = String.valueOf(a) + " " + String.valueOf(b);:}
         | Name:a {:RESULT = String.valueOf(a);:};
 
-VALUES ::= Values:a {:RESULT = String.valueOf(a);:}
-        | Name:a {:RESULT = String.valueOf(a);:};
 
 AGREGARCORRECTO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
-                    LessThan ExclamationMark RealizarSolicitud Colon QuotationMark  UsuarioNuevo QuotationMark GreaterThan
+                    LessThan ExclamationMark RealizarSolicitud Colon QuotationMark  REQUESTS QuotationMark GreaterThan
                     LeftBrace QuotationMark Respuesta QuotationMark Colon LeftBracket LeftBrace
                     QuotationMark Status QuotationMark Colon QuotationMark Ok QuotationMark
                     RightBrace RightBracket
                     RightBrace
                     LessThan FinSolicitud ExclamationMark GreaterThan
-                    {:System.out.println("Sentencia de usuario nuevo correcta y aceptada");
+                    {:System.out.println("Sentencia UsuarioNuevo, EliminarUsuario o NuevaTrivia correcta y aceptada");
                     resultado = "Correcto";:};
 
 AGREGARINCORRECTO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
-                      LessThan ExclamationMark RealizarSolicitud Colon QuotationMark UsuarioNuevo QuotationMark GreaterThan
+                      LessThan ExclamationMark RealizarSolicitud Colon QuotationMark REQUESTS QuotationMark GreaterThan
                       LeftBrace QuotationMark Respuesta QuotationMark Colon LeftBracket LeftBrace
                       QuotationMark Status QuotationMark Colon QuotationMark Error QuotationMark
                       RightBrace RightBracket
                       RightBrace
                       LessThan FinSolicitud ExclamationMark GreaterThan {:System.out.println("Sentencia correcta, usuario ya existe");
                       resultado = "Incorrecto";:};
+
+REQUESTS ::= EliminarUsuario
+             |NuevaTrivia
+             |UsuarioNuevo;

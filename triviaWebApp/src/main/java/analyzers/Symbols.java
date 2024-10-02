@@ -25,7 +25,9 @@ public class Symbols {
   public static final int VersionNumber = 8;
   public static final int RightBrace = 14;
   public static final int Respuesta = 21;
+  public static final int NuevaTrivia = 30;
   public static final int EOF = 0;
+  public static final int EliminarUsuario = 29;
   public static final int Status = 22;
   public static final int Ok = 18;
   public static final int ExclamationMark = 10;
@@ -66,7 +68,9 @@ public class Symbols {
   "FinSolicitud",
   "Values",
   "ModificarUsuario",
-  "UsuarioNuevo"
+  "UsuarioNuevo",
+  "EliminarUsuario",
+  "NuevaTrivia"
   };
 }
 

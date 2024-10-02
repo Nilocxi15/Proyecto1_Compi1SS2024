@@ -42,6 +42,9 @@ parser code
     private LinkedList<String> usuarioTriviaList = new LinkedList<String>();
     private LinkedList<String> dateTriviaList = new LinkedList<String>();
 
+    //Nombre de usuario a eliminar
+    public static LinkedList<String> userToDelete = new LinkedList<>();
+
     //Metodo al que se llama automaticamente ante algun error sintactico
     public void syntax_error(Symbol s)
     {
@@ -106,7 +109,7 @@ terminal String LessThan, GreaterThan, QuestionMark, Equal, XSONsentence, Versio
 //------> declaracion de no terminales
 nonterminal String INICIO, SINGLEREQUEST, USUARIONUEVO, MODIFICARUSUARIO, ELIMINARUSUARIO, LOGINUSUARIO, NUEVATRIVIA,
                     NEWUSERLOOP, NEWUSERBLOCK, NEWTRIVIALOOP, NEWTRIVIABLOCK, VALUES, NAMES, VALUESCONCAT, LOOP,
-                    LOOP2, HEADER, LISTATRIVIAS;
+                    LOOP2, HEADER, LISTATRIVIAS, ELIMINARUSUARIOLOOP;
 
 start with INICIO;
 
@@ -225,15 +228,22 @@ MODIFICARUSUARIO ::= LessThan QuestionMark XSONsentence Version Equal QuotationM
                     requestName = "modificar";:};
 
 
-ELIMINARUSUARIO ::= LessThan QuestionMark XSONsentence Version Equal QuotationMark VersionNumber QuotationMark QuestionMark GreaterThan
-                    LessThan ExclamationMark RealizarSolicitud Colon QuotationMark EliminarUsuario QuotationMark GreaterThan
-                    LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket LeftBrace
-                    QuotationMark Usuario QuotationMark Colon QuotationMark VALUES QuotationMark
-                    RightBrace RightBracket
-                    RightBrace
+ELIMINARUSUARIO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark EliminarUsuario QuotationMark GreaterThan
+                    LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket
+                    ELIMINARUSUARIOLOOP
+                    RightBracket RightBrace
                     LessThan FinSolicitud ExclamationMark GreaterThan
                     {:System.out.println("Sentencia de eliminacion de usuario reconocida y aceptada");
                     requestName = "eliminar";:};
+
+ELIMINARUSUARIOLOOP ::= LeftBrace
+                        QuotationMark Usuario QuotationMark Colon QuotationMark VALUES:usernameVal QuotationMark
+                        RightBrace Comma ELIMINARUSUARIOLOOP
+                        {:userToDelete.add(String.valueOf(usernameVal));:}
+                        | LeftBrace
+                        QuotationMark Usuario QuotationMark Colon QuotationMark VALUES:usernameVal QuotationMark
+                        RightBrace
+                        {:userToDelete.add(String.valueOf(usernameVal));:};
 
 LISTATRIVIAS ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark ListaTrivias QuotationMark GreaterThan
                 LessThan FinSolicitud ExclamationMark GreaterThan

@@ -59,21 +59,21 @@ INICIO ::= A;
 
 A ::= Init OpenParenthesis B CloseParenthesis;
 
-B ::= LeftBrace C RightBrace D;
+B ::= LeftBrace C RightBrace Comma D;
 
 C ::= E:a
         F:b
         QuotationMark Name QuotationMark Colon QuotationMark G:c QuotationMark Comma
         QuotationMark Institution QuotationMark Colon QuotationMark G:d QuotationMark Comma
-        QuotationMark FechaCreacion QuotationMark Colon QuotationMark Date QuotationMar
+        QuotationMark FechaCreacion QuotationMark Colon QuotationMark Date QuotationMark
         {:String userName = String.valueOf(a);
         String password = String.valueOf(b);
         String name = String.valueOf(c);
         String institution = String.valueOf(d);
-        user data = new user(userName, password, name, institution);
+        User data = new User(userName, password, name, institution);
         readFiles.usersList.add(data);:};
 
-D ::= Comma B
+D ::= B
     | /*epsilon*/;
 
 E ::= QuotationMark User QuotationMark Colon QuotationMark UPValue:a QuotationMark Comma

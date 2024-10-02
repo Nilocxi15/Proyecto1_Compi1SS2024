@@ -467,8 +467,10 @@ ELIMINARUSUARIO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMa
                     LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket
                     ELIMINARUSUARIOLOOP
                     RightBracket RightBrace
-                    LessThan FinSolicitud ExclamationMark GreaterThan
-                | error ELIMINARUSUARIO {:System.out.println("Error en la declaración de ELIMINARUSUARIO"); :};
+                    LessThan FinSolicitud ExclamationMark GreaterThan {:result = true;
+                    System.out.println("Eliminar usuario reconocido y aceptado");:}
+                | error ELIMINARUSUARIO {:System.out.println("Error en la declaración de ELIMINARUSUARIO");
+                result = false;:};
 
 ELIMINARUSUARIOLOOP ::= LeftBrace
                         QuotationMark Usuario QuotationMark Colon QuotationMark VALUES QuotationMark
@@ -476,7 +478,8 @@ ELIMINARUSUARIOLOOP ::= LeftBrace
                         | LeftBrace
                         QuotationMark Usuario QuotationMark Colon QuotationMark VALUES QuotationMark
                         RightBrace
-                        | error {:System.out.println("Error en la declaración de ELIMINARUSUARIOLOOP"); :};
+                        | error {:System.out.println("Error en la declaración de ELIMINARUSUARIOLOOP");
+                        result = false;:};
 
 NUEVATRIVIA ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark NuevaTrivia QuotationMark GreaterThan
                 LeftBrace QuotationMark ParametrosTrivia QuotationMark Colon LeftBracket

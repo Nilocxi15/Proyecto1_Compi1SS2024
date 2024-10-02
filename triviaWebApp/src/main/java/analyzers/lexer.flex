@@ -30,6 +30,8 @@ realizarSolicitud = "envio_respuesta"
 loginUsuario = "LOGIN_USUARIO"
 modificarUsuario = "MODIFICAR_USUARIO"
 usuarioNuevo = "USUARIO_NUEVO"
+eliminarUsuario = "ELIMINAR_USUARIO"
+nuevaTrivia = "NUEVA_TRIVIA"
 respuesta = "RESPUESTA"
 status = "STATUS"
 usuario = "USUARIO"
@@ -73,6 +75,8 @@ finSolicitudRealizada = "fin_envio_respuesta"
 <YYINITIAL> {respuesta} {System.out.println("Reconocio "+yytext()+" respuesta"); return new Symbol(Symbols.Respuesta, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {status} {System.out.println("Reconocio "+yytext()+" status"); return new Symbol(Symbols.Status, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {usuario} {System.out.println("Reconocio "+yytext()+" usuario"); return new Symbol(Symbols.Usuario, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {eliminarUsuario} {System.out.println("Reconocio "+yytext()+" eliminar usuario"); return new Symbol(Symbols.EliminarUsuario, (yycolumn + 1), (yyline + 1), yytext());}
+<YYINITIAL> {nuevaTrivia} {System.out.println("Reconocio "+yytext()+" nueva trivia"); return new Symbol(Symbols.NuevaTrivia, (yycolumn + 1), (yyline + 1), yytext());}
 
 <YYINITIAL> {name} {System.out.println("Reconocio "+yytext()+" nombre"); return new Symbol(Symbols.Name, (yycolumn + 1), (yyline + 1), yytext());}
 <YYINITIAL> {values} {System.out.println("Reconocio "+yytext()+" valores"); return new Symbol(Symbols.Values, (yycolumn + 1), (yyline + 1), yytext());}

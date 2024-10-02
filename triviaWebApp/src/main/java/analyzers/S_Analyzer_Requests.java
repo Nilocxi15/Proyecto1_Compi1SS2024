@@ -1098,7 +1098,8 @@ class CUP$S_Analyzer_Requests$actions {
           case 36: // ELIMINARUSUARIO ::= LessThan ExclamationMark RealizarSolicitud Colon QuotationMark EliminarUsuario QuotationMark GreaterThan LeftBrace QuotationMark DatosUsuario QuotationMark Colon LeftBracket ELIMINARUSUARIOLOOP RightBracket RightBrace LessThan FinSolicitud ExclamationMark GreaterThan 
             {
               Object RESULT =null;
-
+		result = true;
+                    System.out.println("Eliminar usuario reconocido y aceptado");
               CUP$S_Analyzer_Requests$result = parser.getSymbolFactory().newSymbol("ELIMINARUSUARIO",4, ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.elementAt(CUP$S_Analyzer_Requests$top-20)), ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer_Requests$result;
@@ -1107,7 +1108,8 @@ class CUP$S_Analyzer_Requests$actions {
           case 37: // ELIMINARUSUARIO ::= error ELIMINARUSUARIO 
             {
               Object RESULT =null;
-		System.out.println("Error en la declaración de ELIMINARUSUARIO"); 
+		System.out.println("Error en la declaración de ELIMINARUSUARIO");
+                result = false;
               CUP$S_Analyzer_Requests$result = parser.getSymbolFactory().newSymbol("ELIMINARUSUARIO",4, ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.elementAt(CUP$S_Analyzer_Requests$top-1)), ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer_Requests$result;
@@ -1134,7 +1136,8 @@ class CUP$S_Analyzer_Requests$actions {
           case 40: // ELIMINARUSUARIOLOOP ::= error 
             {
               Object RESULT =null;
-		System.out.println("Error en la declaración de ELIMINARUSUARIOLOOP"); 
+		System.out.println("Error en la declaración de ELIMINARUSUARIOLOOP");
+                        result = false;
               CUP$S_Analyzer_Requests$result = parser.getSymbolFactory().newSymbol("ELIMINARUSUARIOLOOP",18, ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.peek()), ((java_cup.runtime.Symbol)CUP$S_Analyzer_Requests$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer_Requests$result;

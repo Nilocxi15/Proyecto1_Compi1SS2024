@@ -16,6 +16,7 @@ public class Servidor {
     public static void main(String[] args) {
 
         readFiles read = new readFiles();
+        writeFiles write = new writeFiles();
 
         String response = null;
 
@@ -83,6 +84,21 @@ public class Servidor {
                             break;
                         case "eliminar":
                             System.out.println("Se solicita el analisis de ELIMINAR_USUARIO");
+                            read.clearUsers();
+                            for (String un : S_Analyzer_main.userToDelete) {
+                                write.deleteUsers(un);
+                            }
+
+                            S_Analyzer_main.userToDelete.clear();
+                            read.loadUsers();
+
+                            response = "<?xson version=\"1.0\" ?>\n";
+                            response += "<!envio_respuesta: \"ELIMINAR_USUARIO\" >\n";
+                            response += "{ \"RESPUESTA\":[{\n";
+                            response += "\"STATUS\": \"Ok\"\n";
+                            response += "}]\n";
+                            response += "}\n";
+                            response += "<fin_envio_respuesta!>";
                             break;
                         case "nuevo":
                             boolean userExists = false;
@@ -117,7 +133,6 @@ public class Servidor {
                             }
 
                             if (!userExists) {
-                                writeFiles write = new writeFiles();
                                 write.writeNewUsers();
                             }
 
@@ -143,7 +158,7 @@ public class Servidor {
                         case "nuevaTrivia":
                             System.out.println("Se solicita el analisis de NUEVA_TRIVIA");
                             response = "<?xson version=\"1.0\" ?>\n";
-                            response += "<!envio_respuesta: \"USUARIO_NUEVO\" >\n";
+                            response += "<!envio_respuesta: \"NUEVA_TRIVIA\" >\n";
                             response += "{ \"RESPUESTA\":[{\n";
                             response += "\"STATUS\": \"Ok\"\n";
                             response += "}]\n";

@@ -8,6 +8,7 @@ package analyzers;
 import java_cup.runtime.Symbol;
 import models.User;
 import filesManager.readFiles;
+import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
   */
@@ -33,7 +34,7 @@ public class S_Analyzer_Users extends java_cup.runtime.lr_parser {
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
     "\000\015\000\002\002\004\000\002\002\003\000\002\003" +
-    "\006\000\002\004\006\000\002\005\033\000\002\006\004" +
+    "\006\000\002\004\007\000\002\005\033\000\002\006\003" +
     "\000\002\006\002\000\002\007\012\000\002\007\012\000" +
     "\002\010\012\000\002\010\012\000\002\011\003\000\002" +
     "\011\004" });
@@ -49,8 +50,8 @@ public class S_Analyzer_Users extends java_cup.runtime.lr_parser {
     "\000\004\002\001\001\002\000\004\006\011\001\002\000" +
     "\004\011\014\001\002\000\004\005\013\001\002\000\004" +
     "\002\uffff\001\002\000\004\014\070\001\002\000\004\011" +
-    "\023\001\002\000\004\007\017\001\002\000\006\005\ufffb" +
-    "\010\020\001\002\000\004\006\011\001\002\000\004\005" +
+    "\023\001\002\000\004\007\017\001\002\000\004\010\020" +
+    "\001\002\000\006\005\ufffb\006\011\001\002\000\004\005" +
     "\ufffe\001\002\000\004\005\ufffc\001\002\000\004\015\056" +
     "\001\002\000\004\011\025\001\002\000\004\016\026\001" +
     "\002\000\004\011\027\001\002\000\004\012\030\001\002" +
@@ -85,8 +86,8 @@ public class S_Analyzer_Users extends java_cup.runtime.lr_parser {
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\004\004\011\001\001\000\006\005\015\007\014\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\004\010\023\001\001\000\002\001\001\000\004\006" +
-    "\020\001\001\000\004\004\021\001\001\000\002\001\001" +
+    "\000\004\010\023\001\001\000\002\001\001\000\002\001" +
+    "\001\000\006\004\021\006\020\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\004\011\031\001\001\000\002\001\001\000" +
@@ -231,11 +232,11 @@ class CUP$S_Analyzer_Users$actions {
           return CUP$S_Analyzer_Users$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 3: // B ::= LeftBrace C RightBrace D 
+          case 3: // B ::= LeftBrace C RightBrace Comma D 
             {
               String RESULT =null;
 
-              CUP$S_Analyzer_Users$result = parser.getSymbolFactory().newSymbol("B",2, ((java_cup.runtime.Symbol)CUP$S_Analyzer_Users$stack.elementAt(CUP$S_Analyzer_Users$top-3)), ((java_cup.runtime.Symbol)CUP$S_Analyzer_Users$stack.peek()), RESULT);
+              CUP$S_Analyzer_Users$result = parser.getSymbolFactory().newSymbol("B",2, ((java_cup.runtime.Symbol)CUP$S_Analyzer_Users$stack.elementAt(CUP$S_Analyzer_Users$top-4)), ((java_cup.runtime.Symbol)CUP$S_Analyzer_Users$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer_Users$result;
 
@@ -266,11 +267,11 @@ class CUP$S_Analyzer_Users$actions {
           return CUP$S_Analyzer_Users$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 5: // D ::= Comma B 
+          case 5: // D ::= B 
             {
               String RESULT =null;
 
-              CUP$S_Analyzer_Users$result = parser.getSymbolFactory().newSymbol("D",4, ((java_cup.runtime.Symbol)CUP$S_Analyzer_Users$stack.elementAt(CUP$S_Analyzer_Users$top-1)), ((java_cup.runtime.Symbol)CUP$S_Analyzer_Users$stack.peek()), RESULT);
+              CUP$S_Analyzer_Users$result = parser.getSymbolFactory().newSymbol("D",4, ((java_cup.runtime.Symbol)CUP$S_Analyzer_Users$stack.peek()), ((java_cup.runtime.Symbol)CUP$S_Analyzer_Users$stack.peek()), RESULT);
             }
           return CUP$S_Analyzer_Users$result;
 

@@ -43,6 +43,6 @@ public class NewUser {
                 "\t\t\"NOMBRE\": \"" + name + "\",\n" +
                 "\t\t\"INSTITUCION\": \"" + institution + "\",\n" +
                 "\t\t\"FECHA_CREACION\": \"" + date + "\"\n" +
-                "\t}";
+                "\t},";
     }
 }

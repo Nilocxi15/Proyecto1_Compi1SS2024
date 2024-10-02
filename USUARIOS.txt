@@ -82,5 +82,5 @@ db.users(
 		"NOMBRE": "DIEGO TORRES",
 		"INSTITUCION": "UFM",
 		"FECHA_CREACION": "20/10/2024"
-	}
+	},
 )
