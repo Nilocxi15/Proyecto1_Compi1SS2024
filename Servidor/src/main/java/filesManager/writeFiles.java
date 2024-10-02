@@ -61,5 +61,39 @@ public class writeFiles {
         Files.write(Paths.get("D:/Documentos/DocumentosUSAC/Compi1/Proyecto1/USUARIOS.txt"), updatedLines,
                 StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
 
+
+        List<String> lines2 = Files.readAllLines(Paths.get("D:/Documentos/DocumentosUSAC/Compi1/Proyecto1/TRIVIAS.txt"));
+        updatedLines.clear();
+        skipBlock = false;
+        isBlock = false;
+
+        for (String line : lines2) {
+
+            if(line.trim().equals("[")){
+                isBlock = true;
+            }
+
+            if (line.contains("\"USUARIO_CREACION\": \"" + username + "\",") && isBlock) {
+                skipBlock = true;
+                if (!updatedLines.isEmpty()) {
+                    for (int i = 0; i < 5; i++) {
+                        updatedLines.removeLast();
+                    }
+                }
+
+            }
+
+            if (!skipBlock) {
+                updatedLines.add(line);
+            }
+
+            if (skipBlock && line.trim().equals("]")) {
+                skipBlock = false;
+                isBlock = false;
+            }
+        }
+
+        Files.write(Paths.get("D:/Documentos/DocumentosUSAC/Compi1/Proyecto1/TRIVIAS.txt"), updatedLines,
+                StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
     }
 }

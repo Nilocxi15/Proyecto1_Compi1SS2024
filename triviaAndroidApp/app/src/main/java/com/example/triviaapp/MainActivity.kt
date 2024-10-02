@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         val loginButton : Button = findViewById(R.id.loginBtn)
         loginButton.setOnClickListener {
+
             val usernameText = username.text.toString()
             val passwordText = password.text.toString()
 

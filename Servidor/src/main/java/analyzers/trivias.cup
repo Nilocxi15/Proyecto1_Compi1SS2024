@@ -100,7 +100,7 @@
              RightBrace RightPar {:System.out.println("Analisis Sintactico Exitoso");:};
 
  TRIVIALOOP ::= TRIVIABLOCK Comma TRIVIALOOP {:System.out.println("Entra en trivialoop");:}
-                 | TRIVIABLOCK {:System.out.println("Entra en trivialoop");:};
+                 | TRIVIABLOCK Comma {:System.out.println("Entra en trivialoop");:};
 
  TRIVIABLOCK ::= LeftBracket
                  QuotationMark IdTriviaSentence QuotationMark Colon QuotationMark IdTrivia:idTriviaVal QuotationMark Comma

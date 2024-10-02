@@ -155,6 +155,4 @@ db.trivia(
 			"RESPUESTA": "París"
 		}
 		)
-	]
-}
-)
+	],

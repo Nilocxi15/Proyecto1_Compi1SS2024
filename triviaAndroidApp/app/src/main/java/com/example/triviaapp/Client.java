@@ -31,7 +31,7 @@ public class Client {
 
         @Override
         protected String doInBackground(String... params) {
-            final String HOST = "192.168.0.15";
+            final String HOST = "192.168.0.6";
             final int PUERTO = 5000;
             String response = "";
             String status = "";
